@@ -1,0 +1,37 @@
+[
+  {
+    "name": "ECC83_100V",
+    "vp": 100.0,
+    "vg": -1.0,
+    "vs": null,
+    "ip_a": 0.00010039136906460412,
+    "gm_s": 0.0005876102758998423,
+    "reference_ip_a": 0.0005,
+    "reference_gm_s": 0.00125,
+    "spice_python_difference_a": 2.710505431213761e-20
+  },
+  {
+    "name": "ECC83_250V",
+    "vp": 250.0,
+    "vg": -2.0,
+    "vs": null,
+    "ip_a": 0.0009518032098915913,
+    "gm_s": 0.0016699804268464121,
+    "reference_ip_a": 0.0012,
+    "reference_gm_s": 0.0016,
+    "spice_python_difference_a": 8.673617379884035e-19
+  },
+  {
+    "name": "EL34_classA",
+    "vp": 250.0,
+    "vg": -13.5,
+    "vs": 265.0,
+    "ip_a": 0.11521033255863612,
+    "gm_s": 0.012990509372923231,
+    "reference_ip_a": 0.1,
+    "reference_gm_s": 0.0125,
+    "spice_python_difference_a": 1.3877787807814457e-17,
+    "screen_a": 0.005759842179791323,
+    "reference_screen_a": 0.0149
+  }
+]

@@ -1,0 +1,75 @@
+{
+  "retrieved": "2026-09-09",
+  "sources": [
+    {
+      "file": "jcm800pr.gif",
+      "url": "https://www.drtube.com/schematics/marshall/jcm800pr.gif",
+      "author": "Marshall",
+      "description": "Factory preamp/PI drawing, 24-4-81 issue 1",
+      "sha256": "2afb00463f8df7012af466afdaae5154470b436082ef0d74c0fab4ba74bbe9c7"
+    },
+    {
+      "file": "jcm800pw.gif",
+      "url": "https://www.drtube.com/schematics/marshall/jcm800pw.gif",
+      "author": "Marshall",
+      "description": "Factory power/PSU drawing, 24-4-81 issue 1",
+      "sha256": "991bb56c96e5377d2d3341d9b37bd70512c947ad5ab5a54e4afc91f470ed8af8"
+    },
+    {
+      "file": "Tubemods.zip",
+      "url": "https://www.normankoren.com/Audio/Tubemods.zip",
+      "author": "Norman Koren",
+      "description": "Author tube-model archive, shareware; retain original notices",
+      "sha256": "0a640ed245918dc5a349abf370f5e955ccdb6d85986fbf36b10bc720d55f8982"
+    },
+    {
+      "file": "koren-article.html",
+      "url": "https://www.normankoren.com/Audio/Tubemodspice_article.html",
+      "author": "Norman Koren",
+      "description": "Equations and modelling limitations",
+      "sha256": "84732dd9be41dda2e6ab6512e5df38a1b28a4c9fdea02bbae5e5bf1da440f7e7"
+    },
+    {
+      "file": "koren-instructions.html",
+      "url": "https://www.normankoren.com/Audio/Tubemodelinstr.HTM",
+      "author": "Norman Koren",
+      "description": "Archive instructions and conditions",
+      "sha256": "79509990a6f3b2e3df8472f62496436102de27e7569d94f959e243c7d4e7dc40"
+    },
+    {
+      "file": "ecc83-philips1970.pdf",
+      "url": "https://www.drtube.com/datasheets/ecc83-philips1970.pdf",
+      "author": "Philips",
+      "description": "ECC83 January 1970 datasheet",
+      "sha256": "de7b0f55ca541d8b2d1ab79254aca480e1bf00b03a32cdff40ed8ccec43823d9"
+    },
+    {
+      "file": "el34-philips1969.pdf",
+      "url": "https://www.drtube.com/datasheets/el34-philips1969.pdf",
+      "author": "Philips",
+      "description": "EL34 January 1969 datasheet",
+      "sha256": "faf1335a9f6f1f1eeee49a947d06705efa7151098117aa57c11b3e48c831d9ae"
+    },
+    {
+      "file": "hammond-1750U.pdf",
+      "url": "https://www.hammfg.com/files/parts/pdf/1750U.pdf",
+      "author": "Hammond Manufacturing",
+      "description": "Modern replacement OT, not original 1981 transformer",
+      "sha256": "24e9f6ce39388762ef608cfa65bce58ba622e6151544a3fff46002bfad590b8b"
+    },
+    {
+      "file": "dempwolf-zoelzer-2011.pdf",
+      "url": "https://dafx.de/paper-archive/2011/Papers/76_e.pdf",
+      "author": "Kristjan Dempwolf and Udo Zoelzer",
+      "description": "Candidate measured triode/grid-current model; not implemented",
+      "sha256": "9bf71875ec785fafc0b253d7f382fde9447e9477a764816dc2d7acef91f6aeb3"
+    },
+    {
+      "file": "reefman-tube-models.pdf",
+      "url": "https://www.dos4ever.com/uTracer3/Theory.pdf",
+      "author": "Derk Reefman",
+      "description": "Candidate pentode models and measurement-based fitting; not implemented",
+      "sha256": "d8d6ed3dbc8f8329d9c085a556ec9487f60fb5dc791f779afe49fe8532303eaf"
+    }
+  ]
+}

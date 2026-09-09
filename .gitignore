@@ -1,0 +1,6 @@
+__pycache__/
+.venv/
+build/
+simulation/raw/
+reference/originals/
+*.pyc

@@ -1,0 +1,33 @@
+* Equations and parameters: Norman Koren, Tube.lib (2001), see reference/sources.json.
+* Project adaptation for ngspice; not a measured 1981 tube specimen.
+* Stable softplus; screen current domain extended explicitly to cutoff.
+* Original archive and notices retained in reference/originals (local downloads).
+.func softplus(x) {max(x,0)+ln(1+exp(-abs(x)))}
+.subckt ECC83_K p g k
+.param mu=100 ex=1.4 kg1=1060 kp=600 kvb=300
+Be e 0 V={V(p,k)/kp*softplus(kp*(1/mu+V(g,k)/sqrt(kvb+V(p,k)^2)))}
+Bplate p k I={2*max(V(e),0)^ex/kg1}
+Rpk p k 1G
+Cgk g k 2.3p
+Cgp g p 2.4p
+Cpk p k 0.9p
+Rg g gi 2k
+Dg gi k GRID_K
+.model GRID_K D(Is=1n Rs=1 Cjo=10p Tt=1n)
+.ends ECC83_K
+
+.subckt EL34_K p g k s
+.param mu=11 ex=1.35 kg1=650 kg2=4200 kp=60 kvb=24
+* max(Vs,1m) is a numerical guard for zero/negative screen supply.
+* Physical validation is restricted to positive plate/screen voltages.
+Be e 0 V={max(V(s,k),0)/kp*softplus(kp*(1/mu+V(g,k)/max(V(s,k),1m)))}
+Bplate p k I={2*max(V(e),0)^ex/kg1*atan(max(V(p,k),0)/kvb)}
+Bscreen s k I={max(V(s,k)/mu+V(g,k),0)^ex/kg2}
+Rpk p k 1G
+Cgk g k 15p
+Cgp g p 1p
+Cpk p k 8p
+Rg g gi 1k
+Dg gi k GRID_K
+.model GRID_K D(Is=1n Rs=1 Cjo=10p Tt=1n)
+.ends EL34_K
