@@ -1,0 +1,540 @@
+{
+  "python": "3.14.6 (main, Jun 10 2026, 10:03:53) [Clang 17.0.0 (clang-1700.6.4.2)]",
+  "platform": "macOS-15.7.4-arm64-arm-64bit-Mach-O",
+  "numpy": "2.5.3",
+  "scipy": "1.18.1",
+  "ngspice": "******\n** ngspice-47 : Circuit level simulation program\n** Compiled with KLU Direct Linear Solver\n** The U. C. Berkeley CAD Group\n** Copyright 1985-1994, Regents of the University of California.\n** Copyright 2001-2026, The ngspice team.\n** Please get your ngspice manual from https://ngspice.sourceforge.io/docs.html\n** Please file your bug-reports at http://ngspice.sourceforge.net/bugrep.html\n******",
+  "source_sha256": {
+    "simulation/run_tube_validation.py": "84232efa29cfc849a3c3981deeeeb5f96bd6a4f04d714ac79594a2a3566c646b",
+    "simulation/tube_models.py": "bed0fe2448ffed5821e8448013f94bc07cc9a5cec77c22e98fe3f327765761a1",
+    "simulation/full_mna.py": "0df3e1a7389765974fbd37fea0529c6129c3f21b8b88cdc1c37a28811ac9a8bb",
+    "reference/tube_validation_sources.json": "3f87b0a2c4c4fd17a470366ed552ff2d2b106d49c5207c32f33bcb78f9e14ee5"
+  },
+  "jacobians": {
+    "RSD-1": {
+      "points": 35,
+      "max_abs_a_per_v": 8.701671327937532e-12,
+      "max_scaled_error": 0.0023724248848917503,
+      "tolerance": "1e-9 A/V + 1e-5 * abs(analytic)"
+    },
+    "RSD-2": {
+      "points": 35,
+      "max_abs_a_per_v": 1.1012483026179298e-11,
+      "max_scaled_error": 0.003659580961665972,
+      "tolerance": "1e-9 A/V + 1e-5 * abs(analytic)"
+    },
+    "EHX-1": {
+      "points": 35,
+      "max_abs_a_per_v": 4.278200840465707e-12,
+      "max_scaled_error": 0.001315071224605317,
+      "tolerance": "1e-9 A/V + 1e-5 * abs(analytic)"
+    },
+    "Reefman": {
+      "points": 252,
+      "max_abs_a_per_v": 9.772543885233631e-12,
+      "max_scaled_error": 0.0006461938260939224,
+      "tolerance": "1e-9 A/V + 1e-5 * abs(analytic)"
+    }
+  },
+  "spice": [
+    {
+      "model": "RSD-1",
+      "vg": -5.0,
+      "points": 65,
+      "max_difference_a": 8.36542703606396e-15
+    },
+    {
+      "model": "RSD-1",
+      "vg": -2.0,
+      "points": 65,
+      "max_difference_a": 1.5178830414797062e-18
+    },
+    {
+      "model": "RSD-1",
+      "vg": -1.0,
+      "points": 65,
+      "max_difference_a": 1.734723475976807e-18
+    },
+    {
+      "model": "RSD-1",
+      "vg": 0.0,
+      "points": 65,
+      "max_difference_a": 1.734723475976807e-18
+    },
+    {
+      "model": "RSD-1",
+      "vg": 1.0,
+      "points": 65,
+      "max_difference_a": 5.204170427930421e-18
+    },
+    {
+      "model": "RSD-1",
+      "vg": 3.0,
+      "points": 65,
+      "max_difference_a": 5.204170427930421e-18
+    },
+    {
+      "model": "RSD-2",
+      "vg": -5.0,
+      "points": 65,
+      "max_difference_a": 1.1382005228729661e-20
+    },
+    {
+      "model": "RSD-2",
+      "vg": -2.0,
+      "points": 65,
+      "max_difference_a": 1.3010426069826053e-18
+    },
+    {
+      "model": "RSD-2",
+      "vg": -1.0,
+      "points": 65,
+      "max_difference_a": 1.734723475976807e-18
+    },
+    {
+      "model": "RSD-2",
+      "vg": 0.0,
+      "points": 65,
+      "max_difference_a": 1.734723475976807e-18
+    },
+    {
+      "model": "RSD-2",
+      "vg": 1.0,
+      "points": 65,
+      "max_difference_a": 5.204170427930421e-18
+    },
+    {
+      "model": "RSD-2",
+      "vg": 3.0,
+      "points": 65,
+      "max_difference_a": 6.938893903907228e-18
+    },
+    {
+      "model": "EHX-1",
+      "vg": -5.0,
+      "points": 65,
+      "max_difference_a": 7.76722265638537e-15
+    },
+    {
+      "model": "EHX-1",
+      "vg": -2.0,
+      "points": 65,
+      "max_difference_a": 8.673617379884035e-19
+    },
+    {
+      "model": "EHX-1",
+      "vg": -1.0,
+      "points": 65,
+      "max_difference_a": 1.3010426069826053e-18
+    },
+    {
+      "model": "EHX-1",
+      "vg": 0.0,
+      "points": 65,
+      "max_difference_a": 1.734723475976807e-18
+    },
+    {
+      "model": "EHX-1",
+      "vg": 1.0,
+      "points": 65,
+      "max_difference_a": 5.204170427930421e-18
+    },
+    {
+      "model": "EHX-1",
+      "vg": 3.0,
+      "points": 65,
+      "max_difference_a": 8.673617379884035e-18
+    },
+    {
+      "model": "Reefman EL34",
+      "vs": 200.0,
+      "vg": -80.0,
+      "points": 121,
+      "max_difference_a": 3.5998900258307764e-21
+    },
+    {
+      "model": "Reefman EL34",
+      "vs": 200.0,
+      "vg": -47.68,
+      "points": 121,
+      "max_difference_a": 1.3552527156068805e-19
+    },
+    {
+      "model": "Reefman EL34",
+      "vs": 200.0,
+      "vg": -30.0,
+      "points": 121,
+      "max_difference_a": 8.673617379884035e-19
+    },
+    {
+      "model": "Reefman EL34",
+      "vs": 200.0,
+      "vg": -13.5,
+      "points": 121,
+      "max_difference_a": 1.3877787807814457e-17
+    },
+    {
+      "model": "Reefman EL34",
+      "vs": 200.0,
+      "vg": 0.0,
+      "points": 121,
+      "max_difference_a": 2.220446049250313e-16
+    },
+    {
+      "model": "Reefman EL34",
+      "vs": 265.0,
+      "vg": -80.0,
+      "points": 121,
+      "max_difference_a": 9.550296480292236e-20
+    },
+    {
+      "model": "Reefman EL34",
+      "vs": 265.0,
+      "vg": -47.68,
+      "points": 121,
+      "max_difference_a": 1.8295911660692887e-19
+    },
+    {
+      "model": "Reefman EL34",
+      "vs": 265.0,
+      "vg": -30.0,
+      "points": 121,
+      "max_difference_a": 2.168404344971009e-18
+    },
+    {
+      "model": "Reefman EL34",
+      "vs": 265.0,
+      "vg": -13.5,
+      "points": 121,
+      "max_difference_a": 6.938893903907228e-17
+    },
+    {
+      "model": "Reefman EL34",
+      "vs": 265.0,
+      "vg": 0.0,
+      "points": 121,
+      "max_difference_a": 3.3306690738754696e-16
+    },
+    {
+      "model": "Reefman EL34",
+      "vs": 360.0,
+      "vg": -80.0,
+      "points": 121,
+      "max_difference_a": 3.07472959853311e-19
+    },
+    {
+      "model": "Reefman EL34",
+      "vs": 360.0,
+      "vg": -47.68,
+      "points": 121,
+      "max_difference_a": 4.119968255444917e-18
+    },
+    {
+      "model": "Reefman EL34",
+      "vs": 360.0,
+      "vg": -30.0,
+      "points": 121,
+      "max_difference_a": 1.734723475976807e-17
+    },
+    {
+      "model": "Reefman EL34",
+      "vs": 360.0,
+      "vg": -13.5,
+      "points": 121,
+      "max_difference_a": 1.942890293094024e-16
+    },
+    {
+      "model": "Reefman EL34",
+      "vs": 360.0,
+      "vg": 0.0,
+      "points": 121,
+      "max_difference_a": 4.440892098500626e-16
+    },
+    {
+      "model": "Reefman EL34",
+      "vs": 465.0,
+      "vg": -80.0,
+      "points": 121,
+      "max_difference_a": 6.505213034913027e-19
+    },
+    {
+      "model": "Reefman EL34",
+      "vs": 465.0,
+      "vg": -47.68,
+      "points": 121,
+      "max_difference_a": 1.734723475976807e-17
+    },
+    {
+      "model": "Reefman EL34",
+      "vs": 465.0,
+      "vg": -30.0,
+      "points": 121,
+      "max_difference_a": 1.1102230246251565e-16
+    },
+    {
+      "model": "Reefman EL34",
+      "vs": 465.0,
+      "vg": -13.5,
+      "points": 121,
+      "max_difference_a": 2.7755575615628914e-16
+    },
+    {
+      "model": "Reefman EL34",
+      "vs": 465.0,
+      "vg": 0.0,
+      "points": 121,
+      "max_difference_a": 6.661338147750939e-16
+    }
+  ],
+  "anchors": [
+    {
+      "tube": "ECC83",
+      "model": "Koren",
+      "va": 100.0,
+      "vg": -1.0,
+      "vs": null,
+      "ia_a": 0.00010039136906460412,
+      "reference_ia_a": 0.0005,
+      "gm_s": 0.0005876102668426196,
+      "reference_gm_s": 0.00125
+    },
+    {
+      "tube": "ECC83",
+      "model": "DZ RSD-1",
+      "va": 100.0,
+      "vg": -1.0,
+      "vs": null,
+      "ia_a": 0.00027427612528312643,
+      "reference_ia_a": 0.0005,
+      "gm_s": 0.0008674070939714393,
+      "reference_gm_s": 0.00125
+    },
+    {
+      "tube": "ECC83",
+      "model": "DZ RSD-2",
+      "va": 100.0,
+      "vg": -1.0,
+      "vs": null,
+      "ia_a": 0.00030608706169590395,
+      "reference_ia_a": 0.0005,
+      "gm_s": 0.0009029540904626782,
+      "reference_gm_s": 0.00125
+    },
+    {
+      "tube": "ECC83",
+      "model": "DZ EHX-1",
+      "va": 100.0,
+      "vg": -1.0,
+      "vs": null,
+      "ia_a": 0.00020001703894232547,
+      "reference_ia_a": 0.0005,
+      "gm_s": 0.0007479523886654931,
+      "reference_gm_s": 0.00125
+    },
+    {
+      "tube": "ECC83",
+      "model": "Koren",
+      "va": 250.0,
+      "vg": -2.0,
+      "vs": null,
+      "ia_a": 0.0009518032098915911,
+      "reference_ia_a": 0.0012,
+      "gm_s": 0.0016699804275765685,
+      "reference_gm_s": 0.0016
+    },
+    {
+      "tube": "ECC83",
+      "model": "DZ RSD-1",
+      "va": 250.0,
+      "vg": -2.0,
+      "vs": null,
+      "ia_a": 0.0009013219888101784,
+      "reference_ia_a": 0.0012,
+      "gm_s": 0.0018910755061460674,
+      "reference_gm_s": 0.0016
+    },
+    {
+      "tube": "ECC83",
+      "model": "DZ RSD-2",
+      "va": 250.0,
+      "vg": -2.0,
+      "vs": null,
+      "ia_a": 0.0010197703548749262,
+      "reference_ia_a": 0.0012,
+      "gm_s": 0.00195431930840049,
+      "reference_gm_s": 0.0016
+    },
+    {
+      "tube": "ECC83",
+      "model": "DZ EHX-1",
+      "va": 250.0,
+      "vg": -2.0,
+      "vs": null,
+      "ia_a": 0.0011553125243278356,
+      "reference_ia_a": 0.0012,
+      "gm_s": 0.0017375099387852016,
+      "reference_gm_s": 0.0016
+    },
+    {
+      "tube": "EL34",
+      "model": "Koren",
+      "va": 250.0,
+      "vg": -13.5,
+      "vs": 265.0,
+      "ia_a": 0.11521033255863608,
+      "reference_ia_a": 0.1,
+      "ig2_a": 0.005759842179791323,
+      "reference_ig2_a": 0.0149
+    },
+    {
+      "tube": "EL34",
+      "model": "Reefman EL34",
+      "va": 250.0,
+      "vg": -13.5,
+      "vs": 265.0,
+      "ia_a": 0.08505723122100778,
+      "reference_ia_a": 0.1,
+      "ig2_a": 0.01232308397578074,
+      "reference_ig2_a": 0.0149
+    },
+    {
+      "tube": "EL34",
+      "model": "Koren",
+      "va": 250.0,
+      "vg": -14.5,
+      "vs": 245.0,
+      "ia_a": 0.07952627075237415,
+      "reference_ia_a": 0.07,
+      "ig2_a": 0.0037933668055716158,
+      "reference_ig2_a": 0.01
+    },
+    {
+      "tube": "EL34",
+      "model": "Reefman EL34",
+      "va": 250.0,
+      "vg": -14.5,
+      "vs": 245.0,
+      "ia_a": 0.057489615263892506,
+      "reference_ia_a": 0.07,
+      "ig2_a": 0.008329082176273626,
+      "reference_ig2_a": 0.01
+    }
+  ],
+  "old_idle_voltages_probe": {
+    "va": 463.1,
+    "vg": -47.678437,
+    "vs": 462.753633,
+    "koren_ia_a": 0.020969759771782785,
+    "koren_ig2_a": 0.0,
+    "reefman_ia_a": 0.01675610909479987,
+    "reefman_ig2_a": 0.002035644738266885
+  },
+  "screen_resistor_fixture": [
+    {
+      "model": "Koren",
+      "vs": 256.0592797895115,
+      "ia_a": 0.09201433874857312,
+      "ig2_a": 0.004470360105244259,
+      "kcl_a": -5.204170427930421e-18
+    },
+    {
+      "model": "Reefman",
+      "vs": 247.6942143308401,
+      "ia_a": 0.05972462592451829,
+      "ig2_a": 0.008652892834579946,
+      "kcl_a": -1.734723475976807e-18
+    }
+  ],
+  "triode_low_anode": {
+    "RSD-1": {
+      "-5.0": [
+        -8.024976100745221e-08,
+        8.025e-08,
+        2.389925477906316e-13
+      ],
+      "0.0": [
+        0.0002834388264947511,
+        1.8843150333082245e-05,
+        0.00030228197682783336
+      ],
+      "1.0": [
+        0.0016515256209227917,
+        0.0006177843589769188,
+        0.0022693099798997106
+      ],
+      "3.0": [
+        0.00633319401653522,
+        0.002616545252452033,
+        0.008949739268987253
+      ]
+    },
+    "RSD-2": {
+      "-5.0": [
+        -4.526933065276056e-08,
+        4.527e-08,
+        6.693472394429105e-13
+      ],
+      "0.0": [
+        0.0002952492834739144,
+        1.2689395346310153e-05,
+        0.00030793867882022454
+      ],
+      "1.0": [
+        0.0016170957432656192,
+        0.00059114580314907,
+        0.002208241546414689
+      ],
+      "3.0": [
+        0.00623920537988118,
+        0.0026278411250006185,
+        0.008867046504881798
+      ]
+    },
+    "EHX-1": {
+      "-5.0": [
+        -3.9169999992230166e-08,
+        3.917e-08,
+        7.769832262194312e-18
+      ],
+      "0.0": [
+        9.585487400285541e-05,
+        1.2131119676587524e-05,
+        0.00010798599367944293
+      ],
+      "1.0": [
+        0.0010488835523725052,
+        0.0003263393652376433,
+        0.0013752229176101484
+      ],
+      "3.0": [
+        0.004873015072905788,
+        0.0011619404877240783,
+        0.006034955560629866
+      ]
+    }
+  },
+  "pentode_domain": {
+    "points": 252,
+    "finite": true,
+    "min_ia_a": -0.0003120446158421222,
+    "min_ig2_a": 1.7860145315102328e-40,
+    "current_sum_max_error_a": 0.0,
+    "reverse_anode_probes": [
+      {
+        "va": 250.0,
+        "vg": -80.0,
+        "vs": 465.0,
+        "ia_a": -2.1565716562365953e-05,
+        "ig2_a": 0.00020788701512397084
+      },
+      {
+        "va": 250.0,
+        "vg": -80.0,
+        "vs": 550.0,
+        "ia_a": -0.0003120446158421222,
+        "ig2_a": 0.0017261809558752547
+      }
+    ]
+  },
+  "status": "implementation_verified_physical_qualification_incomplete"
+}

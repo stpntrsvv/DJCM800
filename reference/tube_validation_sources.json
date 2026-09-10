@@ -1,0 +1,38 @@
+{
+  "retrieved": "2026-09-10",
+  "downloads": [
+    {
+      "file": "ecc83-philips1970.pdf",
+      "url": "https://www.drtube.com/datasheets/ecc83-philips1970.pdf",
+      "author": "Philips",
+      "description": "ECC83 January 1970 datasheet",
+      "sha256": "de7b0f55ca541d8b2d1ab79254aca480e1bf00b03a32cdff40ed8ccec43823d9"
+    },
+    {
+      "file": "el34-philips1969.pdf",
+      "url": "https://www.drtube.com/datasheets/el34-philips1969.pdf",
+      "author": "Philips",
+      "description": "EL34 January 1969 datasheet",
+      "sha256": "faf1335a9f6f1f1eeee49a947d06705efa7151098117aa57c11b3e48c831d9ae"
+    },
+    {
+      "file": "dempwolf-zoelzer-2011.pdf",
+      "url": "https://dafx.de/paper-archive/2011/Papers/76_e.pdf",
+      "author": "Kristjan Dempwolf and Udo Zoelzer",
+      "description": "Candidate measured triode/grid-current model; not implemented",
+      "sha256": "9bf71875ec785fafc0b253d7f382fde9447e9477a764816dc2d7acef91f6aeb3"
+    },
+    {
+      "file": "reefman-em4-theory.pdf",
+      "url": "https://www.dos4ever.com/uTracer3/EM4_Theory.pdf",
+      "sha256": "af5b760a45a9e371ffd76b0baa63bcd03e1bdf1004a2483f058a8479c3ffdb69"
+    },
+    {
+      "file": "ExtractModel4.msi",
+      "url": "https://www.dos4ever.com/uTracer3/ExtractModel4.msi",
+      "sha256": "a381d1cf91b3e07fd7f16bce501915a8ba29597344d0fd32f6c34cfd6f87b1ae"
+    }
+  ],
+  "library_sha256": "3f03b9795e2299d7215c32dd0b0f47a55887da56168d96d715aba506590b374e",
+  "notes": "EL34 author model dated 2013-12-15 in TubeLib 2025-12-26; linked EM4_Theory.pdf itself dated 2019-03-14. No claim of measured 1981 Marshall tubes."
+}
