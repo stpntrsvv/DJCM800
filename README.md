@@ -21,6 +21,9 @@ High Input → V1b → V1a → V2a → V2b
 [полная схема и устройство решателя](docs/09%20Полная%20схема%20и%20общий%20решатель.md),
 [сверка MNA со SPICE](simulation/experiments/full_mna/report.md).
 
+Полное питание доведено до периодического режима; проверены баланс энергии и
+атаки 25/100/500 мВ. [Результаты и ограничения](simulation/experiments/settling_power/report.md).
+
 Начать с [цели и границ](docs/01%20Цель%20и%20границы.md),
 [выбора схемы](docs/02%20Схема%20и%20источники.md),
 [устройства модели](docs/03%20Модель.md) и
@@ -33,6 +36,7 @@ High Input → V1b → V1a → V2a → V2b
 ```powershell
 ..\.venv\Scripts\python.exe simulation\run_reference.py
 ..\.venv\Scripts\python.exe simulation\run_full_mna.py
+..\.venv\Scripts\python.exe simulation\run_settling.py
 ```
 
 На другой машине: Python с зависимостями из `requirements.txt`, ngspice в `PATH`
