@@ -1,0 +1,125 @@
+{
+  "status": "pass",
+  "compiler": "cc -O3 -std=c11 -fPIC -shared",
+  "validation": {
+    "ecc83": {
+      "current_max_abs": 3.469446951953614e-18,
+      "current_max_relative": 2.2200702857472938e-16,
+      "jacobian_max_abs": 4.336808689942018e-19,
+      "jacobian_max_relative": 6.060219093639044e-16
+    },
+    "el34": {
+      "current_max_abs": 2.220446049250313e-16,
+      "current_max_relative": 1.6306758760050802e-13,
+      "jacobian_max_abs": 1.734723475976807e-17,
+      "jacobian_max_relative": 1.4086188304046526e-12
+    }
+  },
+  "benchmark": {
+    "ecc83": {
+      "currents_only": {
+        "median_ns": 10545875,
+        "ns_per_device": 52.729375,
+        "samples_ns": [
+          11744958,
+          11051834,
+          10911459,
+          10401541,
+          10545875,
+          10493209,
+          10533125,
+          10754708,
+          10445791
+        ]
+      },
+      "currents_and_jacobian": {
+        "median_ns": 14955042,
+        "ns_per_device": 74.77521,
+        "samples_ns": [
+          15472542,
+          15016292,
+          14757875,
+          14716792,
+          14763125,
+          14898167,
+          14955042,
+          14982375,
+          16255625
+        ]
+      },
+      "python_reference": {
+        "median_ns": 8848208,
+        "ns_per_device": 4424.104,
+        "samples_ns": [
+          9304667,
+          8848208,
+          8742917
+        ]
+      },
+      "python_to_c_batch_speedup": 59.16538382172381
+    },
+    "el34": {
+      "currents_only": {
+        "median_ns": 8882250,
+        "ns_per_device": 44.41125,
+        "samples_ns": [
+          9225125,
+          8707458,
+          8884166,
+          8841958,
+          8995042,
+          8882250,
+          9000917,
+          8821709,
+          8674000
+        ]
+      },
+      "currents_and_jacobian": {
+        "median_ns": 13767875,
+        "ns_per_device": 68.839375,
+        "samples_ns": [
+          14051292,
+          13651625,
+          13985000,
+          13778000,
+          13745292,
+          13630000,
+          13965625,
+          13767875,
+          13597417
+        ]
+      },
+      "python_reference": {
+        "median_ns": 28104833,
+        "ns_per_device": 14052.4165,
+        "samples_ns": [
+          28104833,
+          28167250,
+          27675042
+        ]
+      },
+      "python_to_c_batch_speedup": 204.13341201892084
+    }
+  },
+  "compile_command": [
+    "cc",
+    "-O3",
+    "-std=c11",
+    "-fPIC",
+    "-shared",
+    "/Users/stpntrsvv/DJCM800/csrc/jcm800_nonlinear.c",
+    "-o",
+    "/Users/stpntrsvv/DJCM800/build/c_nonlinear_kernel/libjcm800_nonlinear.dylib",
+    "-lm"
+  ],
+  "model_budget": {
+    "ecc83_sections": 6,
+    "el34_tubes": 4,
+    "c_currents_only_ns": 494.02125,
+    "c_currents_and_jacobian_ns": 724.0087599999999
+  },
+  "source_sha256": {
+    "jcm800_nonlinear.c": "543fa3d43961f0f766c9be71bb6da4faadde40c9c0b75f3d300258765d4d2b84",
+    "jcm800_nonlinear.h": "adcddb2381e1fd18ded4c778a361da0ec4509576d8eb3b4a8c17696759bfc06b"
+  }
+}

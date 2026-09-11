@@ -1,0 +1,75 @@
+{
+  "status": "pass",
+  "compiler": "cc -O3 -std=c11 -fPIC -shared",
+  "validation": {
+    "ecc83": {
+      "current_max_abs": 1.734723475976807e-18,
+      "current_max_relative": 2.1843986689066008e-16,
+      "jacobian_max_abs": 5.421010862427522e-20,
+      "jacobian_max_relative": 3.4084838817039604e-16
+    },
+    "el34": {
+      "current_max_abs": 1.1102230246251565e-16,
+      "current_max_relative": 1.0648683683788542e-14,
+      "jacobian_max_abs": 6.938893903907228e-18,
+      "jacobian_max_relative": 6.462273837995141e-13
+    }
+  },
+  "benchmark": {
+    "ecc83": {
+      "currents_only": {
+        "median_ns": 91417,
+        "ns_per_device": 91.417,
+        "samples_ns": [
+          98209,
+          91417,
+          83042
+        ]
+      },
+      "currents_and_jacobian": {
+        "median_ns": 123041,
+        "ns_per_device": 123.041,
+        "samples_ns": [
+          130500,
+          123041,
+          113625
+        ]
+      }
+    },
+    "el34": {
+      "currents_only": {
+        "median_ns": 67250,
+        "ns_per_device": 67.25,
+        "samples_ns": [
+          71792,
+          63208,
+          67250
+        ]
+      },
+      "currents_and_jacobian": {
+        "median_ns": 96542,
+        "ns_per_device": 96.542,
+        "samples_ns": [
+          111917,
+          96542,
+          95834
+        ]
+      }
+    }
+  },
+  "compile_command": [
+    "cc",
+    "-O3",
+    "-std=c11",
+    "-fPIC",
+    "-shared",
+    "/Users/stpntrsvv/DJCM800/csrc/jcm800_nonlinear.c",
+    "-o",
+    "/Users/stpntrsvv/DJCM800/build/c_nonlinear_kernel/libjcm800_nonlinear.dylib",
+    "-lm"
+  ],
+  "source_sha256": {
+    "jcm800_nonlinear.c": "543fa3d43961f0f766c9be71bb6da4faadde40c9c0b75f3d300258765d4d2b84",
+    "jcm800_nonlinear.h": "adcddb2381e1fd18ded4c778a361da0ec4509576d8eb3b4a8c17696759bfc06b"
+  }
+}
