@@ -14,6 +14,12 @@ class ControlBuildTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             build(controls={"VOLUME": .5})
 
+    def test_time_function_overrides_source(self):
+        circuit = build(amplitude=.123)
+        circuit.source_function("Vin", lambda time: 2*time)
+        self.assertEqual(circuit.rhs(.25)[circuit.branches["Vin"]], .5)
+        self.assertEqual(circuit.rhs()[circuit.branches["Vin"]], 0.)
+
 
 if __name__ == "__main__":
     unittest.main()

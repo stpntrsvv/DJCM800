@@ -103,6 +103,7 @@ class Circuit:
     def __init__(self, tube_set="koren", tube_caps="auto", el34_grid_r=None):
         self.parts = []
         self.sources = {}
+        self.source_functions = {}
         self.notes = {}
         self.tube_set = tube_set
         self.tube_caps = tube_caps
@@ -114,6 +115,12 @@ class Circuit:
     def source(self, name, p, n, dc=0., amplitude=0., frequency=0., phase=0.):
         self.add("V", name, p, n)
         self.sources[name] = (dc, amplitude, frequency, phase)
+
+    def source_function(self, name, function):
+        """Override an existing independent source with a function of time."""
+        if name not in self.sources:
+            raise KeyError(name)
+        self.source_functions[name] = function
 
     def tube(self, name, p, g, k, screen=None):
         if self.tube_set == "koren":
@@ -201,7 +208,11 @@ class Circuit:
     def rhs(self, t=None, scale=1.):
         b = np.zeros(self.size)
         for name, (dc, amp, freq, phase) in self.sources.items():
-            b[self.branches[name]] = scale*(dc if t is None else dc+amp*math.sin(2*math.pi*freq*t+phase))
+            if t is not None and name in self.source_functions:
+                value = float(self.source_functions[name](t))
+            else:
+                value = dc if t is None else dc+amp*math.sin(2*math.pi*freq*t+phase)
+            b[self.branches[name]] = scale*value
         return b
 
     def nonlinear(self, x):
