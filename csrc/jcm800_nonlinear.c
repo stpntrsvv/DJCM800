@@ -1,6 +1,7 @@
 #include "jcm800_nonlinear.h"
 
 #include <math.h>
+#include <float.h>
 
 typedef struct { double value, sigmoid; } softplus_result;
 
@@ -73,4 +74,33 @@ void jcm800_reefman_el34_batch(const double *va_vg_vs, size_t count,
             }
         }
     }
+}
+
+int jcm800_dense_solve(double *a, double *b, size_t n) {
+    for (size_t k=0; k<n; ++k) {
+        size_t pivot=k; double largest=fabs(a[k*n+k]);
+        for (size_t i=k+1; i<n; ++i) {
+            const double candidate=fabs(a[i*n+k]);
+            if (candidate>largest) { largest=candidate; pivot=i; }
+        }
+        if (largest<=DBL_MIN) return -1;
+        if (pivot!=k) {
+            for (size_t j=k; j<n; ++j) {
+                const double temporary=a[k*n+j]; a[k*n+j]=a[pivot*n+j]; a[pivot*n+j]=temporary;
+            }
+            const double temporary=b[k]; b[k]=b[pivot]; b[pivot]=temporary;
+        }
+        const double diagonal=a[k*n+k];
+        for (size_t i=k+1; i<n; ++i) {
+            const double factor=a[i*n+k]/diagonal; a[i*n+k]=factor;
+            for (size_t j=k+1; j<n; ++j) a[i*n+j]-=factor*a[k*n+j];
+            b[i]-=factor*b[k];
+        }
+    }
+    for (size_t ii=n; ii-- > 0;) {
+        double value=b[ii];
+        for (size_t j=ii+1; j<n; ++j) value-=a[ii*n+j]*b[j];
+        b[ii]=value/a[ii*n+ii];
+    }
+    return 0;
 }

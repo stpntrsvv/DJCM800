@@ -13,6 +13,8 @@ from pathlib import Path
 import numpy as np
 
 from full_mna import ROOT
+from compact_mna import CompactCircuit
+from run_controls_qualification import MODEL
 from tube_models import EL34, TRIODES, dempwolf, reefman
 
 DEST=ROOT/"simulation/experiments/c_nonlinear_kernel"
@@ -35,6 +37,8 @@ def bind(path):
         function=getattr(library,name)
         function.argtypes=[pointer,ctypes.c_size_t,pointer,pointer,ctypes.c_uint]
         function.restype=None
+    library.jcm800_dense_solve.argtypes=[pointer,pointer,ctypes.c_size_t]
+    library.jcm800_dense_solve.restype=ctypes.c_int
     return library
 
 
@@ -68,6 +72,35 @@ def benchmark_python(inputs,kind,repeats):
     return dict(median_ns=int(np.median(samples)),ns_per_device=float(np.median(samples)/len(inputs)),samples_ns=samples)
 
 
+def c_solve(function,matrix,rhs):
+    matrix=np.array(matrix,dtype=np.float64,order="C",copy=True); rhs=np.array(rhs,dtype=np.float64,copy=True)
+    pointer=ctypes.POINTER(ctypes.c_double)
+    status=function(matrix.ctypes.data_as(pointer),rhs.ctypes.data_as(pointer),len(rhs))
+    if status: raise np.linalg.LinAlgError("C LU reported singular matrix")
+    return rhs
+
+
+def solver_check_and_benchmark(library,quick):
+    # A real retained-space Jacobian from the accepted circuit at a finite state.
+    circuit = __import__("full_mna").build(True,amplitude=.1,circuit_type=CompactCircuit,**MODEL)
+    with np.load(ROOT/"simulation/raw/linear_reduction/initial.npz") as stored: state=stored["state"]
+    alpha=1/.625e-6; A=circuit.G+alpha*circuit.C
+    _,jac,_,cap=circuit.compact_nonlinear(state[circuit.retained])
+    schur,*_=circuit._blocks(A,alpha); matrix=schur+jac+alpha*cap
+    scaling=np.maximum(np.max(np.abs(matrix),axis=1),1e-15); matrix=matrix/scaling[:,None]
+    rhs=np.sin(np.arange(len(matrix),dtype=float)+.25)/scaling
+    expected=np.linalg.solve(matrix,rhs); actual=c_solve(library.jcm800_dense_solve,matrix,rhs)
+    repeats=20 if quick else 500; samples=[]
+    for _ in range(repeats):
+        began=time.perf_counter_ns(); c_solve(library.jcm800_dense_solve,matrix,rhs); samples.append(time.perf_counter_ns()-began)
+    n=len(matrix)
+    return dict(size=n,max_absolute_difference=float(np.max(np.abs(actual-expected))),
+                relative_residual=float(np.linalg.norm(matrix@actual-rhs)/np.linalg.norm(rhs)),
+                median_ns=int(np.median(samples)),samples_ns=samples,
+                elimination_multiply_subtract_pairs=int(n*(n-1)*(2*n-1)/6),
+                elimination_divisions=int(n*(n-1)/2),back_substitution_terms=int(n*(n-1)/2))
+
+
 def render(result):
     lines=["# Float64 C-ядро нелинейностей JCM800","",f"Статус: **{result['status']}**.","",
            "В C перенесены без смены параметров законы Dempwolf RSD-1 и Reefman EL34.",
@@ -89,6 +122,17 @@ def render(result):
                   f"занимает на этом CPU около **{b['c_currents_only_ns']:.0f} нс** только для токов и",
                   f"**{b['c_currents_and_jacobian_ns']:.0f} нс** с Jacobian. Это не полный шаг Ньютона:",
                   "сюда не входят диоды, stamping, невязка, Schur/LU и line search.", ""]
+    if result.get("dense_solver"):
+        s=result["dense_solver"]
+        lines += ["## Dense LU 39×39", "",
+                  f"На реальном масштабированном Jacobian max Δx={s['max_absolute_difference']:.3e},",
+                  f"относительная невязка={s['relative_residual']:.3e}. Медиана полного C solve",
+                  f"на текущем CPU — **{s['median_ns']} нс**. Статический бюджет: "
+                  f"{s['elimination_multiply_subtract_pairs']} пар multiply-subtract, "
+                  f"{s['elimination_divisions']} делений исключения и "
+                  f"{s['back_substitution_terms']} членов обратного хода.", "",
+                  "Это корректный перенос текущей плотной алгебры, но ещё не финальная архитектура:",
+                  "фиксированная разреженность позволяет затем выбросить гарантированные нули.", ""]
     lines += ["","Это время скомпилированного C на текущем CPU, не такты STM32N6. Для оценки",
               "микроконтроллера API отделяет число вызовов ламп от линейной алгебры; реальные",
               "такты получаются аппаратным DWT/PMU замером того же ядра после кросс-компиляции.","",
@@ -131,6 +175,7 @@ def main():
             "ecc83_sections":6,"el34_tubes":4,
             "c_currents_only_ns":6*eb["currents_only"]["ns_per_device"]+4*pb["currents_only"]["ns_per_device"],
             "c_currents_and_jacobian_ns":6*eb["currents_and_jacobian"]["ns_per_device"]+4*pb["currents_and_jacobian"]["ns_per_device"]}
+        result["dense_solver"]=solver_check_and_benchmark(library,args.quick)
         result.update(status="pass",source_sha256={p.name:hashlib.sha256(p.read_bytes()).hexdigest() for p in (SOURCE,HEADER)})
     except Exception as exc:
         result.update(status="failed",error=f"{type(exc).__name__}: {exc}")

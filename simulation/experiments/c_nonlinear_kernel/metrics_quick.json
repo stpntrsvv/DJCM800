@@ -18,43 +18,59 @@
   "benchmark": {
     "ecc83": {
       "currents_only": {
-        "median_ns": 91417,
-        "ns_per_device": 91.417,
+        "median_ns": 183875,
+        "ns_per_device": 183.875,
         "samples_ns": [
-          98209,
-          91417,
-          83042
+          226750,
+          183875,
+          171708
         ]
       },
       "currents_and_jacobian": {
-        "median_ns": 123041,
-        "ns_per_device": 123.041,
+        "median_ns": 214458,
+        "ns_per_device": 214.458,
         "samples_ns": [
-          130500,
-          123041,
-          113625
+          214458,
+          234750,
+          206958
         ]
-      }
+      },
+      "python_reference": {
+        "median_ns": 1154875,
+        "ns_per_device": 11548.75,
+        "samples_ns": [
+          1154875
+        ]
+      },
+      "python_to_c_batch_speedup": 53.85087056673102
     },
     "el34": {
       "currents_only": {
-        "median_ns": 67250,
-        "ns_per_device": 67.25,
+        "median_ns": 117041,
+        "ns_per_device": 117.041,
         "samples_ns": [
-          71792,
-          63208,
-          67250
+          140792,
+          117041,
+          108459
         ]
       },
       "currents_and_jacobian": {
-        "median_ns": 96542,
-        "ns_per_device": 96.542,
+        "median_ns": 167583,
+        "ns_per_device": 167.583,
         "samples_ns": [
-          111917,
-          96542,
-          95834
+          200750,
+          167583,
+          164542
         ]
-      }
+      },
+      "python_reference": {
+        "median_ns": 3633208,
+        "ns_per_device": 36332.08,
+        "samples_ns": [
+          3633208
+        ]
+      },
+      "python_to_c_batch_speedup": 216.80051079166742
     }
   },
   "compile_command": [
@@ -68,8 +84,45 @@
     "/Users/stpntrsvv/DJCM800/build/c_nonlinear_kernel/libjcm800_nonlinear.dylib",
     "-lm"
   ],
+  "model_budget": {
+    "ecc83_sections": 6,
+    "el34_tubes": 4,
+    "c_currents_only_ns": 1571.414,
+    "c_currents_and_jacobian_ns": 1957.08
+  },
+  "dense_solver": {
+    "size": 39,
+    "max_absolute_difference": 3.5486664273776114e-08,
+    "relative_residual": 3.64604712026041e-15,
+    "median_ns": 22542,
+    "samples_ns": [
+      31375,
+      25625,
+      23542,
+      22500,
+      22458,
+      22791,
+      22584,
+      23166,
+      22792,
+      21542,
+      22708,
+      22250,
+      23500,
+      21750,
+      21500,
+      26417,
+      21834,
+      21792,
+      21833,
+      22250
+    ],
+    "elimination_multiply_subtract_pairs": 19019,
+    "elimination_divisions": 741,
+    "back_substitution_terms": 741
+  },
   "source_sha256": {
-    "jcm800_nonlinear.c": "543fa3d43961f0f766c9be71bb6da4faadde40c9c0b75f3d300258765d4d2b84",
-    "jcm800_nonlinear.h": "adcddb2381e1fd18ded4c778a361da0ec4509576d8eb3b4a8c17696759bfc06b"
+    "jcm800_nonlinear.c": "b3588538c91d38d1343e84ef70c7285e6d97344b72774bc7c50026f48345fe11",
+    "jcm800_nonlinear.h": "95ca157e22a2f64bbdb582656056803dc7944bc49d66f74b50464be376a141a2"
   }
 }

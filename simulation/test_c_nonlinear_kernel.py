@@ -2,7 +2,7 @@ import unittest
 
 import numpy as np
 
-from run_c_nonlinear_kernel import bind, call, compile_library, reference
+from run_c_nonlinear_kernel import bind, call, compile_library, c_solve, reference
 
 
 class CNonlinearKernelTest(unittest.TestCase):
@@ -24,6 +24,12 @@ class CNonlinearKernelTest(unittest.TestCase):
     def test_el34(self):
         self.check_model("el34", np.array([[0.,-150.,250.],[50.,0.,400.],[800.,2.,500.]]),
                          self.library.jcm800_reefman_el34_batch, 9)
+
+    def test_dense_solve(self):
+        matrix=np.array([[4.,1.,2.],[1.,5.,1.],[2.,1.,6.]])
+        rhs=np.array([1.,2.,3.])
+        np.testing.assert_allclose(c_solve(self.library.jcm800_dense_solve,matrix,rhs),
+                                   np.linalg.solve(matrix,rhs),rtol=2e-15,atol=1e-15)
 
 
 if __name__ == "__main__": unittest.main()
