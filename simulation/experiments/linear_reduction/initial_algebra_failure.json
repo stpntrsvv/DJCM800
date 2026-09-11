@@ -1,0 +1,94 @@
+{
+  "status": "failed",
+  "quick": true,
+  "criteria": {
+    "max_node_difference_v": 0.0001,
+    "max_branch_difference_a": 1e-06,
+    "relative_output_error": 1e-06,
+    "delta_scaled_error": 1e-08
+  },
+  "cases": [],
+  "signal_dc": {
+    "max_node_difference_v": 2.1032064978498966e-12,
+    "max_branch_difference_a": 1.1199374760906267e-14,
+    "relative_output_error": 0.0,
+    "output_rms_difference_v": 0.0
+  },
+  "unknowns": 98,
+  "retained": 39,
+  "eliminated": 59,
+  "output_index": 55,
+  "retained_nodes": [
+    "g1",
+    "p1",
+    "k1",
+    "g2",
+    "p2",
+    "k2",
+    "g3",
+    "p3",
+    "k3",
+    "bpre2",
+    "cf",
+    "pi_g1",
+    "pi_g2",
+    "pi_p1",
+    "pi_k",
+    "pi_p2",
+    "g4",
+    "g5",
+    "g6",
+    "g7",
+    "s4",
+    "s5",
+    "s6",
+    "s7",
+    "plate_a",
+    "xv4_junction",
+    "xv5_junction",
+    "plate_b",
+    "xv6_junction",
+    "xv7_junction",
+    "reservoir",
+    "hv1",
+    "hv2",
+    "Dbridge1_a",
+    "Dbridge2_a",
+    "Dbridge3_a",
+    "Dbridge4_a",
+    "bias_d",
+    "bias_raw"
+  ],
+  "circuit_sha256": "92840ba7deaee16574068bd78a5991fb0085c7e4dceb4ff7fedfe4927d36f23d",
+  "source_sha256": {
+    "full_mna.py": "4e23eadaac0e6c90e61ae624d557d85b70f33d636cfedf768dee5fe081015d6e",
+    "reduced_mna.py": "cfcd6ec24cf6a4c0ce5c0a21a7d23c6591af0662983c0eaffcf019ef76a7fbcb",
+    "tube_models.py": "bed0fe2448ffed5821e8448013f94bc07cc9a5cec77c22e98fe3f327765761a1",
+    "run_linear_reduction.py": "d28e78881558b744d40f0f24b7801af833112e250cde953ab14c25d097a0c67f"
+  },
+  "warm_start_sha256": "9c7c8bd37383311298d85eb95515c5bdb4cef1c5e55227042ac87e3aa0c33f2f",
+  "periodic_refinement": [
+    {
+      "cycle": 1,
+      "max_dv_v": null,
+      "max_di_a": null,
+      "kcl_a": 6.02824457018869e-11,
+      "halvings": 0
+    },
+    {
+      "cycle": 2,
+      "max_dv_v": 0.009724817737946978,
+      "max_di_a": 2.4896755076123412e-05,
+      "kcl_a": 5.9980888311717e-11,
+      "halvings": 0
+    },
+    {
+      "cycle": 3,
+      "max_dv_v": 0.009664369172867282,
+      "max_di_a": 4.692525031407824e-06,
+      "kcl_a": 9.64243335849797e-11,
+      "halvings": 0
+    }
+  ],
+  "error": "AssertionError: (1.1013935108159114, 1.1391266359902144e-13)"
+}

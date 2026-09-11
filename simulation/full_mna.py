@@ -30,6 +30,24 @@ def number(value, params):
 
 def electrode(kind, v):
     """Currents and analytic Jacobian, coordinates relative to cathode."""
+    if kind.startswith("dempwolf:"):
+        from tube_models import TRIODES, dempwolf
+        name = kind.split(":", 1)[1]
+        currents, jac = dempwolf(v[0], v[1], TRIODES[name])
+        return currents[:2], jac[:2]
+    if kind == "reefman":
+        from tube_models import reefman
+        # The isolated law intentionally rejects unsupported quadrants. The MNA
+        # nevertheless needs a finite trial-point continuation during source
+        # stepping/Newton. Constant projection is numerical scaffolding, not a
+        # claim about reverse-anode or nonpositive-screen tube physics.
+        va, vs = max(float(v[0]), 0.), max(float(v[2]), 1e-6)
+        currents, jac = reefman(va, v[1], vs)
+        if v[0] < 0:
+            jac[:, 0] = 0.
+        if v[2] <= 1e-6:
+            jac[:, 2] = 0.
+        return currents[:2], jac[:2]
     p, g = v[:2]
     if kind == "triode":
         root = math.sqrt(300 + p*p)
@@ -82,10 +100,13 @@ def diode(v, isat, cjo, tt):
 
 
 class Circuit:
-    def __init__(self):
+    def __init__(self, tube_set="koren", tube_caps="auto", el34_grid_r=None):
         self.parts = []
         self.sources = {}
         self.notes = {}
+        self.tube_set = tube_set
+        self.tube_caps = tube_caps
+        self.el34_grid_r = (1001. if tube_set == "koren" else 2001.) if el34_grid_r is None else el34_grid_r
 
     def add(self, kind, name, *args):
         self.parts.append((kind, name, *args))
@@ -95,15 +116,31 @@ class Circuit:
         self.sources[name] = (dc, amplitude, frequency, phase)
 
     def tube(self, name, p, g, k, screen=None):
-        kind = "triode" if screen is None else "pentode"
+        if self.tube_set == "koren":
+            kind = "triode" if screen is None else "pentode"
+        elif self.tube_set.startswith("detailed:"):
+            triode_name = self.tube_set.split(":", 1)[1]
+            if triode_name not in ("RSD-1", "RSD-2", "EHX-1"):
+                raise ValueError(f"Unknown detailed triode parameter set: {triode_name}")
+            kind = f"dempwolf:{triode_name}" if screen is None else "reefman"
+        else:
+            raise ValueError(f"Unknown tube set: {self.tube_set}")
         self.add("T", name, kind, p, g, k, screen)
-        c = (2.3e-12, 2.4e-12, .9e-12) if screen is None else (15e-12, 1e-12, 8e-12)
+        detailed_caps = self.tube_caps == "datasheet" or (self.tube_caps == "auto" and self.tube_set != "koren")
+        if screen is None:
+            c = (1.6e-12, 1.6e-12, .33e-12) if detailed_caps else (2.3e-12, 2.4e-12, .9e-12)
+        else:
+            c = (15.2e-12, 1.1e-12, 8.4e-12) if detailed_caps else (15e-12, 1e-12, 8e-12)
         for suffix, a, b, value in zip(("gk", "gp", "pk"), (g, g, p), (k, p, k), c):
             self.add("C", f"C_{name}_{suffix}", a, b, value)
         self.add("R", f"R_{name}_pk", p, k, 1e9)
         j = name.lower()+"_junction"
-        self.add("R", f"R_{name}_grid", g, j, 2001. if screen is None else 1001.)
-        self.add("D", f"D_{name}_grid", j, k, 1e-9, 10e-12, 1e-9)
+        # Dempwolf already returns Ig1. Reefman does not, so its provisional
+        # legacy R+Shockley grid branch remains explicit until EL34 Ig1 is qualified.
+        if not kind.startswith("dempwolf:"):
+            resistance = 2001. if screen is None else self.el34_grid_r
+            self.add("R", f"R_{name}_grid", g, j, resistance)
+            self.add("D", f"D_{name}_grid", j, k, 1e-9, 10e-12, 1e-9)
 
     def compile(self):
         nodes = []
@@ -133,7 +170,7 @@ class Circuit:
             if kind == "T":
                 model, p, g, k, s = args
                 control = np.array([self.inc(p, k), self.inc(g, k)] + ([] if s is None else [self.inc(s, k)]))
-                output = control[[0]] if s is None else control[[0, 2]]
+                output = control[[0, 1]] if model.startswith("dempwolf:") else control[[0]] if s is None else control[[0, 2]]
                 self.nl.append(("T", control, output, model))
                 continue
             inc = self.inc(args[0], args[1])
@@ -183,6 +220,12 @@ class Circuit:
                 c += output*cap
         return i, j, q, c
 
+    def linearized_delta(self, A, nonlinear_jacobian, residual, alpha):
+        """Solve one Newton correction; overridden by exact linear elimination."""
+        J = A+nonlinear_jacobian
+        row = np.maximum(np.max(np.abs(J), axis=1), 1e-15)
+        return np.linalg.solve(J/row[:, None], -residual/row)
+
     def newton(self, initial, b, alpha=0., history=None, maxiter=100):
         x = initial.copy()
         A = self.G+alpha*self.C
@@ -196,10 +239,7 @@ class Circuit:
             if norm <= 1:
                 return x, dict(iterations=it, kcl=float(np.max(np.abs(residual[:len(self.nodes)]))),
                                voltage=float(np.max(np.abs(residual[len(self.nodes):]))))
-            J = A+jac+alpha*cap
-            # Row equilibration; all physical unknowns remain in the solve.
-            row = np.maximum(np.max(np.abs(J), axis=1), 1e-15)
-            delta = np.linalg.solve(J/row[:, None], -residual/row)
+            delta = self.linearized_delta(A, jac+alpha*cap, residual, alpha)
             accepted = False
             for power in range(28):
                 candidate = x+delta*(.5**power)
@@ -255,17 +295,25 @@ class Circuit:
                 if model == "triode":
                     e = f"({vp}/600*sp(600*(0.01+{vg}/sqrt(300+{vp}^2))))"
                     ip = f"2*max({e},0)^1.4/1060"
-                else:
+                elif model == "pentode":
                     vs = f"v({s},{k})"
                     e = f"(max({vs},0)/60*sp(60*(1/11+{vg}/max({vs},0.001))))"
                     ip = f"2*max({e},0)^1.35/650*atan(max({vp},0)/24)"
                     lines.append(f"B_{name}_screen {s} {k} I={{max({vs}/11+{vg},0)^1.35/4200}}")
+                else:
+                    raise ValueError(f"SPICE export is not implemented for tube model {model}")
                 lines.append(f"B_{name}_plate {p} {k} I={{{ip}}}")
         return "\n".join(lines)+"\n"
 
+    def fingerprint(self):
+        """Stable identity also available for models not exported to SPICE."""
+        return repr((self.tube_set, self.tube_caps, self.el34_grid_r,
+                     self.parts, sorted(self.sources.items())))
 
-def build(full_supply=False, amplitude=.001, controls=.1):
-    circuit = Circuit()
+
+def build(full_supply=False, amplitude=.001, controls=.1, tube_set="koren",
+          tube_caps="auto", el34_grid_r=None, circuit_type=Circuit):
+    circuit = circuit_type(tube_set=tube_set, tube_caps=tube_caps, el34_grid_r=el34_grid_r)
     params = {}
     for line in (ROOT / "simulation/ngspice/jcm800_2203_1981.inc").read_text(encoding="utf-8").splitlines():
         if line.startswith(".param"):

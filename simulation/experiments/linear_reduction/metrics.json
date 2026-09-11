@@ -1,0 +1,217 @@
+{
+  "status": "pass",
+  "quick": false,
+  "criteria": {
+    "max_node_difference_v": 0.0001,
+    "max_branch_difference_a": 1e-06,
+    "relative_output_error": 1e-06,
+    "delta_scaled_error": 1e-08
+  },
+  "cases": [
+    {
+      "name": "electrical_start",
+      "duration_s": 0.06,
+      "h_s": 0.0001,
+      "shared_subdivisions": 0,
+      "full": {
+        "host_s": 2.1945532099343836,
+        "kcl_a": 9.743421694463628e-11,
+        "voltage_residual_v": 9.149516699835658e-10,
+        "max_iterations": 17,
+        "attempted_steps": 600,
+        "failures": 0
+      },
+      "reduced": {
+        "host_s": 2.1644822182133794,
+        "kcl_a": 9.743052892252635e-11,
+        "voltage_residual_v": 1.0359144653193653e-09,
+        "max_iterations": 17,
+        "attempted_steps": 600,
+        "failures": 0
+      },
+      "max_node_difference_v": 6.43836983726942e-10,
+      "max_branch_difference_a": 4.007638665370905e-11,
+      "relative_output_error": 1.871595582746281e-12,
+      "output_rms_difference_v": 2.2348039655582198e-13,
+      "host_speed_ratio": 1.0138929262009948,
+      "cached_factorizations": 6
+    },
+    {
+      "name": "attack_100mv",
+      "duration_s": 0.02,
+      "h_s": 1.25e-06,
+      "shared_subdivisions": 0,
+      "full": {
+        "host_s": 46.94329596008174,
+        "kcl_a": 9.925552740819299e-11,
+        "voltage_residual_v": 4.137109499424696e-08,
+        "max_iterations": 25,
+        "attempted_steps": 16000,
+        "failures": 0
+      },
+      "reduced": {
+        "host_s": 46.2160544951912,
+        "kcl_a": 9.981149240445575e-11,
+        "voltage_residual_v": 3.6940036807209253e-08,
+        "max_iterations": 25,
+        "attempted_steps": 16000,
+        "failures": 0
+      },
+      "max_node_difference_v": 2.5992915198003175e-07,
+      "max_branch_difference_a": 1.5847376744204666e-09,
+      "relative_output_error": 1.002081426409645e-11,
+      "output_rms_difference_v": 5.803242879316708e-10,
+      "host_speed_ratio": 1.015735689098389,
+      "cached_factorizations": 7
+    },
+    {
+      "name": "attack_500mv",
+      "duration_s": 0.02,
+      "h_s": 6.25e-07,
+      "shared_subdivisions": 0,
+      "full": {
+        "host_s": 90.49356739060022,
+        "kcl_a": 9.99970379124502e-11,
+        "voltage_residual_v": 8.475035429000854e-08,
+        "max_iterations": 15,
+        "attempted_steps": 32000,
+        "failures": 0
+      },
+      "reduced": {
+        "host_s": 88.96692576445639,
+        "kcl_a": 9.99982319171977e-11,
+        "voltage_residual_v": 8.69622454047203e-08,
+        "max_iterations": 15,
+        "attempted_steps": 32000,
+        "failures": 0
+      },
+      "max_node_difference_v": 3.4426231081852166e-05,
+      "max_branch_difference_a": 1.295160587666544e-07,
+      "relative_output_error": 3.8906102847178277e-10,
+      "output_rms_difference_v": 2.2686079303948278e-08,
+      "host_speed_ratio": 1.0171596535794176,
+      "cached_factorizations": 8
+    },
+    {
+      "name": "recovery_100mv",
+      "duration_s": 0.5,
+      "h_s": 2e-05,
+      "shared_subdivisions": 1,
+      "full": {
+        "host_s": 84.46746502327733,
+        "kcl_a": 9.994242158037694e-11,
+        "voltage_residual_v": 2.1227606339380145e-09,
+        "max_iterations": 39,
+        "attempted_steps": 25002,
+        "failures": 1
+      },
+      "reduced": {
+        "host_s": 82.59656720492058,
+        "kcl_a": 9.994494121201569e-11,
+        "voltage_residual_v": 2.1500454749912024e-09,
+        "max_iterations": 39,
+        "attempted_steps": 25002,
+        "failures": 1
+      },
+      "max_node_difference_v": 2.746793370533851e-08,
+      "max_branch_difference_a": 2.9684838614985054e-10,
+      "relative_output_error": 1.3295798521872562e-10,
+      "output_rms_difference_v": 7.705300891911032e-10,
+      "host_speed_ratio": 1.02265103601358,
+      "cached_factorizations": 10
+    }
+  ],
+  "signal_dc": {
+    "max_node_difference_v": 2.1032064978498966e-12,
+    "max_branch_difference_a": 1.1199374760906267e-14,
+    "relative_output_error": 0.0,
+    "output_rms_difference_v": 0.0
+  },
+  "unknowns": 98,
+  "retained": 39,
+  "eliminated": 59,
+  "output_index": 55,
+  "retained_nodes": [
+    "g1",
+    "p1",
+    "k1",
+    "g2",
+    "p2",
+    "k2",
+    "g3",
+    "p3",
+    "k3",
+    "bpre2",
+    "cf",
+    "pi_g1",
+    "pi_g2",
+    "pi_p1",
+    "pi_k",
+    "pi_p2",
+    "g4",
+    "g5",
+    "g6",
+    "g7",
+    "s4",
+    "s5",
+    "s6",
+    "s7",
+    "plate_a",
+    "xv4_junction",
+    "xv5_junction",
+    "plate_b",
+    "xv6_junction",
+    "xv7_junction",
+    "reservoir",
+    "hv1",
+    "hv2",
+    "Dbridge1_a",
+    "Dbridge2_a",
+    "Dbridge3_a",
+    "Dbridge4_a",
+    "bias_d",
+    "bias_raw"
+  ],
+  "circuit_sha256": "92840ba7deaee16574068bd78a5991fb0085c7e4dceb4ff7fedfe4927d36f23d",
+  "source_sha256": {
+    "full_mna.py": "4e23eadaac0e6c90e61ae624d557d85b70f33d636cfedf768dee5fe081015d6e",
+    "reduced_mna.py": "cfcd6ec24cf6a4c0ce5c0a21a7d23c6591af0662983c0eaffcf019ef76a7fbcb",
+    "tube_models.py": "bed0fe2448ffed5821e8448013f94bc07cc9a5cec77c22e98fe3f327765761a1",
+    "run_linear_reduction.py": "ac2ea87d443e16eca420270f682a04bad1baba4ef996ec07d921219b6ae26bad"
+  },
+  "warm_start_sha256": "9c7c8bd37383311298d85eb95515c5bdb4cef1c5e55227042ac87e3aa0c33f2f",
+  "periodic_refinement": [
+    {
+      "cycle": 1,
+      "max_dv_v": null,
+      "max_di_a": null,
+      "kcl_a": 6.02824457018869e-11,
+      "halvings": 0
+    },
+    {
+      "cycle": 2,
+      "max_dv_v": 0.009724817737946978,
+      "max_di_a": 2.4896755076123412e-05,
+      "kcl_a": 5.9980888311717e-11,
+      "halvings": 0
+    },
+    {
+      "cycle": 3,
+      "max_dv_v": 0.009664369172867282,
+      "max_di_a": 4.692525031407824e-06,
+      "kcl_a": 9.64243335849797e-11,
+      "halvings": 0
+    }
+  ],
+  "algebra": {
+    "cases": 11,
+    "delta_scaled_error": 7.887652937425242e-09,
+    "componentwise_backward_error": 3.192420036430856e-14
+  },
+  "overload_algebra": {
+    "cases": 5,
+    "delta_scaled_error": 7.0184790516903004e-12,
+    "componentwise_backward_error": 4.014312960163135e-14
+  },
+  "report_renderer_sha256": "36f04eb52c644d8b7ccbb9e2ba935f58ba2ae9b81223142162c1b51ff29652bc"
+}
