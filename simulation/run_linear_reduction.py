@@ -98,9 +98,11 @@ def paired_segment(circuits, initial, t0, duration, h, name):
                    full=stats[0], reduced=stats[1], **errors(circuits[0], *arrays))
     metrics["host_speed_ratio"] = stats[0]["host_s"]/stats[1]["host_s"]
     metrics["cached_factorizations"] = circuits[1].factorizations
-    assert_errors(metrics)
     np.savez_compressed(RAW / f"{name}.npz", time=t0+np.arange(count+1)*h,
                         full=arrays[0], reduced=arrays[1])
+    # Preserve a failed completed trajectory and its diagnostics before raising.
+    (RAW / f"{name}.metrics.json").write_text(json.dumps(metrics, indent=2)+"\n", encoding="utf-8")
+    assert_errors(metrics)
     print(name, json.dumps(metrics), flush=True)
     return arrays, metrics
 
