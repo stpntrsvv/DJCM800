@@ -1,0 +1,233 @@
+{
+  "status": "pass",
+  "quick": false,
+  "sample_sha256": "10877cbd67e41d3e187d46b4463b82e30e1b40c6012e16bead2b0c5bf07ae1f1",
+  "input_peak_v": 0.1,
+  "h_s": 1.25e-06,
+  "duration_s": 0.02,
+  "pre_roll_s": 0.02,
+  "cases": [
+    {
+      "name": "idle",
+      "controls": {
+        "GAIN": 0.5,
+        "BASS": 0.5,
+        "MID": 0.5,
+        "TREBLE": 0.5,
+        "MASTER": 0.5,
+        "PRESENCE": 0.5,
+        "NFB": 1.0
+      },
+      "el34_grid_r_ohm": 2001.0,
+      "driven": false,
+      "stats": {
+        "host_s": 17.29526748112403,
+        "attempted_steps": 16000,
+        "failures": 0,
+        "subdivisions": 0,
+        "max_iterations": 6,
+        "kcl_a": 9.993073035730049e-11,
+        "voltage_residual_v": 1.8873834051191807e-08
+      },
+      "diagnostics": {
+        "output_peak_v": 6.826322284315911e-05,
+        "output_rms_v": 3.538465143016667e-05,
+        "load_mean_w": 7.825459730214977e-11,
+        "load_peak_w": 2.9124172455842493e-10,
+        "load_energy_j": 1.5651897642896232e-12,
+        "bplus_min_v": 459.3737806549477,
+        "bplus_max_v": 473.06991656425896,
+        "bias_min_v": -47.70380915291399,
+        "bias_max_v": -47.68631172208977,
+        "el34_plate_peak_w": 7.876457018364979,
+        "el34_screen_peak_w": 0.9350544343441402,
+        "el34_grid_peak_a": 0.0,
+        "el34_grid_mean_a": 0.0,
+        "el34_grid_above_1ua_fraction": 0.0,
+        "primary_flux_proxy_peak_vs": 1.4439062262019676e-06
+      }
+    },
+    {
+      "name": "accepted",
+      "controls": {
+        "GAIN": 0.5,
+        "BASS": 0.5,
+        "MID": 0.5,
+        "TREBLE": 0.5,
+        "MASTER": 0.5,
+        "PRESENCE": 0.5,
+        "NFB": 1.0
+      },
+      "el34_grid_r_ohm": 2001.0,
+      "driven": true,
+      "stats": {
+        "host_s": 20.976899680681527,
+        "attempted_steps": 16000,
+        "failures": 0,
+        "subdivisions": 0,
+        "max_iterations": 14,
+        "kcl_a": 9.983489469150841e-11,
+        "voltage_residual_v": 3.8533471524715424e-08
+      },
+      "diagnostics": {
+        "output_peak_v": 73.59799790345367,
+        "output_rms_v": 44.95642806704934,
+        "load_mean_w": 126.31752653423632,
+        "load_peak_w": 338.5415809622982,
+        "load_energy_j": 2.5265084275928946,
+        "bplus_min_v": 382.6825700041908,
+        "bplus_max_v": 466.28337850249994,
+        "bias_min_v": -47.86314140269265,
+        "bias_max_v": -47.69841549745446,
+        "el34_plate_peak_w": 85.7051417080378,
+        "el34_screen_peak_w": 38.307341059979976,
+        "el34_grid_peak_a": 0.0003397929700996056,
+        "el34_grid_mean_a": 3.145082237062122e-05,
+        "el34_grid_above_1ua_fraction": 0.4779076307730767,
+        "primary_flux_proxy_peak_vs": 0.6080403939013048
+      }
+    },
+    {
+      "name": "assumed_audio_taper_mid",
+      "controls": {
+        "GAIN": 0.1,
+        "BASS": 0.5,
+        "MID": 0.5,
+        "TREBLE": 0.5,
+        "MASTER": 0.1,
+        "PRESENCE": 0.5,
+        "NFB": 1.0
+      },
+      "el34_grid_r_ohm": 2001.0,
+      "driven": true,
+      "stats": {
+        "host_s": 20.17573455744423,
+        "attempted_steps": 16000,
+        "failures": 0,
+        "subdivisions": 0,
+        "max_iterations": 7,
+        "kcl_a": 9.998017778262147e-11,
+        "voltage_residual_v": 1.6720150597393513e-08
+      },
+      "diagnostics": {
+        "output_peak_v": 54.560928131933764,
+        "output_rms_v": 11.049242847961384,
+        "load_mean_w": 7.630360469576613,
+        "load_peak_w": 186.05592991362758,
+        "load_energy_j": 0.15261674734211925,
+        "bplus_min_v": 451.22499406901017,
+        "bplus_max_v": 472.95341239446526,
+        "bias_min_v": -47.70394957730228,
+        "bias_max_v": -47.6867012391131,
+        "el34_plate_peak_w": 63.1593402665697,
+        "el34_screen_peak_w": 22.390780254198564,
+        "el34_grid_peak_a": 4.185339072812074e-07,
+        "el34_grid_mean_a": 2.3070653271287627e-08,
+        "el34_grid_above_1ua_fraction": 0.0,
+        "primary_flux_proxy_peak_vs": 0.11498723923514458
+      }
+    },
+    {
+      "name": "el34_ig1_off",
+      "controls": {
+        "GAIN": 0.5,
+        "BASS": 0.5,
+        "MID": 0.5,
+        "TREBLE": 0.5,
+        "MASTER": 0.5,
+        "PRESENCE": 0.5,
+        "NFB": 1.0
+      },
+      "el34_grid_r_ohm": 1000000000000000.0,
+      "driven": true,
+      "stats": {
+        "host_s": 21.249764675740153,
+        "attempted_steps": 16000,
+        "failures": 0,
+        "subdivisions": 0,
+        "max_iterations": 6,
+        "kcl_a": 9.993847456947307e-11,
+        "voltage_residual_v": 4.17931005358696e-08
+      },
+      "diagnostics": {
+        "output_peak_v": 81.83788049776149,
+        "output_rms_v": 51.38371303906256,
+        "load_mean_w": 165.01787285504548,
+        "load_peak_w": 418.58991777286815,
+        "load_energy_j": 3.3005637294419787,
+        "bplus_min_v": 370.02693620333184,
+        "bplus_max_v": 466.2838201607824,
+        "bias_min_v": -47.70290786657005,
+        "bias_max_v": -47.683338682607605,
+        "el34_plate_peak_w": 89.31385212543773,
+        "el34_screen_peak_w": 52.674271652603515,
+        "el34_grid_peak_a": 7.465624738625265e-14,
+        "el34_grid_mean_a": 1.4507258024313076e-14,
+        "el34_grid_above_1ua_fraction": 0.0,
+        "primary_flux_proxy_peak_vs": 0.7073164682835473
+      }
+    },
+    {
+      "name": "nfb_off",
+      "controls": {
+        "GAIN": 0.5,
+        "BASS": 0.5,
+        "MID": 0.5,
+        "TREBLE": 0.5,
+        "MASTER": 0.5,
+        "PRESENCE": 0.5,
+        "NFB": 1e-09
+      },
+      "el34_grid_r_ohm": 2001.0,
+      "driven": true,
+      "stats": {
+        "host_s": 21.671456878539175,
+        "attempted_steps": 16000,
+        "failures": 0,
+        "subdivisions": 0,
+        "max_iterations": 14,
+        "kcl_a": 9.989079789024524e-11,
+        "voltage_residual_v": 3.905734047293663e-08
+      },
+      "diagnostics": {
+        "output_peak_v": 74.01720336124532,
+        "output_rms_v": 47.21688335157932,
+        "load_mean_w": 139.33962958979052,
+        "load_peak_w": 342.40914958874663,
+        "load_energy_j": 2.7869667663327977,
+        "bplus_min_v": 376.5042303598807,
+        "bplus_max_v": 466.27407794974516,
+        "bias_min_v": -47.872043712323496,
+        "bias_max_v": -47.6992132468336,
+        "el34_plate_peak_w": 93.88504476363468,
+        "el34_screen_peak_w": 39.173904472169625,
+        "el34_grid_peak_a": 0.00031653679330106933,
+        "el34_grid_mean_a": 3.313677032781154e-05,
+        "el34_grid_above_1ua_fraction": 0.5351540528716955,
+        "primary_flux_proxy_peak_vs": 0.5818978873330685
+      }
+    }
+  ],
+  "comparisons": {
+    "assumed_audio_taper_mid": {
+      "output_rms_difference_v": 37.90823943315574,
+      "relative_output_difference": 0.8432217830255171,
+      "additional_bplus_sag_v": 10.461189932905882
+    },
+    "el34_ig1_off": {
+      "output_rms_difference_v": 7.079570779450858,
+      "relative_output_difference": 0.15747627389107016,
+      "additional_bplus_sag_v": 90.44167577859264
+    },
+    "nfb_off": {
+      "output_rms_difference_v": 7.139921582191216,
+      "relative_output_difference": 0.15881870266789275,
+      "additional_bplus_sag_v": 84.00547929614953
+    },
+    "accepted": {
+      "output_rms_difference_v": 0.0,
+      "relative_output_difference": 0.0,
+      "additional_bplus_sag_v": 77.68819734686394
+    }
+  }
+}
