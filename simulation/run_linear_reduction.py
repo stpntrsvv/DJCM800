@@ -52,7 +52,7 @@ def assert_errors(row, relative=True):
             raise AssertionError(f"{key}: {row[key]:g} exceeds {LIMITS[key]:g}")
 
 
-def paired_segment(circuits, initial, t0, duration, h, name):
+def paired_segment(circuits, initial, t0, duration, h, name, relative=True):
     count = round(duration/h)
     if abs(count*h-duration) > 1e-12:
         raise ValueError("Duration must be a multiple of h")
@@ -102,7 +102,7 @@ def paired_segment(circuits, initial, t0, duration, h, name):
                         full=arrays[0], reduced=arrays[1])
     # Preserve a failed completed trajectory and its diagnostics before raising.
     (RAW / f"{name}.metrics.json").write_text(json.dumps(metrics, indent=2)+"\n", encoding="utf-8")
-    assert_errors(metrics)
+    assert_errors(metrics, relative=relative)
     print(name, json.dumps(metrics), flush=True)
     return arrays, metrics
 

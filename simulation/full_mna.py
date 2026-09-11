@@ -320,7 +320,14 @@ def build(full_supply=False, amplitude=.001, controls=.1, tube_set="koren",
             for field in line.split()[1:]:
                 key, value = field.split("=")
                 params[key] = number(value, params)
-    params.update(GAIN=controls, MASTER=controls)
+    if isinstance(controls, dict):
+        unknown = set(controls)-{"GAIN", "BASS", "MID", "TREBLE", "MASTER", "PRESENCE", "NFB"}
+        if unknown:
+            raise ValueError(f"Unknown controls: {sorted(unknown)}")
+        params.update({name: float(value) for name, value in controls.items()})
+    else:
+        # Historical experiments used one scalar for Gain and Master only.
+        params.update(GAIN=controls, MASTER=controls)
     for line in (ROOT / "simulation/ngspice/jcm800_2203_1981.inc").read_text(encoding="utf-8").splitlines():
         if not line or line[0] in "*.": continue
         name, *a = line.split()
