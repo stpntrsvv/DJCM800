@@ -1,6 +1,6 @@
 import unittest
 
-from full_mna import build
+from full_mna import build, control_position
 
 
 class ControlBuildTests(unittest.TestCase):
@@ -19,6 +19,17 @@ class ControlBuildTests(unittest.TestCase):
         circuit.source_function("Vin", lambda time: 2*time)
         self.assertEqual(circuit.rhs(.25)[circuit.branches["Vin"]], .5)
         self.assertEqual(circuit.rhs()[circuit.branches["Vin"]], 0.)
+
+    def test_logarithmic_front_panel_positions(self):
+        self.assertAlmostEqual(control_position("GAIN", 5.), .1)
+        self.assertAlmostEqual(control_position("MASTER", 5.), .1)
+        self.assertAlmostEqual(control_position("TREBLE", 5.), .5)
+        self.assertEqual(control_position("GAIN", 0.), 0.)
+        self.assertEqual(control_position("GAIN", 10.), 1.)
+
+    def test_invalid_front_panel_position_is_rejected(self):
+        with self.assertRaises(ValueError):
+            control_position("GAIN", 11.)
 
 
 if __name__ == "__main__":

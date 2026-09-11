@@ -1,0 +1,428 @@
+{
+  "status": "pass",
+  "quick": false,
+  "audio_taper_midpoint": 0.1,
+  "duration_s": 0.02,
+  "cases": [
+    {
+      "name": "all5_25mv",
+      "duration_s": 0.02,
+      "h_s": 1.25e-06,
+      "shared_subdivisions": 0,
+      "full": {
+        "host_s": 41.32776499981992,
+        "kcl_a": 9.987388693843968e-11,
+        "voltage_residual_v": 1.410080585628748e-08,
+        "max_iterations": 6,
+        "attempted_steps": 16000,
+        "failures": 0
+      },
+      "reduced": {
+        "host_s": 20.28891041292809,
+        "kcl_a": 9.987388693843968e-11,
+        "voltage_residual_v": 1.635635271668434e-08,
+        "max_iterations": 6,
+        "attempted_steps": 16000,
+        "failures": 0
+      },
+      "max_node_difference_v": 3.452079795351892e-07,
+      "max_branch_difference_a": 2.7722517614847675e-09,
+      "relative_output_error": 4.041231431727923e-10,
+      "output_rms_difference_v": 9.548533904409047e-10,
+      "host_speed_ratio": 2.036963255231581,
+      "cached_factorizations": 2,
+      "positions": {
+        "GAIN": 5.0,
+        "BASS": 5.0,
+        "MID": 5.0,
+        "TREBLE": 5.0,
+        "MASTER": 5.0,
+        "PRESENCE": 5.0
+      },
+      "amplitude_v": 0.025,
+      "electrical": {
+        "GAIN": 0.1,
+        "BASS": 0.5,
+        "MID": 0.5,
+        "TREBLE": 0.5,
+        "MASTER": 0.1,
+        "PRESENCE": 0.5
+      },
+      "output_mean_power_w": 0.3489200789059521,
+      "ranges": {
+        "in": {
+          "min_v": -0.008773538019268362,
+          "max_v": 0.013743810789849023
+        },
+        "master_out": {
+          "min_v": -0.8718165611840734,
+          "max_v": 0.31851806517709397
+        },
+        "pi_p1": {
+          "min_v": 222.33349005726333,
+          "max_v": 244.59626447816564
+        },
+        "pi_p2": {
+          "min_v": 203.49745035079664,
+          "max_v": 226.69588482657082
+        },
+        "g4": {
+          "min_v": -54.89328235536229,
+          "max_v": -32.465162071925725
+        },
+        "g6": {
+          "min_v": -63.562563179924254,
+          "max_v": -40.21436472069322
+        },
+        "bias": {
+          "min_v": -47.703987551651544,
+          "max_v": -47.68658946754035
+        },
+        "bplus": {
+          "min_v": 458.7159920188714,
+          "max_v": 473.0243009431152
+        },
+        "out": {
+          "min_v": -13.269724957171684,
+          "max_v": 5.852397106809148
+        }
+      }
+    },
+    {
+      "name": "all5_100mv",
+      "duration_s": 0.02,
+      "h_s": 1.25e-06,
+      "shared_subdivisions": 0,
+      "full": {
+        "host_s": 42.69287773524411,
+        "kcl_a": 9.998452933646096e-11,
+        "voltage_residual_v": 1.5104888007044792e-08,
+        "max_iterations": 7,
+        "attempted_steps": 16000,
+        "failures": 0
+      },
+      "reduced": {
+        "host_s": 20.914928481681272,
+        "kcl_a": 9.998017778262147e-11,
+        "voltage_residual_v": 1.6720150597393513e-08,
+        "max_iterations": 7,
+        "attempted_steps": 16000,
+        "failures": 0
+      },
+      "max_node_difference_v": 1.0338180800317787e-07,
+      "max_branch_difference_a": 6.32866203886806e-10,
+      "relative_output_error": 1.0211082855985751e-10,
+      "output_rms_difference_v": 1.1282473421654884e-09,
+      "host_speed_ratio": 2.0412633862285237,
+      "cached_factorizations": 2,
+      "positions": {
+        "GAIN": 5.0,
+        "BASS": 5.0,
+        "MID": 5.0,
+        "TREBLE": 5.0,
+        "MASTER": 5.0,
+        "PRESENCE": 5.0
+      },
+      "amplitude_v": 0.1,
+      "electrical": {
+        "GAIN": 0.1,
+        "BASS": 0.5,
+        "MID": 0.5,
+        "TREBLE": 0.5,
+        "MASTER": 0.1,
+        "PRESENCE": 0.5
+      },
+      "output_mean_power_w": 7.630360469591086,
+      "ranges": {
+        "in": {
+          "min_v": -0.03509415207707345,
+          "max_v": 0.054975243159396094
+        },
+        "master_out": {
+          "min_v": -2.5231253248641567,
+          "max_v": 1.3148972017133589
+        },
+        "pi_p1": {
+          "min_v": 204.99211833135456,
+          "max_v": 268.5501696944731
+        },
+        "pi_p2": {
+          "min_v": 178.41940876483133,
+          "max_v": 244.6982623633788
+        },
+        "g4": {
+          "min_v": -69.51350597060008,
+          "max_v": -7.844359708660503
+        },
+        "g6": {
+          "min_v": -89.29242445114495,
+          "max_v": -25.064957188083
+        },
+        "bias": {
+          "min_v": -47.70394957730201,
+          "max_v": -47.686701239112814
+        },
+        "bplus": {
+          "min_v": 451.2249940690752,
+          "max_v": 472.95341239457747
+        },
+        "out": {
+          "min_v": -54.56092813141683,
+          "max_v": 25.34469883031279
+        }
+      }
+    },
+    {
+      "name": "gain2_master8",
+      "duration_s": 0.02,
+      "h_s": 1.25e-06,
+      "shared_subdivisions": 0,
+      "full": {
+        "host_s": 42.80069900886156,
+        "kcl_a": 9.985201727957804e-11,
+        "voltage_residual_v": 1.5963451005518436e-08,
+        "max_iterations": 6,
+        "attempted_steps": 16000,
+        "failures": 0
+      },
+      "reduced": {
+        "host_s": 20.671907706884667,
+        "kcl_a": 9.985457859879032e-11,
+        "voltage_residual_v": 1.3882527127861977e-08,
+        "max_iterations": 6,
+        "attempted_steps": 16000,
+        "failures": 0
+      },
+      "max_node_difference_v": 3.0311402454685776e-07,
+      "max_branch_difference_a": 2.432157586440553e-09,
+      "relative_output_error": 9.277915862333999e-10,
+      "output_rms_difference_v": 2.2229745868923906e-09,
+      "host_speed_ratio": 2.0704764947555865,
+      "cached_factorizations": 2,
+      "positions": {
+        "GAIN": 2.0,
+        "BASS": 5.0,
+        "MID": 5.0,
+        "TREBLE": 5.0,
+        "MASTER": 8.0,
+        "PRESENCE": 5.0
+      },
+      "amplitude_v": 0.1,
+      "electrical": {
+        "GAIN": 0.004765098748902246,
+        "BASS": 0.5,
+        "MID": 0.5,
+        "TREBLE": 0.5,
+        "MASTER": 0.47650987489022456,
+        "PRESENCE": 0.5
+      },
+      "output_mean_power_w": 0.35879646333815757,
+      "ranges": {
+        "in": {
+          "min_v": -0.03509415207707345,
+          "max_v": 0.054975243159396094
+        },
+        "master_out": {
+          "min_v": -0.9667339495085694,
+          "max_v": 0.13516282784838776
+        },
+        "pi_p1": {
+          "min_v": 228.3865803798015,
+          "max_v": 248.6152361497207
+        },
+        "pi_p2": {
+          "min_v": 198.9386320836253,
+          "max_v": 220.011814464504
+        },
+        "g4": {
+          "min_v": -55.24017109211687,
+          "max_v": -34.20820670211005
+        },
+        "g6": {
+          "min_v": -61.745570348906426,
+          "max_v": -39.8760585100979
+        },
+        "bias": {
+          "min_v": -47.70489904983899,
+          "max_v": -47.68772055409092
+        },
+        "bplus": {
+          "min_v": 456.4333767806529,
+          "max_v": 472.0846249041366
+        },
+        "out": {
+          "min_v": -11.077882929260774,
+          "max_v": 6.509268798130774
+        }
+      }
+    },
+    {
+      "name": "gain8_master2",
+      "duration_s": 0.02,
+      "h_s": 1.25e-06,
+      "shared_subdivisions": 0,
+      "full": {
+        "host_s": 41.28239346155897,
+        "kcl_a": 9.995351768488092e-11,
+        "voltage_residual_v": 1.57597241923213e-08,
+        "max_iterations": 7,
+        "attempted_steps": 16000,
+        "failures": 0
+      },
+      "reduced": {
+        "host_s": 20.145597548922524,
+        "kcl_a": 9.973380194622239e-11,
+        "voltage_residual_v": 1.3838871382176876e-08,
+        "max_iterations": 7,
+        "attempted_steps": 16000,
+        "failures": 0
+      },
+      "max_node_difference_v": 6.445415579037217e-07,
+      "max_branch_difference_a": 3.391782854578196e-09,
+      "relative_output_error": 7.228351948232305e-11,
+      "output_rms_difference_v": 6.708474500962599e-11,
+      "host_speed_ratio": 2.049201735580533,
+      "cached_factorizations": 2,
+      "positions": {
+        "GAIN": 8.0,
+        "BASS": 5.0,
+        "MID": 5.0,
+        "TREBLE": 5.0,
+        "MASTER": 2.0,
+        "PRESENCE": 5.0
+      },
+      "amplitude_v": 0.1,
+      "electrical": {
+        "GAIN": 0.47650987489022456,
+        "BASS": 0.5,
+        "MID": 0.5,
+        "TREBLE": 0.5,
+        "MASTER": 0.004765098748902246,
+        "PRESENCE": 0.5
+      },
+      "output_mean_power_w": 0.053833049689084436,
+      "ranges": {
+        "in": {
+          "min_v": -0.03509415207707345,
+          "max_v": 0.054975243159396094
+        },
+        "master_out": {
+          "min_v": -0.15756416406369575,
+          "max_v": 0.18435538629549247
+        },
+        "pi_p1": {
+          "min_v": 224.44502402187362,
+          "max_v": 231.2520767885911
+        },
+        "pi_p2": {
+          "min_v": 217.44514352744733,
+          "max_v": 224.55379047281963
+        },
+        "g4": {
+          "min_v": -50.788157941035024,
+          "max_v": -44.59976019125307
+        },
+        "g6": {
+          "min_v": -50.90947686329839,
+          "max_v": -44.45458105680234
+        },
+        "bias": {
+          "min_v": -47.70380027620897,
+          "max_v": -47.686334590212546
+        },
+        "bplus": {
+          "min_v": 459.27604920767027,
+          "max_v": 473.03400940621106
+        },
+        "out": {
+          "min_v": -2.205258630692736,
+          "max_v": 1.778895397068635
+        }
+      }
+    },
+    {
+      "name": "gain8_master5",
+      "duration_s": 0.02,
+      "h_s": 1.25e-06,
+      "shared_subdivisions": 0,
+      "full": {
+        "host_s": 44.33103813556954,
+        "kcl_a": 9.999632198665065e-11,
+        "voltage_residual_v": 2.7284841053187847e-08,
+        "max_iterations": 6,
+        "attempted_steps": 16000,
+        "failures": 0
+      },
+      "reduced": {
+        "host_s": 21.690896234475076,
+        "kcl_a": 9.999010473771275e-11,
+        "voltage_residual_v": 3.035529516637325e-08,
+        "max_iterations": 6,
+        "attempted_steps": 16000,
+        "failures": 0
+      },
+      "max_node_difference_v": 2.4674091392284936e-07,
+      "max_branch_difference_a": 1.7283419140312617e-09,
+      "relative_output_error": 4.8924498115294026e-11,
+      "output_rms_difference_v": 1.4162841148762641e-09,
+      "host_speed_ratio": 2.043762399504299,
+      "cached_factorizations": 2,
+      "positions": {
+        "GAIN": 8.0,
+        "BASS": 5.0,
+        "MID": 5.0,
+        "TREBLE": 5.0,
+        "MASTER": 5.0,
+        "PRESENCE": 5.0
+      },
+      "amplitude_v": 0.1,
+      "electrical": {
+        "GAIN": 0.47650987489022456,
+        "BASS": 0.5,
+        "MID": 0.5,
+        "TREBLE": 0.5,
+        "MASTER": 0.1,
+        "PRESENCE": 0.5
+      },
+      "output_mean_power_w": 52.37548132865402,
+      "ranges": {
+        "in": {
+          "min_v": -0.03509415207707345,
+          "max_v": 0.054975243159396094
+        },
+        "master_out": {
+          "min_v": -3.217757065778711,
+          "max_v": 3.665886655787092
+        },
+        "pi_p1": {
+          "min_v": 167.7605897517446,
+          "max_v": 279.5068783687395
+        },
+        "pi_p2": {
+          "min_v": 166.8982063550539,
+          "max_v": 279.0652372806567
+        },
+        "g4": {
+          "min_v": -98.79575894651342,
+          "max_v": 0.3813665256389571
+        },
+        "g6": {
+          "min_v": -104.64049357364027,
+          "max_v": 0.3361220876840975
+        },
+        "bias": {
+          "min_v": -47.70359642373057,
+          "max_v": -47.686695586701994
+        },
+        "bplus": {
+          "min_v": 422.7108151893008,
+          "max_v": 472.1651824578492
+        },
+        "out": {
+          "min_v": -65.24297736137608,
+          "max_v": 59.87305983172853
+        }
+      }
+    }
+  ]
+}

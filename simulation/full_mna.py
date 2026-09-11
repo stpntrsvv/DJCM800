@@ -14,10 +14,26 @@ import numpy as np
 ROOT = Path(__file__).resolve().parents[1]
 SCALE = {"meg": 1e6, "k": 1e3, "m": 1e-3, "u": 1e-6, "n": 1e-9, "p": 1e-12, "g": 1e9}
 VT = 8.617087e-5 * 300.15
+AUDIO_TAPER_MIDPOINT = .1
 
 
 def expit(x):
     return 1/(1+math.exp(-x)) if x >= 0 else math.exp(x)/(1+math.exp(x))
+
+
+def control_position(name, position, audio_midpoint=AUDIO_TAPER_MIDPOINT):
+    """Map a mechanical 0..10 knob position to electrical wiper fraction."""
+    if name not in {"GAIN", "BASS", "MID", "TREBLE", "MASTER", "PRESENCE"}:
+        raise ValueError(f"Unknown front-panel control: {name}")
+    if not 0. <= position <= 10.:
+        raise ValueError(f"Control position must be within 0..10: {name}={position}")
+    fraction = position/10.
+    if name in {"GAIN", "MASTER"}:
+        if not 0. < audio_midpoint < 1.:
+            raise ValueError("Audio-taper midpoint must be within 0..1")
+        exponent = math.log(audio_midpoint)/math.log(.5)
+        fraction = fraction**exponent
+    return fraction
 
 
 def number(value, params):
@@ -323,7 +339,8 @@ class Circuit:
 
 
 def build(full_supply=False, amplitude=.001, controls=.1, tube_set="koren",
-          tube_caps="auto", el34_grid_r=None, circuit_type=Circuit):
+          tube_caps="auto", el34_grid_r=None, circuit_type=Circuit,
+          control_positions=None, audio_taper_midpoint=AUDIO_TAPER_MIDPOINT):
     circuit = circuit_type(tube_set=tube_set, tube_caps=tube_caps, el34_grid_r=el34_grid_r)
     params = {}
     for line in (ROOT / "simulation/ngspice/jcm800_2203_1981.inc").read_text(encoding="utf-8").splitlines():
@@ -339,6 +356,9 @@ def build(full_supply=False, amplitude=.001, controls=.1, tube_set="koren",
     else:
         # Historical experiments used one scalar for Gain and Master only.
         params.update(GAIN=controls, MASTER=controls)
+    if control_positions is not None:
+        params.update({name: control_position(name, float(position), audio_taper_midpoint)
+                       for name, position in control_positions.items()})
     for line in (ROOT / "simulation/ngspice/jcm800_2203_1981.inc").read_text(encoding="utf-8").splitlines():
         if not line or line[0] in "*.": continue
         name, *a = line.split()
