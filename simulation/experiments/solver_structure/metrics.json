@@ -1,0 +1,49 @@
+{
+  "status": "pass",
+  "h_s": 6.25e-07,
+  "full": {
+    "size": 98,
+    "nnz": 394
+  },
+  "schur": {
+    "size": 39,
+    "nnz": 317
+  },
+  "orderings": {
+    "NATURAL": {
+      "l_nnz": 600,
+      "u_nnz": 521,
+      "total_nnz": 1121,
+      "relative_residual": 1.0649487377204212e-09,
+      "dynamic_row_pivots": 51
+    },
+    "MMD_ATA": {
+      "l_nnz": 368,
+      "u_nnz": 375,
+      "total_nnz": 743,
+      "relative_residual": 4.54389960348521e-10,
+      "dynamic_row_pivots": 98
+    },
+    "MMD_AT_PLUS_A": {
+      "l_nnz": 341,
+      "u_nnz": 365,
+      "total_nnz": 706,
+      "relative_residual": 8.209824844557528e-10,
+      "dynamic_row_pivots": 97
+    },
+    "COLAMD": {
+      "l_nnz": 361,
+      "u_nnz": 376,
+      "total_nnz": 737,
+      "relative_residual": 4.3077883472909795e-10,
+      "dynamic_row_pivots": 98
+    }
+  },
+  "dense_schur": {
+    "multiply_subtract_pairs": 19019
+  },
+  "best": {
+    "ordering": "MMD_AT_PLUS_A",
+    "factor_nnz": 706
+  }
+}
