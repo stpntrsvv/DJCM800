@@ -340,7 +340,8 @@ class Circuit:
 
 def build(full_supply=False, amplitude=.001, controls=.1, tube_set="koren",
           tube_caps="auto", el34_grid_r=None, circuit_type=Circuit,
-          control_positions=None, audio_taper_midpoint=AUDIO_TAPER_MIDPOINT):
+          control_positions=None, audio_taper_midpoint=AUDIO_TAPER_MIDPOINT,
+          speaker_load=None):
     circuit = circuit_type(tube_set=tube_set, tube_caps=tube_caps, el34_grid_r=el34_grid_r)
     params = {}
     for line in (ROOT / "simulation/ngspice/jcm800_2203_1981.inc").read_text(encoding="utf-8").splitlines():
@@ -363,6 +364,8 @@ def build(full_supply=False, amplitude=.001, controls=.1, tube_set="koren",
         if not line or line[0] in "*.": continue
         name, *a = line.split()
         kind = name[0].upper()
+        if name == "Rload" and speaker_load is not None:
+            continue
         if kind in "RCL": circuit.add(kind, name, a[0], a[1], number(a[2], params))
         elif kind == "V": circuit.source(name, a[0], a[1], dc=number(a[2], params))
         elif kind == "E": circuit.add(kind, name, *a[:4], number(a[4], params))
@@ -370,6 +373,9 @@ def build(full_supply=False, amplitude=.001, controls=.1, tube_set="koren",
         elif kind == "X": circuit.tube(name, *a[:-1])
         else: raise ValueError(line)
     circuit.source("Vin", "in", "0", amplitude=amplitude, frequency=1000)
+    if speaker_load is not None:
+        from speaker_load import add_speaker_load
+        add_speaker_load(circuit, speaker_load)
     if full_supply:
         extend_factory_supply(circuit)
     return circuit.compile()
