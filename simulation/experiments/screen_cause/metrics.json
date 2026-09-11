@@ -1,0 +1,160 @@
+{
+  "status": "pass",
+  "quick": false,
+  "sample_sha256": "10877cbd67e41d3e187d46b4463b82e30e1b40c6012e16bead2b0c5bf07ae1f1",
+  "input_peak_v": 0.1,
+  "positions": {
+    "GAIN": 5.0,
+    "BASS": 5.0,
+    "MID": 5.0,
+    "TREBLE": 5.0,
+    "MASTER": 8.0,
+    "PRESENCE": 5.0
+  },
+  "duration_s": 0.03,
+  "h_s": 1.25e-06,
+  "cases": [
+    {
+      "name": "accepted",
+      "changes": {},
+      "warm_stats": {
+        "host_s": 3.490791713586077,
+        "attempted_steps": 2500,
+        "failures": 0,
+        "subdivisions": 0,
+        "max_iterations": 11,
+        "kcl_a": 9.935543367038408e-11,
+        "voltage_residual_v": 8.567440090700984e-10
+      },
+      "stats": {
+        "host_s": 33.28644858370535,
+        "attempted_steps": 24000,
+        "failures": 0,
+        "subdivisions": 0,
+        "max_iterations": 15,
+        "kcl_a": 9.999086541395696e-11,
+        "voltage_residual_v": 4.145840648561716e-08
+      },
+      "metrics": {
+        "screen_mean_max_w": 6.8596954111439,
+        "screen_max_20ms_w": 9.556321636264343,
+        "worst_tube": 7,
+        "worst_window_start_ms": 8.29125,
+        "va_below_vs_fraction_in_worst_tube": 0.565434773551102,
+        "screen_energy_when_va_below_vs_fraction": 0.9780047815610423,
+        "bscreen_min_v": 404.8892438907261,
+        "bplus_min_v": 396.8579905870494,
+        "output_peak_v": 71.30113829300322
+      }
+    },
+    {
+      "name": "secondary_off",
+      "changes": {
+        "el34_secondary_scale": 0.0
+      },
+      "warm_stats": {
+        "host_s": 3.8545086223166436,
+        "attempted_steps": 2500,
+        "failures": 0,
+        "subdivisions": 0,
+        "max_iterations": 11,
+        "kcl_a": 9.981704351957887e-11,
+        "voltage_residual_v": 1.1077645467594266e-09
+      },
+      "stats": {
+        "host_s": 35.90223459387198,
+        "attempted_steps": 24000,
+        "failures": 0,
+        "subdivisions": 0,
+        "max_iterations": 14,
+        "kcl_a": 9.992896614352542e-11,
+        "voltage_residual_v": 4.17931005358696e-08
+      },
+      "metrics": {
+        "screen_mean_max_w": 6.824039815478735,
+        "screen_max_20ms_w": 9.503194610443929,
+        "worst_tube": 6,
+        "worst_window_start_ms": 8.2925,
+        "va_below_vs_fraction_in_worst_tube": 0.5655597683429857,
+        "screen_energy_when_va_below_vs_fraction": 0.9778745473400402,
+        "bscreen_min_v": 404.89329600771674,
+        "bplus_min_v": 396.6684034551532,
+        "output_peak_v": 72.266700794161
+      }
+    },
+    {
+      "name": "screen_feed_500ohm",
+      "changes": {
+        "component_overrides": {
+          "Rch": 500.0
+        }
+      },
+      "warm_stats": {
+        "host_s": 3.613308143336326,
+        "attempted_steps": 2500,
+        "failures": 0,
+        "subdivisions": 0,
+        "max_iterations": 11,
+        "kcl_a": 9.936229616869241e-11,
+        "voltage_residual_v": 8.685674401931465e-10
+      },
+      "stats": {
+        "host_s": 32.57774777524173,
+        "attempted_steps": 24000,
+        "failures": 0,
+        "subdivisions": 0,
+        "max_iterations": 14,
+        "kcl_a": 9.995003609486464e-11,
+        "voltage_residual_v": 4.083995008841157e-08
+      },
+      "metrics": {
+        "screen_mean_max_w": 6.728093918370229,
+        "screen_max_20ms_w": 9.41088107686688,
+        "worst_tube": 6,
+        "worst_window_start_ms": 8.2925,
+        "va_below_vs_fraction_in_worst_tube": 0.4871047039706679,
+        "screen_energy_when_va_below_vs_fraction": 0.9657710370836936,
+        "bscreen_min_v": 409.4842736343429,
+        "bplus_min_v": 392.80141948617495,
+        "output_peak_v": 71.0063276520664
+      }
+    },
+    {
+      "name": "primary_2200ohm",
+      "changes": {
+        "parameter_overrides": {
+          "RAA": 2200.0
+        }
+      },
+      "warm_stats": {
+        "host_s": 3.4523556316271424,
+        "attempted_steps": 2500,
+        "failures": 0,
+        "subdivisions": 0,
+        "max_iterations": 11,
+        "kcl_a": 9.935520907790405e-11,
+        "voltage_residual_v": 7.930793799459934e-10
+      },
+      "stats": {
+        "host_s": 33.01958646439016,
+        "attempted_steps": 24000,
+        "failures": 0,
+        "subdivisions": 0,
+        "max_iterations": 13,
+        "kcl_a": 9.997824963747792e-11,
+        "voltage_residual_v": 3.5332050174474716e-08
+      },
+      "metrics": {
+        "screen_mean_max_w": 7.327791942531808,
+        "screen_max_20ms_w": 10.262371118446069,
+        "worst_tube": 6,
+        "worst_window_start_ms": 8.287500000000001,
+        "va_below_vs_fraction_in_worst_tube": 0.5364776467647181,
+        "screen_energy_when_va_below_vs_fraction": 0.974421600003604,
+        "bscreen_min_v": 406.1517601802312,
+        "bplus_min_v": 402.427962696468,
+        "output_peak_v": 68.25625083618468
+      }
+    }
+  ]
+}

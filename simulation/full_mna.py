@@ -51,14 +51,18 @@ def electrode(kind, v):
         name = kind.split(":", 1)[1]
         currents, jac = dempwolf(v[0], v[1], TRIODES[name])
         return currents[:2], jac[:2]
-    if kind == "reefman":
-        from tube_models import reefman
+    if kind == "reefman" or kind.startswith("reefman-secondary:"):
+        from dataclasses import replace
+        from tube_models import EL34, reefman
         # The isolated law intentionally rejects unsupported quadrants. The MNA
         # nevertheless needs a finite trial-point continuation during source
         # stepping/Newton. Constant projection is numerical scaffolding, not a
         # claim about reverse-anode or nonpositive-screen tube physics.
         va, vs = max(float(v[0]), 0.), max(float(v[2]), 1e-6)
-        currents, jac = reefman(va, v[1], vs)
+        parameters = EL34
+        if kind.startswith("reefman-secondary:"):
+            parameters = replace(EL34, secondary=EL34.secondary*float(kind.split(":", 1)[1]))
+        currents, jac = reefman(va, v[1], vs, parameters)
         if v[0] < 0:
             jac[:, 0] = 0.
         if v[2] <= 1e-6:
@@ -116,7 +120,8 @@ def diode(v, isat, cjo, tt):
 
 
 class Circuit:
-    def __init__(self, tube_set="koren", tube_caps="auto", el34_grid_r=None):
+    def __init__(self, tube_set="koren", tube_caps="auto", el34_grid_r=None,
+                 el34_secondary_scale=1.):
         self.parts = []
         self.sources = {}
         self.source_functions = {}
@@ -124,6 +129,7 @@ class Circuit:
         self.tube_set = tube_set
         self.tube_caps = tube_caps
         self.el34_grid_r = (1001. if tube_set == "koren" else 2001.) if el34_grid_r is None else el34_grid_r
+        self.el34_secondary_scale = float(el34_secondary_scale)
 
     def add(self, kind, name, *args):
         self.parts.append((kind, name, *args))
@@ -145,7 +151,9 @@ class Circuit:
             triode_name = self.tube_set.split(":", 1)[1]
             if triode_name not in ("RSD-1", "RSD-2", "EHX-1"):
                 raise ValueError(f"Unknown detailed triode parameter set: {triode_name}")
-            kind = f"dempwolf:{triode_name}" if screen is None else "reefman"
+            kind = f"dempwolf:{triode_name}" if screen is None else (
+                "reefman" if self.el34_secondary_scale == 1. else
+                f"reefman-secondary:{self.el34_secondary_scale:g}")
         else:
             raise ValueError(f"Unknown tube set: {self.tube_set}")
         self.add("T", name, kind, p, g, k, screen)
@@ -334,21 +342,28 @@ class Circuit:
 
     def fingerprint(self):
         """Stable identity also available for models not exported to SPICE."""
-        return repr((self.tube_set, self.tube_caps, self.el34_grid_r,
-                     self.parts, sorted(self.sources.items())))
+        identity = (self.tube_set, self.tube_caps, self.el34_grid_r,
+                    self.parts, sorted(self.sources.items()))
+        if self.el34_secondary_scale != 1.:
+            identity += (("el34_secondary_scale", self.el34_secondary_scale),)
+        return repr(identity)
 
 
 def build(full_supply=False, amplitude=.001, controls=.1, tube_set="koren",
           tube_caps="auto", el34_grid_r=None, circuit_type=Circuit,
           control_positions=None, audio_taper_midpoint=AUDIO_TAPER_MIDPOINT,
-          speaker_load=None):
-    circuit = circuit_type(tube_set=tube_set, tube_caps=tube_caps, el34_grid_r=el34_grid_r)
+          speaker_load=None, parameter_overrides=None, component_overrides=None,
+          el34_secondary_scale=1.):
+    circuit = circuit_type(tube_set=tube_set, tube_caps=tube_caps, el34_grid_r=el34_grid_r,
+                           el34_secondary_scale=el34_secondary_scale)
     params = {}
     for line in (ROOT / "simulation/ngspice/jcm800_2203_1981.inc").read_text(encoding="utf-8").splitlines():
         if line.startswith(".param"):
             for field in line.split()[1:]:
                 key, value = field.split("=")
                 params[key] = number(value, params)
+    if parameter_overrides:
+        params.update({name: float(value) for name, value in parameter_overrides.items()})
     if isinstance(controls, dict):
         unknown = set(controls)-{"GAIN", "BASS", "MID", "TREBLE", "MASTER", "PRESENCE", "NFB"}
         if unknown:
@@ -366,7 +381,11 @@ def build(full_supply=False, amplitude=.001, controls=.1, tube_set="koren",
         kind = name[0].upper()
         if name == "Rload" and speaker_load is not None:
             continue
-        if kind in "RCL": circuit.add(kind, name, a[0], a[1], number(a[2], params))
+        if kind in "RCL":
+            value = number(a[2], params)
+            if component_overrides and name in component_overrides:
+                value = float(component_overrides[name])
+            circuit.add(kind, name, a[0], a[1], value)
         elif kind == "V": circuit.source(name, a[0], a[1], dc=number(a[2], params))
         elif kind == "E": circuit.add(kind, name, *a[:4], number(a[4], params))
         elif kind == "K": circuit.add(kind, name, a[:-1], number(a[-1], params))
@@ -377,11 +396,11 @@ def build(full_supply=False, amplitude=.001, controls=.1, tube_set="koren",
         from speaker_load import add_speaker_load
         add_speaker_load(circuit, speaker_load)
     if full_supply:
-        extend_factory_supply(circuit)
+        extend_factory_supply(circuit, lpri=params["LPRI"], raa=params["RAA"])
     return circuit.compile()
 
 
-def extend_factory_supply(c):
+def extend_factory_supply(c, lpri=8.85, raa=1700.):
     remove = {"Vraw", "Rps", "Vbias", "Rmainbalance1", "Rmainbalance2", "Ls", "Kmain", "Rsec", "Etap"}
     c.parts = [p for p in c.parts if p[1] not in remove]
     for name in ("Vraw", "Vbias"): del c.sources[name]
@@ -419,7 +438,7 @@ def extend_factory_supply(c):
     for z in (4, 8, 16):
         delta = math.sqrt(z)-turns
         end = "out" if z == 16 else f"tap{z}"
-        c.add("L", f"Lsec{z}", f"sec{z}i", previous, 8.85*delta**2/1700)
+        c.add("L", f"Lsec{z}", f"sec{z}i", previous, lpri*delta**2/raa)
         c.add("R", f"Rsec{z}", f"sec{z}i", end, .320*delta/4)
         previous, turns = end, math.sqrt(z)
     c.add("K", "Koutput", ["Lpa", "Lpb", "Lsec4", "Lsec8", "Lsec16"], .9995)
