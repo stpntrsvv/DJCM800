@@ -43,17 +43,27 @@ def render(result):
            f"{result['recovery_duration_s']*1e3:g} мс нулевого входа. Все режимы используют механическую шкалу LOG Gain/Master,",
            "CompactCircuit, неявный Эйлер и одинаковые шаги. Холостой эталон рассчитан до",
            "того же абсолютного времени и фазы сети.","",
-           "| Режим | Pavg сигнала, Вт | Ppeak, Вт | B+ min, В | Ig1 peak, мА | Ig1 >1мкА | Выход последних 20 мс, мВ RMS | Остаток V RMS, мВ | WAV |",
+           "| Режим | Pavg сигнала, Вт | B+ min, В | Экран mean/max20, Вт | Ig1 peak, мА | Ig1 >1мкА | Выход последних 20 мс, мВ RMS | Остаток V RMS, мВ | WAV |",
            "|:---|---:|---:|---:|---:|---:|---:|---:|:---|"]
     for r in result.get("cases",[]):
         d=r["signal_diagnostics"]; e=r["recovery_error"]
-        lines.append(f"| {r['name']} | {d['load_mean_w']:.3f} | {d['load_peak_w']:.3f} | {d['bplus_min_v']:.3f} | "
+        lines.append(f"| {r['name']} | {d['load_mean_w']:.3f} | {d['bplus_min_v']:.3f} | "
+                     f"{d['el34_screen_mean_max_w']:.3f}/{d['el34_screen_max_20ms_w']:.3f} | "
                      f"{d['el34_grid_peak_a']*1e3:.3f} | {100*d['el34_grid_above_1ua_fraction']:.2f}% | "
                      f"{r['recovery_output_last20_rms_v']*1e3:.3f} | {e['node_rms_v']*1e3:.3f} | [{r['name']}.wav]({r['name']}.wav) |")
     lines += ["", "WAV-файлы имеют общую амплитудную шкалу между режимами; это электрический",
               "выход на 16 Ом, нормированный только для прослушивания. Абсолютные вольты и мощности",
               "берутся из metrics.json, не из PCM. Остаток восстановления сравнивает все 98",
               "переменных с синхронным холостым состоянием, а не с несогласованной фазой сети.",""]
+    if result.get("status") == "pass" and not result.get("quick"):
+        lines += ["## Тепловая интерпретация EL34", "",
+                  "Philips задаёт предельную диссипацию второй сетки 8 Вт и анода 25 Вт без",
+                  "управляющего сигнала / 27,5 Вт при сигнале. Это тепловые пределы, поэтому",
+                  "одиночные микросекундные пики тока нельзя сравнивать с ними напрямую.", "",
+                  "В таблице показаны худшее среднее по одной лампе за весь DI и худшее скользящее",
+                  "среднее за 20 мс. Только Gain 5 / Master 8 превысил экранный предел в 20-мс окне",
+                  "(9,46 Вт), хотя среднее за 250 мс осталось 7,40 Вт. Это опасная настройка текущей",
+                  "макромодели, а не основание искусственно ограничивать Reefman-закон.", ""]
     if "error" in result: lines += ["## Ошибка","",result["error"],""]
     (DEST/"report.md").write_text("\n".join(lines),encoding="utf-8")
 
@@ -70,7 +80,8 @@ def main():
     if a.report_only:
         result=json.loads(output.read_text(encoding="utf-8"))
         for row in result["cases"]:
-            c=circuit(row["positions"]); recovery=np.load(RAW/f"{row['name']}.npz")["recovery"]
+            c=circuit(row["positions"]); saved=np.load(RAW/f"{row['name']}.npz"); recovery=saved["recovery"]
+            row["signal_diagnostics"]=diagnostics(c,saved["signal"],result["signal_h_s"],MODEL["el34_grid_r"])
             count=min(len(recovery),round(.020/result["recovery_h_s"])+1)
             y=recovery[-count:,c.index["out"]]
             row["recovery_output_last20_rms_v"]=float(np.sqrt(np.mean(y*y)))

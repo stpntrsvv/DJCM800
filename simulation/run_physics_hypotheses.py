@@ -78,6 +78,10 @@ def diagnostics(c, x, h, grid_r):
             ig.append(max((vg-row[c.index[junction]])/grid_r, 0.))
         plate_power.append(pp); screen_power.append(ps); grid_current.append(ig)
     plate_power, screen_power, grid_current = map(np.asarray, (plate_power, screen_power, grid_current))
+    window = min(len(x), max(1, round(.020/h)))
+    def max_window_mean(values):
+        cumulative = np.c_[np.zeros(len(values)), np.cumsum(values, axis=1)]
+        return float(np.max((cumulative[:, window:]-cumulative[:, :-window])/window))
     winding_v = .5*((x[:, c.index["oa"]]-x[:, c.index["bplus"]])-
                     (x[:, c.index["ob"]]-x[:, c.index["bplus"]]))
     flux_proxy = np.cumsum(winding_v)*h
@@ -87,6 +91,10 @@ def diagnostics(c, x, h, grid_r):
                 bplus_min_v=float(np.min(x[:, c.index["bplus"]])), bplus_max_v=float(np.max(x[:, c.index["bplus"]])),
                 bias_min_v=float(np.min(x[:, c.index["bias"]])), bias_max_v=float(np.max(x[:, c.index["bias"]])),
                 el34_plate_peak_w=float(np.max(plate_power)), el34_screen_peak_w=float(np.max(screen_power)),
+                el34_plate_mean_max_w=float(np.max(np.mean(plate_power, axis=1))),
+                el34_plate_max_20ms_w=max_window_mean(plate_power),
+                el34_screen_mean_max_w=float(np.max(np.mean(screen_power, axis=1))),
+                el34_screen_max_20ms_w=max_window_mean(screen_power),
                 el34_grid_peak_a=float(np.max(grid_current)), el34_grid_mean_a=float(np.mean(grid_current)),
                 el34_grid_above_1ua_fraction=float(np.mean(np.any(grid_current > 1e-6, axis=0))),
                 primary_flux_proxy_peak_vs=float(np.max(np.abs(flux_proxy-flux_proxy[0]))))
