@@ -1,0 +1,20 @@
+{
+  "status": "pass",
+  "steps": 1600,
+  "h_s": 1.25e-06,
+  "duration_s": 0.002,
+  "max_iterations": 19,
+  "max_node_difference_v": 7.056388540149783e-08,
+  "max_branch_difference_a": 4.849223245173562e-10,
+  "relative_output_error": 1.1880237914000315e-11,
+  "python_host_s": 4.484494396,
+  "c_host_s": 0.04908552,
+  "host_speedup": 91.36084116048887,
+  "c_ns_per_step": 30678.45,
+  "source_sha256": {
+    "jcm800_step98.c": "22256140069e705fb688e60a2f56ce80816795ecfd2d11dccb6bc10636f0a258",
+    "jcm800_model98.c": "edc3bfca0f42da458aea575d8a85b88bd1882c3de32e4930bef8909706f4db0b",
+    "jcm800_sparse98.c": "f1f6f371740061b2bb2499fcd2e99725a1d011a5fefec8515257f09e543bc37d",
+    "jcm800_nonlinear.c": "e500d6b12feb566d6a7f07962ebbe59369a8fb8fb077076bda1d4dfb8db99759"
+  }
+}

@@ -104,3 +104,14 @@ int jcm800_dense_solve(double *a, double *b, size_t n) {
     }
     return 0;
 }
+
+void jcm800_diode(double v, double isat, double cjo, double tt,
+                  double *current, double *conductance, double *charge, double *capacitance) {
+    const double vt=8.617087e-5*300.15, z=v/vt;
+    if (z<40.0) { const double e=exp(z); *current=isat*expm1(z); *conductance=isat*e/vt; }
+    else { const double e=exp(40.0); *current=isat*(e*(1.0+z-40.0)-1.0); *conductance=isat*e/vt; }
+    double junction_q,junction_c;
+    if (v<.5) { junction_q=2*cjo*(1-sqrt(1-v)); junction_c=cjo/sqrt(1-v); }
+    else { const double d=v-.5; junction_q=2*cjo*(1-sqrt(.5))+cjo*sqrt(2.)*(d+.5*d*d); junction_c=cjo*sqrt(2.)*(1+d); }
+    *charge=junction_q+tt**current; *capacitance=junction_c+tt**conductance;
+}
