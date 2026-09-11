@@ -112,7 +112,7 @@ def segment(c, x, t0, duration, h, audit=False):
 
 def settle(c, reuse=False):
     cache = RAW / "settled.npz"
-    fingerprint = hashlib.sha256(c.export().encode("ascii")).hexdigest()
+    fingerprint = hashlib.sha256(c.fingerprint().encode("utf-8")).hexdigest()
     if reuse and cache.exists():
         saved = np.load(cache)
         if str(saved["fingerprint"]) != fingerprint:
@@ -178,16 +178,28 @@ def describe(c, data, stats, duration):
     info["mean_power_w"] = dict(zip(("sources", "resistors", "nonlinear_devices", "storage_change", "backward_euler_loss"),
                                    (stats["energy"]/duration).tolist()))
     tubes = {}
+    ranges = {}
     for kind, name, *a in c.parts:
-        if kind != "T" or a[0] != "pentode": continue
-        _, p, g, k, screen = a
-        vals = data[1:, [c.index[p], c.index[g], c.index[screen]]]
-        currents = np.array([electrode("pentode", v)[0] for v in vals])
+        if kind != "T": continue
+        model, p, g, k, screen = a
+        def voltage(node):
+            value = np.zeros(len(data)-1) if node == "0" else data[1:, c.index[node]]
+            cathode = np.zeros(len(data)-1) if k == "0" else data[1:, c.index[k]]
+            return value-cathode
+        columns = [voltage(p), voltage(g)] + ([] if screen is None else [voltage(screen)])
+        vals = np.column_stack(columns)
+        labels = ("va", "vg1") if screen is None else ("va", "vg1", "vg2")
+        ranges[name] = dict(model=model, **{label: dict(min_v=float(values.min()), max_v=float(values.max()))
+                                                 for label, values in zip(labels, vals.T)})
+        if screen is None:
+            continue
+        currents = np.array([electrode(model, v)[0] for v in vals])
         tubes[name] = dict(plate_mean_a=float(currents[:, 0].mean()),
                            screen_mean_a=float(currents[:, 1].mean()),
                            plate_dissipation_w=float(np.mean(vals[:, 0]*currents[:, 0])),
                            screen_dissipation_w=float(np.mean(vals[:, 2]*currents[:, 1])))
     info["el34"] = tubes
+    info["tube_voltage_ranges"] = ranges
     if stats["power_residual"] > 1e-4:
         raise AssertionError("Electrical power identity failed")
     return info
@@ -232,17 +244,25 @@ quit
 
 
 def main():
+    global RAW, DEST
     parser = argparse.ArgumentParser()
     parser.add_argument("--reuse-settled", action="store_true")
     parser.add_argument("--settle-only", action="store_true")
     parser.add_argument("--report-only", action="store_true", help="Rebuild figures/report from saved successful runs")
+    parser.add_argument("--tube-set", default="koren",
+                        choices=("koren", "detailed:RSD-1", "detailed:RSD-2", "detailed:EHX-1"))
     args = parser.parse_args()
+    if args.tube_set != "koren":
+        slug = args.tube_set.lower().replace(":", "_").replace("-", "")
+        RAW = ROOT / "simulation/raw" / f"settling_power_{slug}"
+        DEST = ROOT / "simulation/experiments" / f"settling_power_{slug}"
     RAW.mkdir(parents=True, exist_ok=True)
     DEST.mkdir(parents=True, exist_ok=True)
-    c = build(True, amplitude=0., controls=.5)
+    c = build(True, amplitude=0., controls=.5, tube_set=args.tube_set)
+    fingerprint = hashlib.sha256(c.fingerprint().encode("utf-8")).hexdigest()
     if args.report_only:
         results = json.loads((DEST / "metrics.json").read_text(encoding="utf-8"))
-        if results["circuit_sha256"] != hashlib.sha256(c.export().encode("ascii")).hexdigest():
+        if results["circuit_sha256"] != fingerprint:
             raise ValueError("Saved results refer to another circuit")
         idle = np.load(RAW / "idle.npz")["states"]
         heater = idle[1:, c.index["heater1"]]-idle[1:, c.index["heater2"]]
@@ -256,7 +276,7 @@ def main():
         plot_and_report(c, results, idle, bursts)
         return
     initial, t, settling = settle(c, args.reuse_settled)
-    results = dict(settling=settling, circuit_sha256=hashlib.sha256(c.export().encode("ascii")).hexdigest())
+    results = dict(tube_set=args.tube_set, settling=settling, circuit_sha256=fingerprint)
     data, stats = segment(c, initial, t, PERIOD, .0001, audit=True)
     results["idle"] = describe(c, data, stats, PERIOD)
     np.savez_compressed(RAW / "idle.npz", states=data, time=np.linspace(0, PERIOD, len(data)))
@@ -274,7 +294,7 @@ def main():
             info["release_last_output_v"] = float(off[-1, c.index["out"]])
             bursts.append((amplitude, on, off, info))
             np.savez_compressed(RAW / f"burst_{round(amplitude*1000)}mv.npz", on=on, off=off)
-            if amplitude == .1:
+            if amplitude == .1 and args.tube_set == "koren":
                 c.sources["Vin"] = (0., amplitude, 1000., 0.)
                 ref = spice_burst(c, initial)
                 grid = np.arange(1, len(on))*5e-6
@@ -310,7 +330,7 @@ def plot_and_report(c, results, idle, bursts):
     lines = ["# Установление питания, баланс мощности и сильный сигнал", "",
              "Полная MNA: 90 узлов / 104 неизвестных, без исключения каскадов. Лампы считаются горячими.",
              "Сеть 230 В RMS / 50 Гц, нагрузка 16 Ом; все ручки электрически 0,5.",
-             "Начальные магнитные и ламповые параметры прежние; совпадение с реальным усилителем не заявляется.", "",
+             f"Набор ламп: `{results.get('tube_set', 'koren')}`. Магнитные параметры предварительные; совпадение с реальным усилителем не заявляется.", "",
              "## Критерий установления", "",
              "Сравниваются ВСЕ напряжения и токи ветвей на всей сетке двух соседних периодов сети.",
              "Допуски: 10 мВ и 20 мкА, три периода подряд. Инициализация шагом 1 мс,",
@@ -347,17 +367,23 @@ def plot_and_report(c, results, idle, bursts):
             lines += ["", f"100 мВ: разность с ngspice Gear до 2-го порядка / maxstep 1 мкс — {100*info['spice_relative_rms']:.6f}% RMS.",
                       "Оба расчёта начинают с одних узловых напряжений и токов индуктивностей;",
                       "SPICE не устанавливает питание заново. Разность включает интеграторы и сетки.", ""]
-    lines += ["", "## Интерпретация и ограничения", "",
-              "Нулевой Ig2 при анодном токе около 21 мА — ограничение текущего закона EL34:",
-              "экранная ветвь обнуляется при Vs/11 + Vg <= 0. Сходимость Ньютона и совпадение",
-              "со SPICE не подтверждают этот закон физически; нужна отдельная проверка экранных характеристик.", "",
-              "264–275 Вт в нагрузке относятся только к первым 20 мс атаки. Накопители отдают",
-              "в среднем 141–147 Вт; это не проверка длительной паспортной мощности 100 Вт.",
+    lines += ["", "## Интерпретация и ограничения", ""]
+    if results.get("tube_set", "koren") == "koren":
+        lines += ["Нулевой Ig2 при анодном токе около 21 мА — ограничение текущего закона EL34:",
+                  "экранная ветвь обнуляется при Vs/11 + Vg <= 0. Сходимость Ньютона и совпадение",
+                  "со SPICE не подтверждают этот закон физически; нужна отдельная проверка экранных характеристик.", ""]
+    else:
+        lines += ["Reefman устраняет прежний строго нулевой Ig2 в покое, но сильный сигнал выходит",
+                  "за проверенную область напряжений. Положительный Ig1 EL34 всё ещё задан временной",
+                  "ветвью R+Shockley и не аттестован по измеренным характеристикам.", ""]
+    lines += ["Мощность в нагрузке относится только к первым 20 мс атаки. Существенная часть",
+              "энергии приходит из накопителей; это не проверка длительной паспортной мощности 100 Вт.",
               "После 20 мс отключённого входа выход ещё не вернулся к покою; полное восстановление не измерено.", "",
-              "Для атак 25/100/500 мВ потребовалось соответственно 15/42/55 делений шага после",
-              "неудачи Ньютона. Это проверяет защитный механизм на данных опытах, но не даёт гарантии",
-              "для любого входа. Разность со SPICE 2,56% требует отдельного сгущения сетки в перегрузке;",
-              "сходимость по шагу предыдущего малосигнального опыта на этот режим не переносится.", "",
+              "Для атак 25/100/500 мВ потребовалось соответственно " +
+              "/".join(str(x["halvings"]) for x in results["bursts"]) + " делений шага после неудачи Ньютона.",
+              "Это проверяет защитный механизм на данных опытах, но не даёт гарантии для любого входа.",
+              "Сходимость по шагу сильного сигнала ещё не установлена; независимый SPICE-экспорт",
+              "подробных законов пока не подключён к полной схеме.", "",
               "![Результаты](results.png)", ""]
     (DEST / "report.md").write_text("\n".join(lines), encoding="utf-8")
 

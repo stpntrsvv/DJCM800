@@ -1,0 +1,13 @@
+{
+  "status": "pass",
+  "validation": {
+    "matrices": 49,
+    "pivot_failures": 0,
+    "max_relative_residual": 1.493703029212488e-11,
+    "max_solution_difference": 0.0043163299560546875
+  },
+  "benchmark": {
+    "median_ns": 5666,
+    "samples": 5000
+  }
+}

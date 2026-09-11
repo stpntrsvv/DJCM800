@@ -1,0 +1,360 @@
+{
+  "status": "pass",
+  "quick": false,
+  "criteria": {
+    "max_node_difference_v": 0.0001,
+    "max_branch_difference_a": 1e-06,
+    "relative_output_error": 1e-06,
+    "delta_scaled_error": 1e-08
+  },
+  "cases": [
+    {
+      "name": "electrical_start",
+      "duration_s": 0.06,
+      "h_s": 0.0001,
+      "shared_subdivisions": 0,
+      "full": {
+        "host_s": 2.262559200869873,
+        "kcl_a": 9.743421694463628e-11,
+        "voltage_residual_v": 9.149516699835658e-10,
+        "max_iterations": 17,
+        "attempted_steps": 600,
+        "failures": 0
+      },
+      "reduced": {
+        "host_s": 1.0981707524042577,
+        "kcl_a": 9.743052892252635e-11,
+        "voltage_residual_v": 1.0359144653193653e-09,
+        "max_iterations": 17,
+        "attempted_steps": 600,
+        "failures": 0
+      },
+      "max_node_difference_v": 6.43836983726942e-10,
+      "max_branch_difference_a": 4.007638665370905e-11,
+      "relative_output_error": 1.871595582746281e-12,
+      "output_rms_difference_v": 2.2348039655582198e-13,
+      "host_speed_ratio": 2.0602981785085657,
+      "cached_factorizations": 1,
+      "previous_schur": {
+        "status": "compared",
+        "bitwise_equal": true,
+        "max_node_difference_v": 0.0,
+        "max_branch_difference_a": 0.0,
+        "relative_output_error": 0.0,
+        "output_rms_difference_v": 0.0,
+        "source_sha256": "c47dc1d91cf19ad3e6fe77095f66d952a51510b4f3a9795b9d3d20027bf33469"
+      }
+    },
+    {
+      "name": "attack_100mv",
+      "duration_s": 0.02,
+      "h_s": 1.25e-06,
+      "shared_subdivisions": 0,
+      "full": {
+        "host_s": 46.17844999022782,
+        "kcl_a": 9.925552740819299e-11,
+        "voltage_residual_v": 4.137109499424696e-08,
+        "max_iterations": 25,
+        "attempted_steps": 16000,
+        "failures": 0
+      },
+      "reduced": {
+        "host_s": 22.145818239543587,
+        "kcl_a": 9.981149240445575e-11,
+        "voltage_residual_v": 3.6940036807209253e-08,
+        "max_iterations": 25,
+        "attempted_steps": 16000,
+        "failures": 0
+      },
+      "max_node_difference_v": 2.5992915198003175e-07,
+      "max_branch_difference_a": 1.5847376744204666e-09,
+      "relative_output_error": 1.002081426409645e-11,
+      "output_rms_difference_v": 5.803242879316708e-10,
+      "host_speed_ratio": 2.0851995392869047,
+      "cached_factorizations": 2,
+      "previous_schur": {
+        "status": "compared",
+        "bitwise_equal": true,
+        "max_node_difference_v": 0.0,
+        "max_branch_difference_a": 0.0,
+        "relative_output_error": 0.0,
+        "output_rms_difference_v": 0.0,
+        "source_sha256": "44fba64dfe1fdb438881984631432ddaf06cd9340b5f0f7a2ee754b920656892"
+      }
+    },
+    {
+      "name": "attack_500mv",
+      "duration_s": 0.02,
+      "h_s": 6.25e-07,
+      "shared_subdivisions": 0,
+      "full": {
+        "host_s": 97.6875795959495,
+        "kcl_a": 9.99970379124502e-11,
+        "voltage_residual_v": 8.475035429000854e-08,
+        "max_iterations": 15,
+        "attempted_steps": 32000,
+        "failures": 0
+      },
+      "reduced": {
+        "host_s": 47.31239595473744,
+        "kcl_a": 9.99982319171977e-11,
+        "voltage_residual_v": 8.69622454047203e-08,
+        "max_iterations": 15,
+        "attempted_steps": 32000,
+        "failures": 0
+      },
+      "max_node_difference_v": 3.4426231081852166e-05,
+      "max_branch_difference_a": 1.295160587666544e-07,
+      "relative_output_error": 3.8906102847178277e-10,
+      "output_rms_difference_v": 2.2686079303948278e-08,
+      "host_speed_ratio": 2.064735417107278,
+      "cached_factorizations": 3,
+      "previous_schur": {
+        "status": "compared",
+        "bitwise_equal": true,
+        "max_node_difference_v": 0.0,
+        "max_branch_difference_a": 0.0,
+        "relative_output_error": 0.0,
+        "output_rms_difference_v": 0.0,
+        "source_sha256": "dd62ef78bd27d761ee9e32f4f3cd1267a3a3b36b7807435b420b1554409ad40a"
+      }
+    },
+    {
+      "name": "recovery_100mv",
+      "duration_s": 0.5,
+      "h_s": 2e-05,
+      "shared_subdivisions": 1,
+      "full": {
+        "host_s": 77.93966477341019,
+        "kcl_a": 9.994242158037694e-11,
+        "voltage_residual_v": 2.1227606339380145e-09,
+        "max_iterations": 39,
+        "attempted_steps": 25002,
+        "failures": 1
+      },
+      "reduced": {
+        "host_s": 35.81287611788139,
+        "kcl_a": 9.994494121201569e-11,
+        "voltage_residual_v": 2.1500454749912024e-09,
+        "max_iterations": 39,
+        "attempted_steps": 25002,
+        "failures": 1
+      },
+      "max_node_difference_v": 2.746793370533851e-08,
+      "max_branch_difference_a": 2.9684838614985054e-10,
+      "relative_output_error": 1.3295798521872562e-10,
+      "output_rms_difference_v": 7.705300891911032e-10,
+      "host_speed_ratio": 2.1763028614865947,
+      "cached_factorizations": 5,
+      "previous_schur": {
+        "status": "compared",
+        "bitwise_equal": true,
+        "max_node_difference_v": 0.0,
+        "max_branch_difference_a": 0.0,
+        "relative_output_error": 0.0,
+        "output_rms_difference_v": 0.0,
+        "source_sha256": "6aef105aa99e1fe31077ce5fea57291577100f79a3214d483f500b12000f0b4f"
+      }
+    }
+  ],
+  "solver_names": {
+    "full": "Circuit",
+    "reduced": "CompactCircuit"
+  },
+  "source_sha256": {
+    "full_mna.py": "4e23eadaac0e6c90e61ae624d557d85b70f33d636cfedf768dee5fe081015d6e",
+    "reduced_mna.py": "cfcd6ec24cf6a4c0ce5c0a21a7d23c6591af0662983c0eaffcf019ef76a7fbcb",
+    "compact_mna.py": "7c7ba1fc5789a8fd57ff799f9113ce2b63822feaa54b164590dcfe9482f9eb82",
+    "tube_models.py": "bed0fe2448ffed5821e8448013f94bc07cc9a5cec77c22e98fe3f327765761a1",
+    "run_linear_reduction.py": "abc40137025e14a73a373e0c42cf1471295094adb93062bd1afbb120abec51ae",
+    "run_compact_assembly.py": "89c5124385811726de0c4c006c4d628a315d4a9717aeaa7ed944d6d4676a6f00"
+  },
+  "unknowns": 98,
+  "retained": 39,
+  "output_index": 55,
+  "circuit_sha256": "92840ba7deaee16574068bd78a5991fb0085c7e4dceb4ff7fedfe4927d36f23d",
+  "initial_sha256": "5bfde951cfc0def3b7ca63e6684d9b13d0a41f5dd0fa37aa77fcf54ac018bbfe",
+  "initial_time_s": 20.97999999999964,
+  "signal_dc": {
+    "max_node_difference_v": 2.1032064978498966e-12,
+    "max_branch_difference_a": 1.1199374760906267e-14,
+    "relative_output_error": 0.0,
+    "output_rms_difference_v": 0.0
+  },
+  "assembly": {
+    "states": 2,
+    "max_absolute_difference": {
+      "current_a": 0.0,
+      "jacobian_a_per_v": 0.0,
+      "charge_c": 0.0,
+      "capacitance_f": 0.0
+    }
+  },
+  "profile": {
+    "full": {
+      "steps": 200,
+      "repeats": 5,
+      "unprofiled_s": [
+        0.661005208035931,
+        0.6935903751291335,
+        0.6884115422144532,
+        0.5626267080660909,
+        0.5778412078507245
+      ],
+      "median_unprofiled_s": 0.661005208035931,
+      "profile": {
+        "step": {
+          "calls": 200,
+          "self_s": 0.0013973240000000001,
+          "cumulative_s": 0.627037787
+        },
+        "newton": {
+          "calls": 200,
+          "self_s": 0.014682243000000001,
+          "cumulative_s": 0.540495593
+        },
+        "nonlinear": {
+          "calls": 1343,
+          "self_s": 0.381319344,
+          "cumulative_s": 0.564744101
+        },
+        "compact_nonlinear": {
+          "calls": 0,
+          "self_s": 0,
+          "cumulative_s": 0
+        },
+        "electrode": {
+          "calls": 13430,
+          "self_s": 0.024716211000000002,
+          "cumulative_s": 0.15677296400000001
+        },
+        "linearized_delta": {
+          "calls": 470,
+          "self_s": 0.008023843000000001,
+          "cumulative_s": 0.03842616
+        },
+        "compact_delta": {
+          "calls": 0,
+          "self_s": 0,
+          "cumulative_s": 0
+        }
+      }
+    },
+    "schur": {
+      "steps": 200,
+      "repeats": 5,
+      "unprofiled_s": [
+        0.6272886670194566,
+        0.5836324999108911,
+        0.6047797920182347,
+        0.599217499839142,
+        0.5793699161149561
+      ],
+      "median_unprofiled_s": 0.599217499839142,
+      "profile": {
+        "step": {
+          "calls": 200,
+          "self_s": 0.0016431870000000002,
+          "cumulative_s": 0.6306042970000001
+        },
+        "newton": {
+          "calls": 200,
+          "self_s": 0.015151249,
+          "cumulative_s": 0.543893374
+        },
+        "nonlinear": {
+          "calls": 1343,
+          "self_s": 0.38370298700000005,
+          "cumulative_s": 0.5696035850000001
+        },
+        "compact_nonlinear": {
+          "calls": 0,
+          "self_s": 0,
+          "cumulative_s": 0
+        },
+        "electrode": {
+          "calls": 13430,
+          "self_s": 0.025202628,
+          "cumulative_s": 0.15822323100000002
+        },
+        "linearized_delta": {
+          "calls": 470,
+          "self_s": 0.010199877000000001,
+          "cumulative_s": 0.036185204000000006
+        },
+        "compact_delta": {
+          "calls": 0,
+          "self_s": 0,
+          "cumulative_s": 0
+        }
+      }
+    },
+    "compact": {
+      "steps": 200,
+      "repeats": 5,
+      "unprofiled_s": [
+        0.2694301251322031,
+        0.2693900829181075,
+        0.265787374926731,
+        0.2671606249641627,
+        0.2678033330012113
+      ],
+      "median_unprofiled_s": 0.2678033330012113,
+      "profile": {
+        "step": {
+          "calls": 200,
+          "self_s": 0.001603405,
+          "cumulative_s": 0.323255038
+        },
+        "newton": {
+          "calls": 200,
+          "self_s": 0.007453211,
+          "cumulative_s": 0.287922238
+        },
+        "nonlinear": {
+          "calls": 0,
+          "self_s": 0,
+          "cumulative_s": 0
+        },
+        "compact_nonlinear": {
+          "calls": 1343,
+          "self_s": 0.12417186200000001,
+          "cumulative_s": 0.27611673400000003
+        },
+        "electrode": {
+          "calls": 13430,
+          "self_s": 0.019791450000000002,
+          "cumulative_s": 0.137506085
+        },
+        "linearized_delta": {
+          "calls": 0,
+          "self_s": 0,
+          "cumulative_s": 0
+        },
+        "compact_delta": {
+          "calls": 470,
+          "self_s": 0.005976839,
+          "cumulative_s": 0.026561756000000002
+        }
+      }
+    }
+  },
+  "assembly_100mv": {
+    "states": 21,
+    "max_absolute_difference": {
+      "current_a": 0.0,
+      "jacobian_a_per_v": 0.0,
+      "charge_c": 0.0,
+      "capacitance_f": 0.0
+    }
+  },
+  "assembly_500mv": {
+    "states": 21,
+    "max_absolute_difference": {
+      "current_a": 0.0,
+      "jacobian_a_per_v": 0.0,
+      "charge_c": 0.0,
+      "capacitance_f": 0.0
+    }
+  }
+}

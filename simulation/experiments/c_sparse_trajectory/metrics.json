@@ -1,0 +1,35 @@
+{
+  "status": "pass",
+  "unknowns": 98,
+  "cases": [
+    {
+      "name": "attack_100mv",
+      "duration_s": 0.002,
+      "h_s": 1.25e-06,
+      "shared_subdivisions": 0,
+      "full": {
+        "host_s": 4.761047879001126,
+        "kcl_a": 9.884034606402747e-11,
+        "voltage_residual_v": 1.5133991837501526e-09,
+        "max_iterations": 10,
+        "attempted_steps": 1600,
+        "failures": 0
+      },
+      "reduced": {
+        "host_s": 4.535712604178116,
+        "kcl_a": 9.884079579108862e-11,
+        "voltage_residual_v": 1.3969838619232178e-09,
+        "max_iterations": 10,
+        "attempted_steps": 1600,
+        "failures": 0
+      },
+      "max_node_difference_v": 1.8017374259216012e-08,
+      "max_branch_difference_a": 1.7444073963091e-10,
+      "relative_output_error": 1.17348339320404e-11,
+      "output_rms_difference_v": 5.475853209623922e-10,
+      "host_speed_ratio": 1.0496802364892872,
+      "cached_factorizations": 0
+    }
+  ],
+  "solver_source_sha256": "ea8cc0690fa26f5216af0de0637cc951b1f3cf2bf64d48c84e69b82b70d945c9"
+}

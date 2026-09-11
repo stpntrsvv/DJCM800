@@ -1,0 +1,659 @@
+{
+  "status": "pass",
+  "quick": false,
+  "criteria": {
+    "max_node_difference_v": 0.0001,
+    "max_branch_difference_a": 1e-06,
+    "relative_output_error": 1e-06,
+    "delta_scaled_error": 1e-08
+  },
+  "baseline_controls": {
+    "GAIN": 0.5,
+    "BASS": 0.5,
+    "MID": 0.5,
+    "TREBLE": 0.5,
+    "MASTER": 0.5,
+    "PRESENCE": 0.5,
+    "NFB": 1.0
+  },
+  "cases": [
+    {
+      "name": "baseline_100mv",
+      "duration_s": 0.02,
+      "h_s": 1.25e-06,
+      "shared_subdivisions": 0,
+      "full": {
+        "host_s": 47.47532490477897,
+        "kcl_a": 9.971645731354783e-11,
+        "voltage_residual_v": 4.096091288374737e-08,
+        "max_iterations": 25,
+        "attempted_steps": 16000,
+        "failures": 0
+      },
+      "reduced": {
+        "host_s": 23.29703985271044,
+        "kcl_a": 9.971368175598627e-11,
+        "voltage_residual_v": 3.912282409146428e-08,
+        "max_iterations": 25,
+        "attempted_steps": 16000,
+        "failures": 0
+      },
+      "max_node_difference_v": 2.910422480795205e-07,
+      "max_branch_difference_a": 2.262408926867465e-09,
+      "relative_output_error": 1.2402331171590185e-11,
+      "output_rms_difference_v": 7.186183570715528e-10,
+      "host_speed_ratio": 2.037826488040092,
+      "cached_factorizations": 2,
+      "amplitude_v": 0.1,
+      "controls": {
+        "GAIN": 0.5,
+        "BASS": 0.5,
+        "MID": 0.5,
+        "TREBLE": 0.5,
+        "MASTER": 0.5,
+        "PRESENCE": 0.5,
+        "NFB": 1.0
+      },
+      "changed_controls": {},
+      "ranges": {
+        "in": {
+          "min_v": -0.1,
+          "max_v": 0.1
+        },
+        "master_out": {
+          "min_v": -12.531813788738097,
+          "max_v": 11.266095548969718
+        },
+        "pi_p1": {
+          "min_v": 148.82068756079715,
+          "max_v": 300.1030306463262
+        },
+        "pi_p2": {
+          "min_v": 138.8231775086755,
+          "max_v": 297.79659024560516
+        },
+        "g4": {
+          "min_v": -144.33103453426455,
+          "max_v": 0.7794667106599824
+        },
+        "g6": {
+          "min_v": -146.87516834880182,
+          "max_v": 0.7811726500156941
+        },
+        "bias": {
+          "min_v": -48.02675461702294,
+          "max_v": -47.69841549745447
+        },
+        "bplus": {
+          "min_v": 357.4270253553885,
+          "max_v": 466.28337850247584
+        },
+        "out": {
+          "min_v": -67.93733766588313,
+          "max_v": 69.44992915223277
+        }
+      }
+    },
+    {
+      "name": "baseline_500mv",
+      "duration_s": 0.02,
+      "h_s": 6.25e-07,
+      "shared_subdivisions": 0,
+      "full": {
+        "host_s": 88.00599690084346,
+        "kcl_a": 9.998895182422758e-11,
+        "voltage_residual_v": 8.475035429000854e-08,
+        "max_iterations": 15,
+        "attempted_steps": 32000,
+        "failures": 0
+      },
+      "reduced": {
+        "host_s": 43.346971083199605,
+        "kcl_a": 9.99893501330007e-11,
+        "voltage_residual_v": 7.729977369308472e-08,
+        "max_iterations": 15,
+        "attempted_steps": 32000,
+        "failures": 0
+      },
+      "max_node_difference_v": 8.578270040970892e-07,
+      "max_branch_difference_a": 2.8647557659411405e-09,
+      "relative_output_error": 9.706206108290591e-12,
+      "output_rms_difference_v": 5.662636802270123e-10,
+      "host_speed_ratio": 2.030268660108359,
+      "cached_factorizations": 2,
+      "amplitude_v": 0.5,
+      "controls": {
+        "GAIN": 0.5,
+        "BASS": 0.5,
+        "MID": 0.5,
+        "TREBLE": 0.5,
+        "MASTER": 0.5,
+        "PRESENCE": 0.5,
+        "NFB": 1.0
+      },
+      "changed_controls": {},
+      "ranges": {
+        "in": {
+          "min_v": -0.5,
+          "max_v": 0.5
+        },
+        "master_out": {
+          "min_v": -13.903790464785182,
+          "max_v": 16.322275850902482
+        },
+        "pi_p1": {
+          "min_v": 149.00818234967272,
+          "max_v": 307.0951432089735
+        },
+        "pi_p2": {
+          "min_v": 138.5128460668085,
+          "max_v": 291.6992562158424
+        },
+        "g4": {
+          "min_v": -151.8788986995161,
+          "max_v": 0.7801137100365285
+        },
+        "g6": {
+          "min_v": -141.23148622050212,
+          "max_v": 0.7961808096872373
+        },
+        "bias": {
+          "min_v": -48.04153760161988,
+          "max_v": -47.69841549745447
+        },
+        "bplus": {
+          "min_v": 357.0752828251053,
+          "max_v": 466.28337850247584
+        },
+        "out": {
+          "min_v": -67.95454902543257,
+          "max_v": 69.73786260326686
+        }
+      }
+    },
+    {
+      "name": "gain20_master80",
+      "duration_s": 0.02,
+      "h_s": 1.25e-06,
+      "shared_subdivisions": 0,
+      "full": {
+        "host_s": 48.902622343739495,
+        "kcl_a": 9.965805958245255e-11,
+        "voltage_residual_v": 3.818422555923462e-08,
+        "max_iterations": 31,
+        "attempted_steps": 16000,
+        "failures": 0
+      },
+      "reduced": {
+        "host_s": 23.288837388390675,
+        "kcl_a": 9.965450686877375e-11,
+        "voltage_residual_v": 4.281173460185528e-08,
+        "max_iterations": 31,
+        "attempted_steps": 16000,
+        "failures": 0
+      },
+      "max_node_difference_v": 2.0848011672569555e-07,
+      "max_branch_difference_a": 1.6544721148648023e-09,
+      "relative_output_error": 1.5561085744912278e-11,
+      "output_rms_difference_v": 8.998992301370634e-10,
+      "host_speed_ratio": 2.0998309846122725,
+      "cached_factorizations": 2,
+      "amplitude_v": 0.1,
+      "controls": {
+        "GAIN": 0.2,
+        "BASS": 0.5,
+        "MID": 0.5,
+        "TREBLE": 0.5,
+        "MASTER": 0.8,
+        "PRESENCE": 0.5,
+        "NFB": 1.0
+      },
+      "changed_controls": {
+        "GAIN": 0.2,
+        "MASTER": 0.8
+      },
+      "ranges": {
+        "in": {
+          "min_v": -0.1,
+          "max_v": 0.1
+        },
+        "master_out": {
+          "min_v": -20.933022832948208,
+          "max_v": 15.154651328345764
+        },
+        "pi_p1": {
+          "min_v": 143.8096251067765,
+          "max_v": 300.27997665711445
+        },
+        "pi_p2": {
+          "min_v": 138.20181504175332,
+          "max_v": 298.21815452341633
+        },
+        "g4": {
+          "min_v": -148.23979181205652,
+          "max_v": 0.781646730240519
+        },
+        "g6": {
+          "min_v": -147.69758485088093,
+          "max_v": 0.7823120991016651
+        },
+        "bias": {
+          "min_v": -48.045845934385845,
+          "max_v": -47.69874105784635
+        },
+        "bplus": {
+          "min_v": 356.9592434640647,
+          "max_v": 464.0383190307011
+        },
+        "out": {
+          "min_v": -65.82532604920164,
+          "max_v": 70.42108596054862
+        }
+      }
+    },
+    {
+      "name": "gain80_master20",
+      "duration_s": 0.02,
+      "h_s": 1.25e-06,
+      "shared_subdivisions": 0,
+      "full": {
+        "host_s": 48.372401028173044,
+        "kcl_a": 9.96803277940328e-11,
+        "voltage_residual_v": 4.022513167001307e-08,
+        "max_iterations": 16,
+        "attempted_steps": 16000,
+        "failures": 0
+      },
+      "reduced": {
+        "host_s": 23.030929398490116,
+        "kcl_a": 9.979717052743808e-11,
+        "voltage_residual_v": 4.156754584982991e-08,
+        "max_iterations": 16,
+        "attempted_steps": 16000,
+        "failures": 0
+      },
+      "max_node_difference_v": 2.0971623371224268e-07,
+      "max_branch_difference_a": 1.4862635566714744e-09,
+      "relative_output_error": 8.408771233434693e-12,
+      "output_rms_difference_v": 4.833181591367862e-10,
+      "host_speed_ratio": 2.1003234472745285,
+      "cached_factorizations": 2,
+      "amplitude_v": 0.1,
+      "controls": {
+        "GAIN": 0.8,
+        "BASS": 0.5,
+        "MID": 0.5,
+        "TREBLE": 0.5,
+        "MASTER": 0.2,
+        "PRESENCE": 0.5,
+        "NFB": 1.0
+      },
+      "changed_controls": {
+        "GAIN": 0.8,
+        "MASTER": 0.2
+      },
+      "ranges": {
+        "in": {
+          "min_v": -0.1,
+          "max_v": 0.1
+        },
+        "master_out": {
+          "min_v": -5.529416803809054,
+          "max_v": 5.96091018284142
+        },
+        "pi_p1": {
+          "min_v": 153.0649826485882,
+          "max_v": 302.0958662346238
+        },
+        "pi_p2": {
+          "min_v": 139.72651671507253,
+          "max_v": 290.6319971759193
+        },
+        "g4": {
+          "min_v": -141.11963890454246,
+          "max_v": 0.810876741161071
+        },
+        "g6": {
+          "min_v": -142.9495988494687,
+          "max_v": 0.7714787988603977
+        },
+        "bias": {
+          "min_v": -47.91683839241147,
+          "max_v": -47.6984342512078
+        },
+        "bplus": {
+          "min_v": 358.02821921741963,
+          "max_v": 466.21055397786944
+        },
+        "out": {
+          "min_v": -68.17620322170809,
+          "max_v": 69.28541713338545
+        }
+      }
+    },
+    {
+      "name": "dark",
+      "duration_s": 0.02,
+      "h_s": 1.25e-06,
+      "shared_subdivisions": 0,
+      "full": {
+        "host_s": 48.14970031497069,
+        "kcl_a": 9.982510051052568e-11,
+        "voltage_residual_v": 3.608874976634979e-08,
+        "max_iterations": 32,
+        "attempted_steps": 16000,
+        "failures": 0
+      },
+      "reduced": {
+        "host_s": 22.46881036204286,
+        "kcl_a": 9.982510110641336e-11,
+        "voltage_residual_v": 4.001776687800884e-08,
+        "max_iterations": 32,
+        "attempted_steps": 16000,
+        "failures": 0
+      },
+      "max_node_difference_v": 9.242012311005965e-08,
+      "max_branch_difference_a": 8.93694007686463e-10,
+      "relative_output_error": 1.0262576045177692e-11,
+      "output_rms_difference_v": 5.946430993347541e-10,
+      "host_speed_ratio": 2.1429572611601735,
+      "cached_factorizations": 2,
+      "amplitude_v": 0.1,
+      "controls": {
+        "GAIN": 0.5,
+        "BASS": 0.8,
+        "MID": 0.7,
+        "TREBLE": 0.1,
+        "MASTER": 0.5,
+        "PRESENCE": 0.5,
+        "NFB": 1.0
+      },
+      "changed_controls": {
+        "BASS": 0.8,
+        "MID": 0.7,
+        "TREBLE": 0.1
+      },
+      "ranges": {
+        "in": {
+          "min_v": -0.1,
+          "max_v": 0.1
+        },
+        "master_out": {
+          "min_v": -12.907063452129108,
+          "max_v": 10.108268452089243
+        },
+        "pi_p1": {
+          "min_v": 149.56767323345858,
+          "max_v": 300.25144146311715
+        },
+        "pi_p2": {
+          "min_v": 138.73355000381403,
+          "max_v": 298.5247962182073
+        },
+        "g4": {
+          "min_v": -138.5841475426675,
+          "max_v": 0.7793795437570236
+        },
+        "g6": {
+          "min_v": -147.0168705889332,
+          "max_v": 0.7732163411563835
+        },
+        "bias": {
+          "min_v": -48.031799263757584,
+          "max_v": -47.69841480437754
+        },
+        "bplus": {
+          "min_v": 357.5722687731411,
+          "max_v": 466.28335251719545
+        },
+        "out": {
+          "min_v": -67.93669050962555,
+          "max_v": 69.47988361978673
+        }
+      }
+    },
+    {
+      "name": "bright",
+      "duration_s": 0.02,
+      "h_s": 1.25e-06,
+      "shared_subdivisions": 0,
+      "full": {
+        "host_s": 47.1070135156624,
+        "kcl_a": 9.988354587875392e-11,
+        "voltage_residual_v": 4.284083843231201e-08,
+        "max_iterations": 30,
+        "attempted_steps": 16000,
+        "failures": 0
+      },
+      "reduced": {
+        "host_s": 22.387916100444272,
+        "kcl_a": 9.998613048622929e-11,
+        "voltage_residual_v": 3.576860763132572e-08,
+        "max_iterations": 30,
+        "attempted_steps": 16000,
+        "failures": 0
+      },
+      "max_node_difference_v": 1.6290721305267652e-07,
+      "max_branch_difference_a": 1.0905469860489347e-09,
+      "relative_output_error": 1.30262990336942e-11,
+      "output_rms_difference_v": 7.48332667616784e-10,
+      "host_speed_ratio": 2.1041267666144057,
+      "cached_factorizations": 2,
+      "amplitude_v": 0.1,
+      "controls": {
+        "GAIN": 0.5,
+        "BASS": 0.2,
+        "MID": 0.3,
+        "TREBLE": 0.9,
+        "MASTER": 0.5,
+        "PRESENCE": 0.5,
+        "NFB": 1.0
+      },
+      "changed_controls": {
+        "BASS": 0.2,
+        "MID": 0.3,
+        "TREBLE": 0.9
+      },
+      "ranges": {
+        "in": {
+          "min_v": -0.1,
+          "max_v": 0.1
+        },
+        "master_out": {
+          "min_v": -21.8810408181066,
+          "max_v": 12.49359490962151
+        },
+        "pi_p1": {
+          "min_v": 144.74255417361684,
+          "max_v": 302.7613973094449
+        },
+        "pi_p2": {
+          "min_v": 138.90593552033047,
+          "max_v": 294.0781572285396
+        },
+        "g4": {
+          "min_v": -151.88873157459366,
+          "max_v": 0.7795643149977329
+        },
+        "g6": {
+          "min_v": -144.83303867056688,
+          "max_v": 0.7802793521128902
+        },
+        "bias": {
+          "min_v": -48.00087088402558,
+          "max_v": -47.6984165392075
+        },
+        "bplus": {
+          "min_v": 357.4774112476624,
+          "max_v": 466.28340461626294
+        },
+        "out": {
+          "min_v": -67.93773733091038,
+          "max_v": 69.42361036822169
+        }
+      }
+    },
+    {
+      "name": "presence90",
+      "duration_s": 0.02,
+      "h_s": 1.25e-06,
+      "shared_subdivisions": 0,
+      "full": {
+        "host_s": 55.88716812781058,
+        "kcl_a": 9.920508858840549e-11,
+        "voltage_residual_v": 3.92465153709054e-08,
+        "max_iterations": 23,
+        "attempted_steps": 16000,
+        "failures": 0
+      },
+      "reduced": {
+        "host_s": 26.604059827979654,
+        "kcl_a": 9.938250222774059e-11,
+        "voltage_residual_v": 4.196772351861e-08,
+        "max_iterations": 23,
+        "attempted_steps": 16000,
+        "failures": 0
+      },
+      "max_node_difference_v": 1.3965205880595022e-07,
+      "max_branch_difference_a": 9.266720724099287e-10,
+      "relative_output_error": 1.0022700613499603e-11,
+      "output_rms_difference_v": 5.810559325187143e-10,
+      "host_speed_ratio": 2.1007007385028396,
+      "cached_factorizations": 2,
+      "amplitude_v": 0.1,
+      "controls": {
+        "GAIN": 0.5,
+        "BASS": 0.5,
+        "MID": 0.5,
+        "TREBLE": 0.5,
+        "MASTER": 0.5,
+        "PRESENCE": 0.9,
+        "NFB": 1.0
+      },
+      "changed_controls": {
+        "PRESENCE": 0.9
+      },
+      "ranges": {
+        "in": {
+          "min_v": -0.1,
+          "max_v": 0.1
+        },
+        "master_out": {
+          "min_v": -12.284188343796902,
+          "max_v": 10.736387013228196
+        },
+        "pi_p1": {
+          "min_v": 147.63313804673876,
+          "max_v": 299.97797224381884
+        },
+        "pi_p2": {
+          "min_v": 138.88437635329538,
+          "max_v": 298.20154443495164
+        },
+        "g4": {
+          "min_v": -145.3327429826642,
+          "max_v": 0.7794991670793653
+        },
+        "g6": {
+          "min_v": -146.9489776794181,
+          "max_v": 0.7814394166539056
+        },
+        "bias": {
+          "min_v": -48.03037334301161,
+          "max_v": -47.698415498189014
+        },
+        "bplus": {
+          "min_v": 357.3743296024615,
+          "max_v": 466.2833786866095
+        },
+        "out": {
+          "min_v": -67.93784883010414,
+          "max_v": 69.45227800423788
+        }
+      }
+    },
+    {
+      "name": "nfb_half",
+      "duration_s": 0.02,
+      "h_s": 1.25e-06,
+      "shared_subdivisions": 0,
+      "full": {
+        "host_s": 65.59664801554754,
+        "kcl_a": 9.926670596627218e-11,
+        "voltage_residual_v": 4.21423465013504e-08,
+        "max_iterations": 33,
+        "attempted_steps": 16000,
+        "failures": 0
+      },
+      "reduced": {
+        "host_s": 31.96437022741884,
+        "kcl_a": 9.970491099409173e-11,
+        "voltage_residual_v": 3.888271749019623e-08,
+        "max_iterations": 33,
+        "attempted_steps": 16000,
+        "failures": 0
+      },
+      "max_node_difference_v": 1.2187325637569302e-07,
+      "max_branch_difference_a": 9.532925560051808e-10,
+      "relative_output_error": 1.024273704863621e-11,
+      "output_rms_difference_v": 5.936486088113663e-10,
+      "host_speed_ratio": 2.0521802103042575,
+      "cached_factorizations": 2,
+      "amplitude_v": 0.1,
+      "controls": {
+        "GAIN": 0.5,
+        "BASS": 0.5,
+        "MID": 0.5,
+        "TREBLE": 0.5,
+        "MASTER": 0.5,
+        "PRESENCE": 0.5,
+        "NFB": 0.5
+      },
+      "changed_controls": {
+        "NFB": 0.5
+      },
+      "ranges": {
+        "in": {
+          "min_v": -0.1,
+          "max_v": 0.1
+        },
+        "master_out": {
+          "min_v": -12.327797879447965,
+          "max_v": 11.384948248607193
+        },
+        "pi_p1": {
+          "min_v": 148.93290030728454,
+          "max_v": 300.0618353408414
+        },
+        "pi_p2": {
+          "min_v": 137.880982028575,
+          "max_v": 298.11593594488113
+        },
+        "g4": {
+          "min_v": -144.52624104550426,
+          "max_v": 0.738899107346623
+        },
+        "g6": {
+          "min_v": -146.74124931222727,
+          "max_v": 0.8237772252336719
+        },
+        "bias": {
+          "min_v": -48.0290125083154,
+          "max_v": -47.6988148633699
+        },
+        "bplus": {
+          "min_v": 357.3589396996782,
+          "max_v": 466.2763765289163
+        },
+        "out": {
+          "min_v": -67.83054642270758,
+          "max_v": 69.51581509559863
+        }
+      }
+    }
+  ],
+  "unknowns": 98,
+  "retained": 39,
+  "initial_time_s": 20.97999999999964,
+  "initial_sha256": "5bfde951cfc0def3b7ca63e6684d9b13d0a41f5dd0fa37aa77fcf54ac018bbfe"
+}

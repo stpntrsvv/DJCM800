@@ -14,10 +14,26 @@ import numpy as np
 ROOT = Path(__file__).resolve().parents[1]
 SCALE = {"meg": 1e6, "k": 1e3, "m": 1e-3, "u": 1e-6, "n": 1e-9, "p": 1e-12, "g": 1e9}
 VT = 8.617087e-5 * 300.15
+AUDIO_TAPER_MIDPOINT = .1
 
 
 def expit(x):
     return 1/(1+math.exp(-x)) if x >= 0 else math.exp(x)/(1+math.exp(x))
+
+
+def control_position(name, position, audio_midpoint=AUDIO_TAPER_MIDPOINT):
+    """Map a mechanical 0..10 knob position to electrical wiper fraction."""
+    if name not in {"GAIN", "BASS", "MID", "TREBLE", "MASTER", "PRESENCE"}:
+        raise ValueError(f"Unknown front-panel control: {name}")
+    if not 0. <= position <= 10.:
+        raise ValueError(f"Control position must be within 0..10: {name}={position}")
+    fraction = position/10.
+    if name in {"GAIN", "MASTER"}:
+        if not 0. < audio_midpoint < 1.:
+            raise ValueError("Audio-taper midpoint must be within 0..1")
+        exponent = math.log(audio_midpoint)/math.log(.5)
+        fraction = fraction**exponent
+    return fraction
 
 
 def number(value, params):
@@ -30,6 +46,28 @@ def number(value, params):
 
 def electrode(kind, v):
     """Currents and analytic Jacobian, coordinates relative to cathode."""
+    if kind.startswith("dempwolf:"):
+        from tube_models import TRIODES, dempwolf
+        name = kind.split(":", 1)[1]
+        currents, jac = dempwolf(v[0], v[1], TRIODES[name])
+        return currents[:2], jac[:2]
+    if kind == "reefman" or kind.startswith("reefman-secondary:"):
+        from dataclasses import replace
+        from tube_models import EL34, reefman
+        # The isolated law intentionally rejects unsupported quadrants. The MNA
+        # nevertheless needs a finite trial-point continuation during source
+        # stepping/Newton. Constant projection is numerical scaffolding, not a
+        # claim about reverse-anode or nonpositive-screen tube physics.
+        va, vs = max(float(v[0]), 0.), max(float(v[2]), 1e-6)
+        parameters = EL34
+        if kind.startswith("reefman-secondary:"):
+            parameters = replace(EL34, secondary=EL34.secondary*float(kind.split(":", 1)[1]))
+        currents, jac = reefman(va, v[1], vs, parameters)
+        if v[0] < 0:
+            jac[:, 0] = 0.
+        if v[2] <= 1e-6:
+            jac[:, 2] = 0.
+        return currents[:2], jac[:2]
     p, g = v[:2]
     if kind == "triode":
         root = math.sqrt(300 + p*p)
@@ -82,10 +120,16 @@ def diode(v, isat, cjo, tt):
 
 
 class Circuit:
-    def __init__(self):
+    def __init__(self, tube_set="koren", tube_caps="auto", el34_grid_r=None,
+                 el34_secondary_scale=1.):
         self.parts = []
         self.sources = {}
+        self.source_functions = {}
         self.notes = {}
+        self.tube_set = tube_set
+        self.tube_caps = tube_caps
+        self.el34_grid_r = (1001. if tube_set == "koren" else 2001.) if el34_grid_r is None else el34_grid_r
+        self.el34_secondary_scale = float(el34_secondary_scale)
 
     def add(self, kind, name, *args):
         self.parts.append((kind, name, *args))
@@ -94,16 +138,40 @@ class Circuit:
         self.add("V", name, p, n)
         self.sources[name] = (dc, amplitude, frequency, phase)
 
+    def source_function(self, name, function):
+        """Override an existing independent source with a function of time."""
+        if name not in self.sources:
+            raise KeyError(name)
+        self.source_functions[name] = function
+
     def tube(self, name, p, g, k, screen=None):
-        kind = "triode" if screen is None else "pentode"
+        if self.tube_set == "koren":
+            kind = "triode" if screen is None else "pentode"
+        elif self.tube_set.startswith("detailed:"):
+            triode_name = self.tube_set.split(":", 1)[1]
+            if triode_name not in ("RSD-1", "RSD-2", "EHX-1"):
+                raise ValueError(f"Unknown detailed triode parameter set: {triode_name}")
+            kind = f"dempwolf:{triode_name}" if screen is None else (
+                "reefman" if self.el34_secondary_scale == 1. else
+                f"reefman-secondary:{self.el34_secondary_scale:g}")
+        else:
+            raise ValueError(f"Unknown tube set: {self.tube_set}")
         self.add("T", name, kind, p, g, k, screen)
-        c = (2.3e-12, 2.4e-12, .9e-12) if screen is None else (15e-12, 1e-12, 8e-12)
+        detailed_caps = self.tube_caps == "datasheet" or (self.tube_caps == "auto" and self.tube_set != "koren")
+        if screen is None:
+            c = (1.6e-12, 1.6e-12, .33e-12) if detailed_caps else (2.3e-12, 2.4e-12, .9e-12)
+        else:
+            c = (15.2e-12, 1.1e-12, 8.4e-12) if detailed_caps else (15e-12, 1e-12, 8e-12)
         for suffix, a, b, value in zip(("gk", "gp", "pk"), (g, g, p), (k, p, k), c):
             self.add("C", f"C_{name}_{suffix}", a, b, value)
         self.add("R", f"R_{name}_pk", p, k, 1e9)
         j = name.lower()+"_junction"
-        self.add("R", f"R_{name}_grid", g, j, 2001. if screen is None else 1001.)
-        self.add("D", f"D_{name}_grid", j, k, 1e-9, 10e-12, 1e-9)
+        # Dempwolf already returns Ig1. Reefman does not, so its provisional
+        # legacy R+Shockley grid branch remains explicit until EL34 Ig1 is qualified.
+        if not kind.startswith("dempwolf:"):
+            resistance = 2001. if screen is None else self.el34_grid_r
+            self.add("R", f"R_{name}_grid", g, j, resistance)
+            self.add("D", f"D_{name}_grid", j, k, 1e-9, 10e-12, 1e-9)
 
     def compile(self):
         nodes = []
@@ -133,7 +201,7 @@ class Circuit:
             if kind == "T":
                 model, p, g, k, s = args
                 control = np.array([self.inc(p, k), self.inc(g, k)] + ([] if s is None else [self.inc(s, k)]))
-                output = control[[0]] if s is None else control[[0, 2]]
+                output = control[[0, 1]] if model.startswith("dempwolf:") else control[[0]] if s is None else control[[0, 2]]
                 self.nl.append(("T", control, output, model))
                 continue
             inc = self.inc(args[0], args[1])
@@ -164,7 +232,11 @@ class Circuit:
     def rhs(self, t=None, scale=1.):
         b = np.zeros(self.size)
         for name, (dc, amp, freq, phase) in self.sources.items():
-            b[self.branches[name]] = scale*(dc if t is None else dc+amp*math.sin(2*math.pi*freq*t+phase))
+            if t is not None and name in self.source_functions:
+                value = float(self.source_functions[name](t))
+            else:
+                value = dc if t is None else dc+amp*math.sin(2*math.pi*freq*t+phase)
+            b[self.branches[name]] = scale*value
         return b
 
     def nonlinear(self, x):
@@ -183,6 +255,12 @@ class Circuit:
                 c += output*cap
         return i, j, q, c
 
+    def linearized_delta(self, A, nonlinear_jacobian, residual, alpha):
+        """Solve one Newton correction; overridden by exact linear elimination."""
+        J = A+nonlinear_jacobian
+        row = np.maximum(np.max(np.abs(J), axis=1), 1e-15)
+        return np.linalg.solve(J/row[:, None], -residual/row)
+
     def newton(self, initial, b, alpha=0., history=None, maxiter=100):
         x = initial.copy()
         A = self.G+alpha*self.C
@@ -196,10 +274,7 @@ class Circuit:
             if norm <= 1:
                 return x, dict(iterations=it, kcl=float(np.max(np.abs(residual[:len(self.nodes)]))),
                                voltage=float(np.max(np.abs(residual[len(self.nodes):]))))
-            J = A+jac+alpha*cap
-            # Row equilibration; all physical unknowns remain in the solve.
-            row = np.maximum(np.max(np.abs(J), axis=1), 1e-15)
-            delta = np.linalg.solve(J/row[:, None], -residual/row)
+            delta = self.linearized_delta(A, jac+alpha*cap, residual, alpha)
             accepted = False
             for power in range(28):
                 candidate = x+delta*(.5**power)
@@ -255,41 +330,77 @@ class Circuit:
                 if model == "triode":
                     e = f"({vp}/600*sp(600*(0.01+{vg}/sqrt(300+{vp}^2))))"
                     ip = f"2*max({e},0)^1.4/1060"
-                else:
+                elif model == "pentode":
                     vs = f"v({s},{k})"
                     e = f"(max({vs},0)/60*sp(60*(1/11+{vg}/max({vs},0.001))))"
                     ip = f"2*max({e},0)^1.35/650*atan(max({vp},0)/24)"
                     lines.append(f"B_{name}_screen {s} {k} I={{max({vs}/11+{vg},0)^1.35/4200}}")
+                else:
+                    raise ValueError(f"SPICE export is not implemented for tube model {model}")
                 lines.append(f"B_{name}_plate {p} {k} I={{{ip}}}")
         return "\n".join(lines)+"\n"
 
+    def fingerprint(self):
+        """Stable identity also available for models not exported to SPICE."""
+        identity = (self.tube_set, self.tube_caps, self.el34_grid_r,
+                    self.parts, sorted(self.sources.items()))
+        if self.el34_secondary_scale != 1.:
+            identity += (("el34_secondary_scale", self.el34_secondary_scale),)
+        return repr(identity)
 
-def build(full_supply=False, amplitude=.001, controls=.1):
-    circuit = Circuit()
+
+def build(full_supply=False, amplitude=.001, controls=.1, tube_set="koren",
+          tube_caps="auto", el34_grid_r=None, circuit_type=Circuit,
+          control_positions=None, audio_taper_midpoint=AUDIO_TAPER_MIDPOINT,
+          speaker_load=None, parameter_overrides=None, component_overrides=None,
+          el34_secondary_scale=1.):
+    circuit = circuit_type(tube_set=tube_set, tube_caps=tube_caps, el34_grid_r=el34_grid_r,
+                           el34_secondary_scale=el34_secondary_scale)
     params = {}
     for line in (ROOT / "simulation/ngspice/jcm800_2203_1981.inc").read_text(encoding="utf-8").splitlines():
         if line.startswith(".param"):
             for field in line.split()[1:]:
                 key, value = field.split("=")
                 params[key] = number(value, params)
-    params.update(GAIN=controls, MASTER=controls)
+    if parameter_overrides:
+        params.update({name: float(value) for name, value in parameter_overrides.items()})
+    if isinstance(controls, dict):
+        unknown = set(controls)-{"GAIN", "BASS", "MID", "TREBLE", "MASTER", "PRESENCE", "NFB"}
+        if unknown:
+            raise ValueError(f"Unknown controls: {sorted(unknown)}")
+        params.update({name: float(value) for name, value in controls.items()})
+    else:
+        # Historical experiments used one scalar for Gain and Master only.
+        params.update(GAIN=controls, MASTER=controls)
+    if control_positions is not None:
+        params.update({name: control_position(name, float(position), audio_taper_midpoint)
+                       for name, position in control_positions.items()})
     for line in (ROOT / "simulation/ngspice/jcm800_2203_1981.inc").read_text(encoding="utf-8").splitlines():
         if not line or line[0] in "*.": continue
         name, *a = line.split()
         kind = name[0].upper()
-        if kind in "RCL": circuit.add(kind, name, a[0], a[1], number(a[2], params))
+        if name == "Rload" and speaker_load is not None:
+            continue
+        if kind in "RCL":
+            value = number(a[2], params)
+            if component_overrides and name in component_overrides:
+                value = float(component_overrides[name])
+            circuit.add(kind, name, a[0], a[1], value)
         elif kind == "V": circuit.source(name, a[0], a[1], dc=number(a[2], params))
         elif kind == "E": circuit.add(kind, name, *a[:4], number(a[4], params))
         elif kind == "K": circuit.add(kind, name, a[:-1], number(a[-1], params))
         elif kind == "X": circuit.tube(name, *a[:-1])
         else: raise ValueError(line)
     circuit.source("Vin", "in", "0", amplitude=amplitude, frequency=1000)
+    if speaker_load is not None:
+        from speaker_load import add_speaker_load
+        add_speaker_load(circuit, speaker_load)
     if full_supply:
-        extend_factory_supply(circuit)
+        extend_factory_supply(circuit, lpri=params["LPRI"], raa=params["RAA"])
     return circuit.compile()
 
 
-def extend_factory_supply(c):
+def extend_factory_supply(c, lpri=8.85, raa=1700.):
     remove = {"Vraw", "Rps", "Vbias", "Rmainbalance1", "Rmainbalance2", "Ls", "Kmain", "Rsec", "Etap"}
     c.parts = [p for p in c.parts if p[1] not in remove]
     for name in ("Vraw", "Vbias"): del c.sources[name]
@@ -327,7 +438,7 @@ def extend_factory_supply(c):
     for z in (4, 8, 16):
         delta = math.sqrt(z)-turns
         end = "out" if z == 16 else f"tap{z}"
-        c.add("L", f"Lsec{z}", f"sec{z}i", previous, 8.85*delta**2/1700)
+        c.add("L", f"Lsec{z}", f"sec{z}i", previous, lpri*delta**2/raa)
         c.add("R", f"Rsec{z}", f"sec{z}i", end, .320*delta/4)
         previous, turns = end, math.sqrt(z)
     c.add("K", "Koutput", ["Lpa", "Lpb", "Lsec4", "Lsec8", "Lsec16"], .9995)

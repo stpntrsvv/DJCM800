@@ -1,0 +1,17 @@
+{
+  "status": "pass",
+  "states": 32,
+  "max_absolute_difference": {
+    "g": 0.0,
+    "c": 0.0,
+    "current": 5.551115123125783e-17,
+    "charge": 8.470329472543003e-22,
+    "jacobian": 6.938893903907228e-18,
+    "capacitance": 2.710505431213761e-20
+  },
+  "benchmark": {
+    "median_ns": 9542,
+    "calls": 5000
+  },
+  "validation_host_ns": 49993542
+}

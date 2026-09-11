@@ -1,0 +1,132 @@
+{
+  "status": "pass",
+  "quick": false,
+  "full_chord": false,
+  "sample_sha256": "ec1cde00aef4ed99e1223716207b05bd55b85f312a8dd09b0ee5a2cf461ded92",
+  "sample_rate_hz": 48000,
+  "sample_frames": 192000,
+  "signal_duration_s": 0.02,
+  "h_s": 1.25e-06,
+  "input_peak_v": 0.1,
+  "controls": {
+    "GAIN": 5.0,
+    "BASS": 5.0,
+    "MID": 5.0,
+    "TREBLE": 5.0,
+    "MASTER": 5.0,
+    "PRESENCE": 5.0
+  },
+  "speaker_parameters": {
+    "name": "brit_4x12_uk_approx",
+    "re_ohm": 12.5,
+    "le_h": 0.0008,
+    "resonance_hz": 100.0,
+    "motional_peak_ohm": 70.0,
+    "motional_q": 4.0,
+    "lm_h": 0.027852115041081683,
+    "cm_f": 9.094568176679733e-05
+  },
+  "cases": [
+    {
+      "name": "resistive",
+      "unknowns": 98,
+      "warm_stats": {
+        "host_s": 1.4066992737352848,
+        "attempted_steps": 1000,
+        "failures": 0,
+        "subdivisions": 0,
+        "max_iterations": 11,
+        "kcl_a": 9.935519074133481e-11,
+        "voltage_residual_v": 8.418510333285667e-10
+      },
+      "stats": {
+        "host_s": 20.97531213820912,
+        "attempted_steps": 16000,
+        "failures": 0,
+        "subdivisions": 0,
+        "max_iterations": 7,
+        "kcl_a": 9.999916259634256e-11,
+        "voltage_residual_v": 1.8917489796876907e-08
+      },
+      "amplifier": {
+        "output_peak_v": 54.55940444645357,
+        "output_rms_v": 11.04803622136605,
+        "load_mean_w": 7.628694021788515,
+        "load_peak_w": 186.0455383469811,
+        "load_energy_j": 0.15258341630329755,
+        "bplus_min_v": 451.2265158572439,
+        "bplus_max_v": 472.9535126722637,
+        "bias_min_v": -47.703949361230976,
+        "bias_max_v": -47.68670125144114,
+        "el34_plate_peak_w": 63.15816062644682,
+        "el34_screen_peak_w": 22.390335963764127,
+        "el34_plate_mean_max_w": 11.398799591414463,
+        "el34_plate_max_20ms_w": 11.398964642236646,
+        "el34_screen_mean_max_w": 1.8290434008014016,
+        "el34_screen_max_20ms_w": 1.8290919130285852,
+        "el34_grid_peak_a": 4.184611784916998e-07,
+        "el34_grid_mean_a": 2.3061453133389894e-08,
+        "el34_grid_above_1ua_fraction": 0.0,
+        "primary_flux_proxy_peak_vs": 0.1149504029022001
+      },
+      "load": {
+        "voltage_peak_v": 54.55940444645357,
+        "current_peak_a": 3.409962777903348,
+        "real_power_mean_w": 7.628694021788515,
+        "real_energy_j": 0.15258341630329755,
+        "port_power_mean_w": 7.628694021788515
+      }
+    },
+    {
+      "name": "reactive",
+      "unknowns": 102,
+      "warm_stats": {
+        "host_s": 1.4528549027163535,
+        "attempted_steps": 1000,
+        "failures": 0,
+        "subdivisions": 0,
+        "max_iterations": 11,
+        "kcl_a": 9.935519074133481e-11,
+        "voltage_residual_v": 7.428297976730391e-10
+      },
+      "stats": {
+        "host_s": 21.547067345352843,
+        "attempted_steps": 16000,
+        "failures": 0,
+        "subdivisions": 0,
+        "max_iterations": 6,
+        "kcl_a": 9.983149029668681e-11,
+        "voltage_residual_v": 1.516309566795826e-08
+      },
+      "amplifier": {
+        "output_peak_v": 57.567421609839485,
+        "output_rms_v": 12.126467097791643,
+        "load_mean_w": 9.190700267113955,
+        "load_peak_w": 207.1255019253134,
+        "load_energy_j": 0.183825493717613,
+        "bplus_min_v": 451.4358446528318,
+        "bplus_max_v": 472.9489975938314,
+        "bias_min_v": -47.70395312707289,
+        "bias_max_v": -47.68668587167732,
+        "el34_plate_peak_w": 79.20038474655547,
+        "el34_screen_peak_w": 21.984952239747546,
+        "el34_plate_mean_max_w": 11.053077587653863,
+        "el34_plate_max_20ms_w": 11.053739726335827,
+        "el34_screen_mean_max_w": 1.7784488489933212,
+        "el34_screen_max_20ms_w": 1.7784942731914903,
+        "el34_grid_peak_a": 4.190817616026142e-07,
+        "el34_grid_mean_a": 2.369679253515848e-08,
+        "el34_grid_above_1ua_fraction": 0.0,
+        "primary_flux_proxy_peak_vs": 0.13861374983845076
+      },
+      "load": {
+        "voltage_peak_v": 57.567421609839485,
+        "current_peak_a": 3.2742730982996604,
+        "real_power_mean_w": 6.4321402837014325,
+        "real_energy_j": 0.1286508458493833,
+        "port_power_mean_w": 7.399499555601577
+      }
+    }
+  ],
+  "wav_common_scale_v": 60.22388446777342
+}

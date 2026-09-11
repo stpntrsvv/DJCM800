@@ -1,0 +1,141 @@
+{
+  "status": "accepted_as_engineering_macromodel_with_documented_physical_limitations",
+  "convergence": {
+    "author": {
+      "periodic_refinement": [
+        {
+          "cycle": 1,
+          "max_dv_v": null,
+          "max_di_a": null,
+          "kcl_a": 6.562572707480285e-11,
+          "halvings": 0
+        },
+        {
+          "cycle": 2,
+          "max_dv_v": 0.009724817737946978,
+          "max_di_a": 2.489676279343333e-05,
+          "kcl_a": 6.826894605183043e-11,
+          "halvings": 0
+        },
+        {
+          "cycle": 3,
+          "max_dv_v": 0.009664369172867282,
+          "max_di_a": 4.692524010838778e-06,
+          "kcl_a": 9.64243328170914e-11,
+          "halvings": 0
+        }
+      ],
+      "amplitudes": {
+        "100": [
+          {
+            "h_s": 1.25e-06,
+            "halvings": 0,
+            "max_iterations": 25,
+            "relative_waveform": 0.008256150293346207,
+            "max_abs_v": 7.638567402767928
+          }
+        ],
+        "500": [
+          {
+            "h_s": 1.25e-06,
+            "halvings": 0,
+            "max_iterations": 62,
+            "relative_waveform": 0.013899252429465292,
+            "max_abs_v": 13.87420301469811
+          },
+          {
+            "h_s": 6.25e-07,
+            "halvings": 0,
+            "max_iterations": 15,
+            "relative_waveform": 0.0077518758923158905,
+            "max_abs_v": 8.020973802078625
+          }
+        ]
+      }
+    },
+    "legacy_caps": {
+      "periodic_refinement": [
+        {
+          "cycle": 1,
+          "max_dv_v": null,
+          "max_di_a": null,
+          "kcl_a": 6.17319528828375e-11,
+          "halvings": 0
+        },
+        {
+          "cycle": 2,
+          "max_dv_v": 0.009724815656227292,
+          "max_di_a": 4.7035659361434334e-06,
+          "kcl_a": 6.45457021164475e-11,
+          "halvings": 0
+        }
+      ],
+      "amplitudes": {
+        "100": [
+          {
+            "h_s": 1.25e-06,
+            "halvings": 0,
+            "max_iterations": 18,
+            "relative_waveform": 0.007286773237799399,
+            "max_abs_v": 7.757112931504789
+          }
+        ],
+        "500": [
+          {
+            "h_s": 1.25e-06,
+            "halvings": 0,
+            "max_iterations": 71,
+            "relative_waveform": 0.012575524317583398,
+            "max_abs_v": 11.94465533216254
+          },
+          {
+            "h_s": 6.25e-07,
+            "halvings": 0,
+            "max_iterations": 15,
+            "relative_waveform": 0.007518730621799238,
+            "max_abs_v": 7.331073200879686
+          }
+        ]
+      }
+    }
+  },
+  "capacitance_sensitivity": {
+    "100": {
+      "h_s": 1.2499999999999999e-06,
+      "direct_relative": 0.15297689185389088,
+      "best_delay_s": -8.75e-06,
+      "delay_aligned_relative": 0.017999714831032753
+    },
+    "500": {
+      "h_s": 6.249999999999999e-07,
+      "direct_relative": 0.13004791371544205,
+      "best_delay_s": -6.2499999999999995e-06,
+      "delay_aligned_relative": 0.014923662591914884
+    }
+  },
+  "ig1_power_sensitivity": {
+    "0.1": {
+      "values_w": {
+        "ig1_r1k": 208.5213524196723,
+        "author": 209.28969386980185,
+        "ig1_r4k": 210.791385338611
+      },
+      "span_relative": 0.010846367429592054
+    },
+    "0.5": {
+      "values_w": {
+        "ig1_r1k": 211.07775992303388,
+        "author": 211.87846292518006,
+        "ig1_r4k": 213.4454361123799
+      },
+      "span_relative": 0.01117469022881341
+    }
+  },
+  "recovery": {
+    "duration_s": 0.5,
+    "h_s": 2e-05,
+    "last_output_v": 0.00030549125746308093,
+    "tail_rms_v": 0.00032504957085642555,
+    "halvings": 1
+  }
+}

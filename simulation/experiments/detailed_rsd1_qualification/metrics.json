@@ -1,0 +1,608 @@
+{
+  "status": "qualification_incomplete",
+  "tube_set": "detailed:RSD-1",
+  "scenarios": {
+    "idle": {
+      "Xv1b": {
+        "model": "dempwolf:RSD-1",
+        "samples": 201,
+        "positive_grid_fraction": 0.0,
+        "reference_box": "Va=20..300 V, Vg1=-5..3 V",
+        "outside_fraction": 0.0,
+        "outside_samples": 0
+      },
+      "Xv1a": {
+        "model": "dempwolf:RSD-1",
+        "samples": 201,
+        "positive_grid_fraction": 0.0,
+        "reference_box": "Va=20..300 V, Vg1=-5..3 V",
+        "outside_fraction": 0.0,
+        "outside_samples": 0
+      },
+      "Xv2a": {
+        "model": "dempwolf:RSD-1",
+        "samples": 201,
+        "positive_grid_fraction": 0.0,
+        "reference_box": "Va=20..300 V, Vg1=-5..3 V",
+        "outside_fraction": 0.0,
+        "outside_samples": 0
+      },
+      "Xv2b": {
+        "model": "dempwolf:RSD-1",
+        "samples": 201,
+        "positive_grid_fraction": 0.0,
+        "reference_box": "Va=20..300 V, Vg1=-5..3 V",
+        "outside_fraction": 0.0,
+        "outside_samples": 0
+      },
+      "Xv3a": {
+        "model": "dempwolf:RSD-1",
+        "samples": 201,
+        "positive_grid_fraction": 0.0,
+        "reference_box": "Va=20..300 V, Vg1=-5..3 V",
+        "outside_fraction": 0.0,
+        "outside_samples": 0
+      },
+      "Xv3b": {
+        "model": "dempwolf:RSD-1",
+        "samples": 201,
+        "positive_grid_fraction": 0.0,
+        "reference_box": "Va=20..300 V, Vg1=-5..3 V",
+        "outside_fraction": 0.0,
+        "outside_samples": 0
+      },
+      "Xv4": {
+        "model": "reefman",
+        "samples": 201,
+        "positive_grid_fraction": 0.0,
+        "reference_box": "numerically tested box: Va=.1..600 V, Vg1=-80..3 V, Vg2=50..550 V",
+        "outside_fraction": 0.0,
+        "outside_samples": 0,
+        "continuation_samples": 0
+      },
+      "Xv5": {
+        "model": "reefman",
+        "samples": 201,
+        "positive_grid_fraction": 0.0,
+        "reference_box": "numerically tested box: Va=.1..600 V, Vg1=-80..3 V, Vg2=50..550 V",
+        "outside_fraction": 0.0,
+        "outside_samples": 0,
+        "continuation_samples": 0
+      },
+      "Xv6": {
+        "model": "reefman",
+        "samples": 201,
+        "positive_grid_fraction": 0.0,
+        "reference_box": "numerically tested box: Va=.1..600 V, Vg1=-80..3 V, Vg2=50..550 V",
+        "outside_fraction": 0.0,
+        "outside_samples": 0,
+        "continuation_samples": 0
+      },
+      "Xv7": {
+        "model": "reefman",
+        "samples": 201,
+        "positive_grid_fraction": 0.0,
+        "reference_box": "numerically tested box: Va=.1..600 V, Vg1=-80..3 V, Vg2=50..550 V",
+        "outside_fraction": 0.0,
+        "outside_samples": 0,
+        "continuation_samples": 0
+      }
+    },
+    "burst_25mv": {
+      "Xv1b": {
+        "model": "dempwolf:RSD-1",
+        "samples": 4001,
+        "positive_grid_fraction": 0.0,
+        "reference_box": "Va=20..300 V, Vg1=-5..3 V",
+        "outside_fraction": 0.0,
+        "outside_samples": 0
+      },
+      "Xv1a": {
+        "model": "dempwolf:RSD-1",
+        "samples": 4001,
+        "positive_grid_fraction": 0.0,
+        "reference_box": "Va=20..300 V, Vg1=-5..3 V",
+        "outside_fraction": 0.0,
+        "outside_samples": 0
+      },
+      "Xv2a": {
+        "model": "dempwolf:RSD-1",
+        "samples": 4001,
+        "positive_grid_fraction": 0.0,
+        "reference_box": "Va=20..300 V, Vg1=-5..3 V",
+        "outside_fraction": 0.0,
+        "outside_samples": 0
+      },
+      "Xv2b": {
+        "model": "dempwolf:RSD-1",
+        "samples": 4001,
+        "positive_grid_fraction": 0.48937765558610347,
+        "reference_box": "Va=20..300 V, Vg1=-5..3 V",
+        "outside_fraction": 0.3346663334166458,
+        "outside_samples": 1339
+      },
+      "Xv3a": {
+        "model": "dempwolf:RSD-1",
+        "samples": 4001,
+        "positive_grid_fraction": 0.15496125968507873,
+        "reference_box": "Va=20..300 V, Vg1=-5..3 V",
+        "outside_fraction": 0.41339665083729066,
+        "outside_samples": 1654
+      },
+      "Xv3b": {
+        "model": "dempwolf:RSD-1",
+        "samples": 4001,
+        "positive_grid_fraction": 0.012996750812296926,
+        "reference_box": "Va=20..300 V, Vg1=-5..3 V",
+        "outside_fraction": 0.0,
+        "outside_samples": 0
+      },
+      "Xv4": {
+        "model": "reefman",
+        "samples": 4001,
+        "positive_grid_fraction": 0.43739065233691576,
+        "reference_box": "numerically tested box: Va=.1..600 V, Vg1=-80..3 V, Vg2=50..550 V",
+        "outside_fraction": 0.49687578105473634,
+        "outside_samples": 1988,
+        "continuation_samples": 0
+      },
+      "Xv5": {
+        "model": "reefman",
+        "samples": 4001,
+        "positive_grid_fraction": 0.43739065233691576,
+        "reference_box": "numerically tested box: Va=.1..600 V, Vg1=-80..3 V, Vg2=50..550 V",
+        "outside_fraction": 0.49687578105473634,
+        "outside_samples": 1988,
+        "continuation_samples": 0
+      },
+      "Xv6": {
+        "model": "reefman",
+        "samples": 4001,
+        "positive_grid_fraction": 0.4551362159460135,
+        "reference_box": "numerically tested box: Va=.1..600 V, Vg1=-80..3 V, Vg2=50..550 V",
+        "outside_fraction": 0.47438140464883777,
+        "outside_samples": 1898,
+        "continuation_samples": 0
+      },
+      "Xv7": {
+        "model": "reefman",
+        "samples": 4001,
+        "positive_grid_fraction": 0.4551362159460135,
+        "reference_box": "numerically tested box: Va=.1..600 V, Vg1=-80..3 V, Vg2=50..550 V",
+        "outside_fraction": 0.47438140464883777,
+        "outside_samples": 1898,
+        "continuation_samples": 0
+      }
+    },
+    "release_25mv": {
+      "Xv1b": {
+        "model": "dempwolf:RSD-1",
+        "samples": 2001,
+        "positive_grid_fraction": 0.0,
+        "reference_box": "Va=20..300 V, Vg1=-5..3 V",
+        "outside_fraction": 0.0,
+        "outside_samples": 0
+      },
+      "Xv1a": {
+        "model": "dempwolf:RSD-1",
+        "samples": 2001,
+        "positive_grid_fraction": 0.0,
+        "reference_box": "Va=20..300 V, Vg1=-5..3 V",
+        "outside_fraction": 0.0,
+        "outside_samples": 0
+      },
+      "Xv2a": {
+        "model": "dempwolf:RSD-1",
+        "samples": 2001,
+        "positive_grid_fraction": 0.0,
+        "reference_box": "Va=20..300 V, Vg1=-5..3 V",
+        "outside_fraction": 0.0,
+        "outside_samples": 0
+      },
+      "Xv2b": {
+        "model": "dempwolf:RSD-1",
+        "samples": 2001,
+        "positive_grid_fraction": 0.0,
+        "reference_box": "Va=20..300 V, Vg1=-5..3 V",
+        "outside_fraction": 0.00399800099950025,
+        "outside_samples": 8
+      },
+      "Xv3a": {
+        "model": "dempwolf:RSD-1",
+        "samples": 2001,
+        "positive_grid_fraction": 0.0,
+        "reference_box": "Va=20..300 V, Vg1=-5..3 V",
+        "outside_fraction": 0.005997001499250375,
+        "outside_samples": 12
+      },
+      "Xv3b": {
+        "model": "dempwolf:RSD-1",
+        "samples": 2001,
+        "positive_grid_fraction": 0.0,
+        "reference_box": "Va=20..300 V, Vg1=-5..3 V",
+        "outside_fraction": 0.0,
+        "outside_samples": 0
+      },
+      "Xv4": {
+        "model": "reefman",
+        "samples": 2001,
+        "positive_grid_fraction": 0.00849575212393803,
+        "reference_box": "numerically tested box: Va=.1..600 V, Vg1=-80..3 V, Vg2=50..550 V",
+        "outside_fraction": 0.0,
+        "outside_samples": 0,
+        "continuation_samples": 0
+      },
+      "Xv5": {
+        "model": "reefman",
+        "samples": 2001,
+        "positive_grid_fraction": 0.00849575212393803,
+        "reference_box": "numerically tested box: Va=.1..600 V, Vg1=-80..3 V, Vg2=50..550 V",
+        "outside_fraction": 0.0,
+        "outside_samples": 0,
+        "continuation_samples": 0
+      },
+      "Xv6": {
+        "model": "reefman",
+        "samples": 2001,
+        "positive_grid_fraction": 0.0,
+        "reference_box": "numerically tested box: Va=.1..600 V, Vg1=-80..3 V, Vg2=50..550 V",
+        "outside_fraction": 0.28085957021489255,
+        "outside_samples": 562,
+        "continuation_samples": 0
+      },
+      "Xv7": {
+        "model": "reefman",
+        "samples": 2001,
+        "positive_grid_fraction": 0.0,
+        "reference_box": "numerically tested box: Va=.1..600 V, Vg1=-80..3 V, Vg2=50..550 V",
+        "outside_fraction": 0.28085957021489255,
+        "outside_samples": 562,
+        "continuation_samples": 0
+      }
+    },
+    "burst_100mv": {
+      "Xv1b": {
+        "model": "dempwolf:RSD-1",
+        "samples": 4001,
+        "positive_grid_fraction": 0.0,
+        "reference_box": "Va=20..300 V, Vg1=-5..3 V",
+        "outside_fraction": 0.0,
+        "outside_samples": 0
+      },
+      "Xv1a": {
+        "model": "dempwolf:RSD-1",
+        "samples": 4001,
+        "positive_grid_fraction": 0.0,
+        "reference_box": "Va=20..300 V, Vg1=-5..3 V",
+        "outside_fraction": 0.0,
+        "outside_samples": 0
+      },
+      "Xv2a": {
+        "model": "dempwolf:RSD-1",
+        "samples": 4001,
+        "positive_grid_fraction": 0.3409147713071732,
+        "reference_box": "Va=20..300 V, Vg1=-5..3 V",
+        "outside_fraction": 0.44713821544613847,
+        "outside_samples": 1789
+      },
+      "Xv2b": {
+        "model": "dempwolf:RSD-1",
+        "samples": 4001,
+        "positive_grid_fraction": 0.5366158460384903,
+        "reference_box": "Va=20..300 V, Vg1=-5..3 V",
+        "outside_fraction": 0.40889777555611095,
+        "outside_samples": 1636
+      },
+      "Xv3a": {
+        "model": "dempwolf:RSD-1",
+        "samples": 4001,
+        "positive_grid_fraction": 0.1994501374656336,
+        "reference_box": "Va=20..300 V, Vg1=-5..3 V",
+        "outside_fraction": 0.42939265183704073,
+        "outside_samples": 1718
+      },
+      "Xv3b": {
+        "model": "dempwolf:RSD-1",
+        "samples": 4001,
+        "positive_grid_fraction": 0.01374656335916021,
+        "reference_box": "Va=20..300 V, Vg1=-5..3 V",
+        "outside_fraction": 0.0094976255936016,
+        "outside_samples": 38
+      },
+      "Xv4": {
+        "model": "reefman",
+        "samples": 4001,
+        "positive_grid_fraction": 0.42989252686828294,
+        "reference_box": "numerically tested box: Va=.1..600 V, Vg1=-80..3 V, Vg2=50..550 V",
+        "outside_fraction": 0.5366158460384903,
+        "outside_samples": 2147,
+        "continuation_samples": 0
+      },
+      "Xv5": {
+        "model": "reefman",
+        "samples": 4001,
+        "positive_grid_fraction": 0.42989252686828294,
+        "reference_box": "numerically tested box: Va=.1..600 V, Vg1=-80..3 V, Vg2=50..550 V",
+        "outside_fraction": 0.5366158460384903,
+        "outside_samples": 2147,
+        "continuation_samples": 0
+      },
+      "Xv6": {
+        "model": "reefman",
+        "samples": 4001,
+        "positive_grid_fraction": 0.5123719070232442,
+        "reference_box": "numerically tested box: Va=.1..600 V, Vg1=-80..3 V, Vg2=50..550 V",
+        "outside_fraction": 0.4521369657585604,
+        "outside_samples": 1809,
+        "continuation_samples": 0
+      },
+      "Xv7": {
+        "model": "reefman",
+        "samples": 4001,
+        "positive_grid_fraction": 0.5123719070232442,
+        "reference_box": "numerically tested box: Va=.1..600 V, Vg1=-80..3 V, Vg2=50..550 V",
+        "outside_fraction": 0.4521369657585604,
+        "outside_samples": 1809,
+        "continuation_samples": 0
+      }
+    },
+    "release_100mv": {
+      "Xv1b": {
+        "model": "dempwolf:RSD-1",
+        "samples": 2001,
+        "positive_grid_fraction": 0.0,
+        "reference_box": "Va=20..300 V, Vg1=-5..3 V",
+        "outside_fraction": 0.0,
+        "outside_samples": 0
+      },
+      "Xv1a": {
+        "model": "dempwolf:RSD-1",
+        "samples": 2001,
+        "positive_grid_fraction": 0.0,
+        "reference_box": "Va=20..300 V, Vg1=-5..3 V",
+        "outside_fraction": 0.0,
+        "outside_samples": 0
+      },
+      "Xv2a": {
+        "model": "dempwolf:RSD-1",
+        "samples": 2001,
+        "positive_grid_fraction": 0.0024987506246876563,
+        "reference_box": "Va=20..300 V, Vg1=-5..3 V",
+        "outside_fraction": 0.0,
+        "outside_samples": 0
+      },
+      "Xv2b": {
+        "model": "dempwolf:RSD-1",
+        "samples": 2001,
+        "positive_grid_fraction": 0.9155422288855573,
+        "reference_box": "Va=20..300 V, Vg1=-5..3 V",
+        "outside_fraction": 0.004497751124437781,
+        "outside_samples": 9
+      },
+      "Xv3a": {
+        "model": "dempwolf:RSD-1",
+        "samples": 2001,
+        "positive_grid_fraction": 0.0,
+        "reference_box": "Va=20..300 V, Vg1=-5..3 V",
+        "outside_fraction": 0.005997001499250375,
+        "outside_samples": 12
+      },
+      "Xv3b": {
+        "model": "dempwolf:RSD-1",
+        "samples": 2001,
+        "positive_grid_fraction": 0.24287856071964017,
+        "reference_box": "Va=20..300 V, Vg1=-5..3 V",
+        "outside_fraction": 0.0,
+        "outside_samples": 0
+      },
+      "Xv4": {
+        "model": "reefman",
+        "samples": 2001,
+        "positive_grid_fraction": 0.1969015492253873,
+        "reference_box": "numerically tested box: Va=.1..600 V, Vg1=-80..3 V, Vg2=50..550 V",
+        "outside_fraction": 0.22088955522238882,
+        "outside_samples": 442,
+        "continuation_samples": 0
+      },
+      "Xv5": {
+        "model": "reefman",
+        "samples": 2001,
+        "positive_grid_fraction": 0.1969015492253873,
+        "reference_box": "numerically tested box: Va=.1..600 V, Vg1=-80..3 V, Vg2=50..550 V",
+        "outside_fraction": 0.22088955522238882,
+        "outside_samples": 442,
+        "continuation_samples": 0
+      },
+      "Xv6": {
+        "model": "reefman",
+        "samples": 2001,
+        "positive_grid_fraction": 0.00849575212393803,
+        "reference_box": "numerically tested box: Va=.1..600 V, Vg1=-80..3 V, Vg2=50..550 V",
+        "outside_fraction": 0.5097451274362819,
+        "outside_samples": 1020,
+        "continuation_samples": 0
+      },
+      "Xv7": {
+        "model": "reefman",
+        "samples": 2001,
+        "positive_grid_fraction": 0.00849575212393803,
+        "reference_box": "numerically tested box: Va=.1..600 V, Vg1=-80..3 V, Vg2=50..550 V",
+        "outside_fraction": 0.5097451274362819,
+        "outside_samples": 1020,
+        "continuation_samples": 0
+      }
+    },
+    "burst_500mv": {
+      "Xv1b": {
+        "model": "dempwolf:RSD-1",
+        "samples": 4001,
+        "positive_grid_fraction": 0.0,
+        "reference_box": "Va=20..300 V, Vg1=-5..3 V",
+        "outside_fraction": 0.0,
+        "outside_samples": 0
+      },
+      "Xv1a": {
+        "model": "dempwolf:RSD-1",
+        "samples": 4001,
+        "positive_grid_fraction": 0.0,
+        "reference_box": "Va=20..300 V, Vg1=-5..3 V",
+        "outside_fraction": 0.3971507123219195,
+        "outside_samples": 1589
+      },
+      "Xv2a": {
+        "model": "dempwolf:RSD-1",
+        "samples": 4001,
+        "positive_grid_fraction": 0.5056235941014746,
+        "reference_box": "Va=20..300 V, Vg1=-5..3 V",
+        "outside_fraction": 0.4593851537115721,
+        "outside_samples": 1838
+      },
+      "Xv2b": {
+        "model": "dempwolf:RSD-1",
+        "samples": 4001,
+        "positive_grid_fraction": 0.4753811547113222,
+        "reference_box": "Va=20..300 V, Vg1=-5..3 V",
+        "outside_fraction": 0.5128717820544864,
+        "outside_samples": 2052
+      },
+      "Xv3a": {
+        "model": "dempwolf:RSD-1",
+        "samples": 4001,
+        "positive_grid_fraction": 0.1937015746063484,
+        "reference_box": "Va=20..300 V, Vg1=-5..3 V",
+        "outside_fraction": 0.5186203449137715,
+        "outside_samples": 2075
+      },
+      "Xv3b": {
+        "model": "dempwolf:RSD-1",
+        "samples": 4001,
+        "positive_grid_fraction": 0.01699575106223444,
+        "reference_box": "Va=20..300 V, Vg1=-5..3 V",
+        "outside_fraction": 0.024493876530867282,
+        "outside_samples": 98
+      },
+      "Xv4": {
+        "model": "reefman",
+        "samples": 4001,
+        "positive_grid_fraction": 0.49987503124218946,
+        "reference_box": "numerically tested box: Va=.1..600 V, Vg1=-80..3 V, Vg2=50..550 V",
+        "outside_fraction": 0.47813046738315423,
+        "outside_samples": 1913,
+        "continuation_samples": 0
+      },
+      "Xv5": {
+        "model": "reefman",
+        "samples": 4001,
+        "positive_grid_fraction": 0.49987503124218946,
+        "reference_box": "numerically tested box: Va=.1..600 V, Vg1=-80..3 V, Vg2=50..550 V",
+        "outside_fraction": 0.47813046738315423,
+        "outside_samples": 1913,
+        "continuation_samples": 0
+      },
+      "Xv6": {
+        "model": "reefman",
+        "samples": 4001,
+        "positive_grid_fraction": 0.45413646588352913,
+        "reference_box": "numerically tested box: Va=.1..600 V, Vg1=-80..3 V, Vg2=50..550 V",
+        "outside_fraction": 0.5211197200699825,
+        "outside_samples": 2085,
+        "continuation_samples": 0
+      },
+      "Xv7": {
+        "model": "reefman",
+        "samples": 4001,
+        "positive_grid_fraction": 0.45413646588352913,
+        "reference_box": "numerically tested box: Va=.1..600 V, Vg1=-80..3 V, Vg2=50..550 V",
+        "outside_fraction": 0.5211197200699825,
+        "outside_samples": 2085,
+        "continuation_samples": 0
+      }
+    },
+    "release_500mv": {
+      "Xv1b": {
+        "model": "dempwolf:RSD-1",
+        "samples": 2001,
+        "positive_grid_fraction": 0.0,
+        "reference_box": "Va=20..300 V, Vg1=-5..3 V",
+        "outside_fraction": 0.0,
+        "outside_samples": 0
+      },
+      "Xv1a": {
+        "model": "dempwolf:RSD-1",
+        "samples": 2001,
+        "positive_grid_fraction": 0.0,
+        "reference_box": "Va=20..300 V, Vg1=-5..3 V",
+        "outside_fraction": 0.004997501249375313,
+        "outside_samples": 10
+      },
+      "Xv2a": {
+        "model": "dempwolf:RSD-1",
+        "samples": 2001,
+        "positive_grid_fraction": 0.010494752623688156,
+        "reference_box": "Va=20..300 V, Vg1=-5..3 V",
+        "outside_fraction": 0.0,
+        "outside_samples": 0
+      },
+      "Xv2b": {
+        "model": "dempwolf:RSD-1",
+        "samples": 2001,
+        "positive_grid_fraction": 0.0,
+        "reference_box": "Va=20..300 V, Vg1=-5..3 V",
+        "outside_fraction": 0.03298350824587706,
+        "outside_samples": 66
+      },
+      "Xv3a": {
+        "model": "dempwolf:RSD-1",
+        "samples": 2001,
+        "positive_grid_fraction": 0.0,
+        "reference_box": "Va=20..300 V, Vg1=-5..3 V",
+        "outside_fraction": 0.4612693653173413,
+        "outside_samples": 923
+      },
+      "Xv3b": {
+        "model": "dempwolf:RSD-1",
+        "samples": 2001,
+        "positive_grid_fraction": 0.0,
+        "reference_box": "Va=20..300 V, Vg1=-5..3 V",
+        "outside_fraction": 0.0,
+        "outside_samples": 0
+      },
+      "Xv4": {
+        "model": "reefman",
+        "samples": 2001,
+        "positive_grid_fraction": 0.063968015992004,
+        "reference_box": "numerically tested box: Va=.1..600 V, Vg1=-80..3 V, Vg2=50..550 V",
+        "outside_fraction": 0.34632683658170915,
+        "outside_samples": 693,
+        "continuation_samples": 0
+      },
+      "Xv5": {
+        "model": "reefman",
+        "samples": 2001,
+        "positive_grid_fraction": 0.063968015992004,
+        "reference_box": "numerically tested box: Va=.1..600 V, Vg1=-80..3 V, Vg2=50..550 V",
+        "outside_fraction": 0.34632683658170915,
+        "outside_samples": 693,
+        "continuation_samples": 0
+      },
+      "Xv6": {
+        "model": "reefman",
+        "samples": 2001,
+        "positive_grid_fraction": 0.24987506246876562,
+        "reference_box": "numerically tested box: Va=.1..600 V, Vg1=-80..3 V, Vg2=50..550 V",
+        "outside_fraction": 0.31634182908545727,
+        "outside_samples": 633,
+        "continuation_samples": 0
+      },
+      "Xv7": {
+        "model": "reefman",
+        "samples": 2001,
+        "positive_grid_fraction": 0.24987506246876562,
+        "reference_box": "numerically tested box: Va=.1..600 V, Vg1=-80..3 V, Vg2=50..550 V",
+        "outside_fraction": 0.31634182908545727,
+        "outside_samples": 633,
+        "continuation_samples": 0
+      }
+    }
+  }
+}
